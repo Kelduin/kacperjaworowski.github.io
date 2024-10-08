@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
     <title>Kacper Jaworowski - Game Developer Portfolio</title>
-    
+
     <!-- CSS Styling -->
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(36,36,36,0.8) 100%), url('path_to_background_image.jpg') no-repeat center center fixed;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(36, 36, 36, 0.8) 100%), url('path_to_background_image.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
         }
 
-        header, footer {
+        header,
+        footer {
             background-color: #222;
             color: #fff;
             text-align: center;
@@ -35,10 +37,10 @@
             max-width: 1000px;
             margin: 20px auto;
             padding: 20px;
-            background-color: rgba(255,255,255,0.9);
+            background-color: rgba(255, 255, 255, 0.9);
             color: #333;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         h2 {
@@ -105,7 +107,7 @@
             transform: scale(1.05);
         }
 
-        /* Modal for enlarged images */
+        /* Modal for enlarged images and videos */
         .modal {
             display: none;
             position: fixed;
@@ -119,14 +121,10 @@
         }
 
         .modal-content {
-            margin: 10% auto;
+            margin: 5% auto;
             display: block;
             width: 80%;
-            max-width: 700px;
-        }
-
-        .modal-content img, .modal-content video {
-            width: 100%;
+            max-width: 900px;
         }
 
         .close {
@@ -138,7 +136,8 @@
             font-weight: bold;
         }
 
-        .close:hover, .close:focus {
+        .close:hover,
+        .close:focus {
             color: #999;
             text-decoration: none;
             cursor: pointer;
@@ -156,7 +155,7 @@
         .project-description video {
             width: 100%;
             border-radius: 10px;
-            cursor: pointer;
+            height: 300px;
         }
 
         footer {
@@ -198,7 +197,8 @@
             display: block;
         }
 
-        .slider .prev, .slider .next {
+        .slider .prev,
+        .slider .next {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -218,6 +218,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -246,15 +247,15 @@
             <div class="project-content">
                 <div class="project-images slider">
                     <img src="assets/pictures/CASTLECART1.png" class="active enlarge" alt="Castle Cart Screenshot 1">
-                    <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2" class="enlarge">
-                    <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3" class="enlarge">
-                    <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4" class="enlarge">
+                    <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2">
+                    <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3">
+                    <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4">
                     <span class="prev">&#10094;</span>
                     <span class="next">&#10095;</span>
                 </div>
                 <div class="project-description">
                     <video controls class="enlarge">
-                        <source src="assets/videos/CASTLECARDVID.mp4" type="video/mp4">
+                        <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
                     <p>Project description: A racing game based in a fantasy world with classes and magic. This is a project I made with my friends from Uni. I mainly worked on the gameplay mechanics and designed most of the classes and their spells.</p>
@@ -270,15 +271,15 @@
             <div class="project-content">
                 <div class="project-images slider">
                     <img src="assets/pictures/MUSHROOM1.png" class="active enlarge" alt="Mushroom Survivors Screenshot 1">
-                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" class="enlarge">
-                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" class="enlarge">
-                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" class="enlarge">
+                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2">
+                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
+                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4">
                     <span class="prev">&#10094;</span>
                     <span class="next">&#10095;</span>
                 </div>
                 <div class="project-description">
                     <video controls class="enlarge">
-                        <source src="assets/videos/MushroomVID.mp4" type="video/mp4">
+                        <source src="assets/videos/MushroomVID.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
                     <p>Project description: A survivors-style game where enemies become your allies. I worked on the core gameplay mechanics and designed the boss fight. The game is in a very raw state.</p>
@@ -294,15 +295,15 @@
             <div class="project-content">
                 <div class="project-images slider">
                     <img src="assets/pictures/UEDEMO1.png" class="active enlarge" alt="Unreal Demo Screenshot 1">
-                    <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2" class="enlarge">
-                    <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3" class="enlarge">
-                    <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4" class="enlarge">
+                    <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2">
+                    <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3">
+                    <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4">
                     <span class="prev">&#10094;</span>
                     <span class="next">&#10095;</span>
                 </div>
                 <div class="project-description">
                     <video controls class="enlarge">
-                        <source src="assets/videos/UEVID.mp4" type="video/mp4">
+                        <source src="assets/videos/UEVID.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
                     <p>Project description: One of my first solo projects I did for fun, I tried making a demo for a 2.5D game where you play as a 2D character in a 3D environment.</p>
@@ -325,72 +326,69 @@
     </footer>
 
     <script>
-        const sliders = document.querySelectorAll('.slider');
-        sliders.forEach(slider => {
-            let index = 0;
-            const images = slider.querySelectorAll('img');
-            const prev = slider.querySelector('.prev');
-            const next = slider.querySelector('.next');
+        // Handle the image modal
+        const enlargeImages = document.querySelectorAll('.enlarge');
+        const imageModal = document.getElementById('imageModal');
+        const closeButtons = document.querySelectorAll('.close');
+        const modalImages = imageModal.querySelectorAll('.modal-content img');
 
-            function showImage(n) {
-                images.forEach((img, i) => {
-                    img.classList.toggle('active', i === n);
+        // Handle opening image modal
+        enlargeImages.forEach(img => {
+            img.addEventListener('click', () => {
+                // Pause playing videos
+                document.querySelectorAll('video').forEach(video => video.pause());
+
+                imageModal.style.display = 'block';
+                // Activate corresponding image in modal
+                modalImages.forEach(modalImg => {
+                    modalImg.classList.toggle('active', modalImg.src === img.src);
                 });
-            }
-
-            prev.addEventListener('click', () => {
-                index = (index - 1 + images.length) % images.length;
-                showImage(index);
-            });
-
-            next.addEventListener('click', () => {
-                index = (index + 1) % images.length;
-                showImage(index);
             });
         });
 
-        // Image and Video Enlargement Modal
-        const enlargeElements = document.querySelectorAll('.enlarge');
-        const modal = document.createElement('div');
-        modal.classList.add('modal');
-        const modalContent = document.createElement('div');
-        modalContent.classList.add('modal-content');
-        modal.appendChild(modalContent);
-        document.body.appendChild(modal);
+        // Close the modal when clicking the close button or outside
+        closeButtons.forEach(btn => {
+            btn.onclick = function () {
+                imageModal.style.display = 'none';
+                document.querySelectorAll('video').forEach(video => video.pause());
+            }
+        });
 
-        const closeModal = document.createElement('span');
-        closeModal.classList.add('close');
-        closeModal.innerHTML = '&times;';
-        modal.appendChild(closeModal);
-
-        enlargeElements.forEach(element => {
-            element.addEventListener('click', () => {
-                modal.style.display = 'block';
-                if (element.tagName === 'IMG') {
-                    const img = document.createElement('img');
-                    img.src = element.src;
-                    modalContent.innerHTML = '';
-                    modalContent.appendChild(img);
-                } else if (element.tagName === 'VIDEO') {
-                    const video = element.cloneNode(true);
-                    video.controls = true;
-                    modalContent.innerHTML = '';
-                    modalContent.appendChild(video);
-                    video.play();
+        // Handle slider functionality
+        document.querySelectorAll('.prev, .next').forEach(arrow => {
+            arrow.addEventListener('click', function () {
+                const activeImg = this.closest('.slider').querySelector('img.active');
+                let index = Array.from(activeImg.parentElement.children).indexOf(activeImg);
+                if (this.classList.contains('prev')) {
+                    index = (index - 1 + activeImg.parentElement.children.length) % activeImg.parentElement.children.length;
+                } else {
+                    index = (index + 1) % activeImg.parentElement.children.length;
                 }
+                activeImg.classList.remove('active');
+                activeImg.parentElement.children[index].classList.add('active');
             });
         });
 
-        closeModal.onclick = function() {
-            modal.style.display = 'none';
-        };
+        // Handle enlarged video modal
+        document.querySelectorAll('video.enlarge').forEach(video => {
+            video.addEventListener('click', function () {
+                document.querySelectorAll('video').forEach(vid => vid.pause()); // Pause all playing videos
+                const videoModal = document.getElementById('videoModal');
+                const modalVideo = videoModal.querySelector('video');
+                modalVideo.src = this.querySelector('source').src;
+                videoModal.style.display = 'block';
+                modalVideo.play();
+            });
+        });
 
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
+        closeButtons.forEach(btn => {
+            btn.onclick = function () {
+                videoModal.style.display = 'none';
+                videoModal.querySelector('video').pause();
             }
-        };
+        });
     </script>
 
 </body>
+
 </html>
