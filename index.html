@@ -252,7 +252,9 @@
                 <div class="project-images">
                     <span class="label">Screenshots</span>
                     <img src="assets/pictures/CASTLECART1.png" class="active enlarge" alt="Castle Cart Screenshot 1">
-                    <!-- Other images in slider would follow -->
+                    <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2">
+                    <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3">
+                    <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4">
                 </div>
                 <div class="project-description">
                     <span class="label">Gameplay</span>
@@ -267,7 +269,53 @@
             </div>
         </div>
 
-        <!-- More Projects Follow Here -->
+        <!-- Project 2 -->
+        <div class="project-item">
+            <h3>Mushroom Survivors</h3>
+            <div class="project-content">
+                <div class="project-images">
+                    <span class="label">Screenshots</span>
+                    <img src="assets/pictures/MUSHROOM1.png" class="active enlarge" alt="Mushroom Survivors Screenshot 1">
+                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2">
+                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
+                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4">
+                </div>
+                <div class="project-description">
+                    <span class="label">Gameplay</span>
+                    <video controls class="enlarge">
+                        <source src="assets/videos/MushroomVID.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>Project description: A survivors-style game where enemies become your allies. I worked on the core gameplay mechanics and designed the boss fight. The game is in a very raw state.</p>
+                    <p><strong>Technologies used:</strong> Unity, C#</p>
+                    <p><a href="assets/demos/MushroomSurvivors.rar">Download Mushroom Survivors Demo (RAR)</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-item">
+            <h3>UE DEMO</h3>
+            <div class="project-content">
+                <div class="project-images">
+                    <span class="label">Screenshots</span>
+                    <img src="assets/pictures/UEDEMO1.png" class="active enlarge" alt="Unreal Demo Screenshot 1">
+                    <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2">
+                    <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3">
+                    <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4">
+                </div>
+                <div class="project-description">
+                    <span class="label">Gameplay</span>
+                    <video controls class="enlarge">
+                        <source src="assets/videos/UEVID.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>Project description: One of my first solo projects I did for fun, I tried making a demo for a 2.5D game where you play as a 2D character in a 3D environment.</p>
+                    <p><strong>Technologies used:</strong> Unreal Engine 5, C++ Blueprints</p>
+                    <p><a href="https://drive.google.com/file/d/1YQXjmgzVkSCG0LeMXgMU2KdQI5eFM7kh/view?usp=sharing">Download UE Demo</a></p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <footer id="contact">
@@ -314,7 +362,6 @@
                 const modalContent = document.createElement('div');
                 modalContent.classList.add('modal-content');
 
-                // Check if it's an image or video
                 if (img.tagName === 'IMG') {
                     const modalImg = document.createElement('img');
                     modalImg.src = img.src;
