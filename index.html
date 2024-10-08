@@ -94,21 +94,85 @@
         }
 
         .project-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            text-align: center;
         }
 
-        .project-images img {
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto 20px auto;
+        }
+
+        .carousel img {
             width: 100%;
             height: auto;
             border-radius: 12px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
+        }
+
+        .carousel .prev, .carousel .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            transition: 0.6s ease;
+        }
+
+        .carousel .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .carousel .next {
+            right: 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .carousel .prev:hover, .carousel .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .project-description-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .technologies-used {
+            width: 30%;
+            text-align: left;
+        }
+
+        .technologies-used p {
+            font-weight: bold;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .technologies-used ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .technologies-used li {
+            margin: 0;
         }
 
         .project-description {
-            flex: 1;
-            margin-left: 30px;
+            width: 60%;
             color: #ddd;
         }
 
@@ -126,7 +190,7 @@
             width: 100%;
             max-width: 600px;
             border-radius: 12px;
-            margin: 20px 0;
+            margin: 20px auto;
         }
 
         .btn {
@@ -141,6 +205,13 @@
 
         .btn:hover {
             background-color: #0056b3;
+        }
+
+        .download-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 0;
         }
 
         /* Footer */
@@ -181,17 +252,18 @@
 
         /* Media Queries */
         @media (max-width: 768px) {
-            .project-content {
+            .project-description-container {
                 flex-direction: column;
+                text-align: center;
             }
 
+            .technologies-used,
             .project-description {
-                margin-left: 0;
-                margin-top: 20px;
+                width: 100%;
             }
 
-            .project-description video {
-                max-width: 100%;
+            .carousel img {
+                height: auto;
             }
         }
     </style>
@@ -223,63 +295,107 @@
 
             <!-- Project 1: The Castle Cart -->
             <div class="project-item">
+                <h3>The Castle Cart</h3>
                 <div class="project-content">
-                    <div class="project-images">
-                        <img src="assets/pictures/CASTLECART1.png" alt="Castle Cart Screenshot">
+                    <div class="carousel" id="carousel1">
+                        <img src="assets/pictures/CASTLECART1.png" class="active" alt="Castle Cart Screenshot 1">
+                        <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2">
+                        <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3">
+                        <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4">
+                        <a class="prev" onclick="changeSlide(-1, 'carousel1')">&#10094;</a>
+                        <a class="next" onclick="changeSlide(1, 'carousel1')">&#10095;</a>
                     </div>
-                    <div class="project-description">
-                        <h3>The Castle Cart</h3>
-                        <p><strong>Technologies used:</strong> Unity, C#</p>
-                        <video controls>
-                            <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
-                            Your browser does not support the video tag.
-                        </video>
-                        <p>Project description: A racing game based in a fantasy world with classes and magic. This is a
-                            project I made with my friends from Uni. I mainly worked on the gameplay mechanics and
-                            designed most of the classes and their spells.</p>
-                        <a href="https://gambik.itch.io/the-castle-cart" class="btn">Check out the itch.io page!</a>
+
+                    <div class="project-description-container">
+                        <div class="technologies-used">
+                            <p>Technologies used:</p>
+                            <ul>
+                                <li>Unity</li>
+                                <li>C#</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-description">
+                            <video controls>
+                                <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p>Project description: A racing game based in a fantasy world with classes and magic. This
+                                is a project I made with my friends from Uni. I mainly worked on the gameplay mechanics
+                                and designed most of the classes and their spells.</p>
+                            <a href="https://gambik.itch.io/the-castle-cart" class="btn download-btn">Check out the itch.io page!</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Project 2: Mushroom Survivors -->
             <div class="project-item">
+                <h3>Mushroom Survivors</h3>
                 <div class="project-content">
-                    <div class="project-images">
-                        <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot">
+                    <div class="carousel" id="carousel2">
+                        <img src="assets/pictures/MUSHROOM1.png" class="active" alt="Mushroom Survivors Screenshot 1">
+                        <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2">
+                        <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
+                        <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4">
+                        <a class="prev" onclick="changeSlide(-1, 'carousel2')">&#10094;</a>
+                        <a class="next" onclick="changeSlide(1, 'carousel2')">&#10095;</a>
                     </div>
-                    <div class="project-description">
-                        <h3>Mushroom Survivors</h3>
-                        <p><strong>Technologies used:</strong> Unity, C#</p>
-                        <video controls>
-                            <source src="assets/videos/MushroomVID.webm" type="video/webm">
-                            Your browser does not support the video tag.
-                        </video>
-                        <p>Project description: A survivors-style game where enemies become your allies. I worked on the
-                            core gameplay mechanics and designed the boss fight. The game is in a very raw state.</p>
-                        <a href="assets/demos/MushroomSurvivors.rar" class="btn">Download Mushroom Survivors Demo
-                            (RAR)</a>
+
+                    <div class="project-description-container">
+                        <div class="technologies-used">
+                            <p>Technologies used:</p>
+                            <ul>
+                                <li>Unity</li>
+                                <li>C#</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-description">
+                            <video controls>
+                                <source src="assets/videos/MushroomVID.webm" type="video/webm">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p>Project description: A survivors-style game where enemies become your allies. I worked on
+                                the core gameplay mechanics and designed the boss fight. The game is in a very raw
+                                state.</p>
+                            <a href="assets/demos/MushroomSurvivors.rar" class="btn download-btn">Download Mushroom Survivors Demo (RAR)</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Project 3: UE Demo -->
             <div class="project-item">
+                <h3>UE DEMO</h3>
                 <div class="project-content">
-                    <div class="project-images">
-                        <img src="assets/pictures/UEDEMO1.png" alt="Unreal Demo Screenshot">
+                    <div class="carousel" id="carousel3">
+                        <img src="assets/pictures/UEDEMO1.png" class="active" alt="Unreal Demo Screenshot 1">
+                        <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2">
+                        <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3">
+                        <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4">
+                        <a class="prev" onclick="changeSlide(-1, 'carousel3')">&#10094;</a>
+                        <a class="next" onclick="changeSlide(1, 'carousel3')">&#10095;</a>
                     </div>
-                    <div class="project-description">
-                        <h3>UE DEMO</h3>
-                        <p><strong>Technologies used:</strong> Unreal Engine 5, C++ Blueprints</p>
-                        <video controls>
-                            <source src="assets/videos/UEVID.webm" type="video/webm">
-                            Your browser does not support the video tag.
-                        </video>
-                        <p>Project description: One of my first solo projects I did for fun, I tried making a demo for a
-                            2.5D game where you play as a 2D character in a 3D environment.</p>
-                        <a href="https://drive.google.com/file/d/1YQXjmgzVkSCG0LeMXgMU2KdQI5eFM7kh/view?usp=sharing"
-                            class="btn">Download UE Demo</a>
+
+                    <div class="project-description-container">
+                        <div class="technologies-used">
+                            <p>Technologies used:</p>
+                            <ul>
+                                <li>Unreal Engine 5</li>
+                                <li>C++ Blueprints</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-description">
+                            <video controls>
+                                <source src="assets/videos/UEVID.webm" type="video/webm">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p>Project description: One of my first solo projects I did for fun, I tried making a demo
+                                for a 2.5D game where you play as a 2D character in a 3D environment.</p>
+                            <a href="https://drive.google.com/file/d/1YQXjmgzVkSCG0LeMXgMU2KdQI5eFM7kh/view?usp=sharing" class="btn download-btn">Download UE Demo</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -298,6 +414,25 @@
             <p>© 2024 Kacper Jaworowski. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        function changeSlide(n, carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const images = carousel.getElementsByTagName('img');
+            let currentSlideIndex;
+
+            for (let i = 0; i < images.length; i++) {
+                if (images[i].classList.contains('active')) {
+                    currentSlideIndex = i;
+                    break;
+                }
+            }
+
+            images[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = (currentSlideIndex + n + images.length) % images.length;
+            images[currentSlideIndex].classList.add('active');
+        }
+    </script>
 
 </body>
 
