@@ -95,11 +95,10 @@
 
         .project-content {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
 
-        /* Carousel */
         .carousel {
             position: relative;
             max-width: 600px;
@@ -146,7 +145,6 @@
             background-color: rgba(0, 0, 0, 0.8);
         }
 
-        /* Project Description */
         .project-description {
             flex: 1;
             margin-left: 30px;
@@ -265,13 +263,13 @@
             <!-- Project 1: The Castle Cart -->
             <div class="project-item">
                 <div class="project-content">
-                    <div class="carousel">
-                        <img src="assets/pictures/CASTLECART1.png" class="carousel-image active" alt="Castle Cart Screenshot 1">
-                        <img src="assets/pictures/CASTLECART2.png" class="carousel-image" alt="Castle Cart Screenshot 2">
-                        <img src="assets/pictures/CASTLECART3.png" class="carousel-image" alt="Castle Cart Screenshot 3">
-                        <img src="assets/pictures/CASTLECART4.png" class="carousel-image" alt="Castle Cart Screenshot 4">
-                        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-                        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                    <div class="carousel" id="carousel1">
+                        <img src="assets/pictures/CASTLECART1.png" class="active" alt="Castle Cart Screenshot 1">
+                        <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2">
+                        <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3">
+                        <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4">
+                        <a class="prev" onclick="changeSlide(-1, 'carousel1')">&#10094;</a>
+                        <a class="next" onclick="changeSlide(1, 'carousel1')">&#10095;</a>
                     </div>
                     <div class="project-description">
                         <h3>The Castle Cart</h3>
@@ -291,13 +289,13 @@
             <!-- Project 2: Mushroom Survivors -->
             <div class="project-item">
                 <div class="project-content">
-                    <div class="carousel">
-                        <img src="assets/pictures/MUSHROOM1.png" class="carousel-image active" alt="Mushroom Survivors Screenshot 1">
-                        <img src="assets/pictures/MUSHROOM2.png" class="carousel-image" alt="Mushroom Survivors Screenshot 2">
-                        <img src="assets/pictures/MUSHROOM3.png" class="carousel-image" alt="Mushroom Survivors Screenshot 3">
-                        <img src="assets/pictures/MUSHROOM4.png" class="carousel-image" alt="Mushroom Survivors Screenshot 4">
-                        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-                        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                    <div class="carousel" id="carousel2">
+                        <img src="assets/pictures/MUSHROOM1.png" class="active" alt="Mushroom Survivors Screenshot 1">
+                        <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2">
+                        <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
+                        <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4">
+                        <a class="prev" onclick="changeSlide(-1, 'carousel2')">&#10094;</a>
+                        <a class="next" onclick="changeSlide(1, 'carousel2')">&#10095;</a>
                     </div>
                     <div class="project-description">
                         <h3>Mushroom Survivors</h3>
@@ -317,13 +315,13 @@
             <!-- Project 3: UE Demo -->
             <div class="project-item">
                 <div class="project-content">
-                    <div class="carousel">
-                        <img src="assets/pictures/UEDEMO1.png" class="carousel-image active" alt="Unreal Demo Screenshot 1">
-                        <img src="assets/pictures/UEDEMO2.png" class="carousel-image" alt="Unreal Demo Screenshot 2">
-                        <img src="assets/pictures/UEDEMO3.png" class="carousel-image" alt="Unreal Demo Screenshot 3">
-                        <img src="assets/pictures/UEDEMO4.png" class="carousel-image" alt="Unreal Demo Screenshot 4">
-                        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-                        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                    <div class="carousel" id="carousel3">
+                        <img src="assets/pictures/UEDEMO1.png" class="active" alt="Unreal Demo Screenshot 1">
+                        <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2">
+                        <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3">
+                        <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4">
+                        <a class="prev" onclick="changeSlide(-1, 'carousel3')">&#10094;</a>
+                        <a class="next" onclick="changeSlide(1, 'carousel3')">&#10095;</a>
                     </div>
                     <div class="project-description">
                         <h3>UE DEMO</h3>
@@ -356,13 +354,21 @@
     </footer>
 
     <script>
-        let currentSlideIndex = 0;
+        function changeSlide(n, carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const images = carousel.getElementsByTagName('img');
+            let currentSlideIndex;
 
-        function changeSlide(n) {
-            let images = document.querySelectorAll('.carousel-image');
-            images.forEach((img) => img.classList.remove('active'));  // Hide all images
-            currentSlideIndex = (currentSlideIndex + n + images.length) % images.length;  // Update index
-            images[currentSlideIndex].classList.add('active');  // Show the new active image
+            for (let i = 0; i < images.length; i++) {
+                if (images[i].classList.contains('active')) {
+                    currentSlideIndex = i;
+                    break;
+                }
+            }
+
+            images[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = (currentSlideIndex + n + images.length) % images.length;
+            images[currentSlideIndex].classList.add('active');
         }
     </script>
 
