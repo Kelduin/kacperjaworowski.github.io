@@ -115,6 +115,7 @@
 
         .project-images {
             width: 45%;
+            position: relative;
         }
 
         .project-images img {
@@ -126,6 +127,26 @@
 
         .project-images img:hover {
             transform: scale(1.05);
+        }
+
+        .project-images .prev, .project-images .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 24px;
+        }
+
+        .project-images .prev {
+            left: 10px;
+        }
+
+        .project-images .next {
+            right: 10px;
         }
 
         .modal {
@@ -145,9 +166,10 @@
             display: block;
             width: 80%;
             max-width: 700px;
+            position: relative;
         }
 
-        .modal-content img, .modal-content video {
+        .modal-content img {
             width: 100%;
         }
 
@@ -164,6 +186,26 @@
             color: #999;
             text-decoration: none;
             cursor: pointer;
+        }
+
+        .modal-content .prev, .modal-content .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 24px;
+        }
+
+        .modal-content .prev {
+            left: 10px;
+        }
+
+        .modal-content .next {
+            right: 10px;
         }
 
         .project-description {
@@ -245,20 +287,22 @@
     <section class="projects">
         <h2 id="projects">Projects</h2>
 
-        <!-- Project 1 -->
+        <!-- Project 1: The Castle Cart -->
         <div class="project-item">
             <h3>The Castle Cart</h3>
             <div class="project-content">
                 <div class="project-images">
                     <span class="label">Screenshots</span>
-                    <img src="assets/pictures/CASTLECART1.png" class="active enlarge" alt="Castle Cart Screenshot 1">
-                    <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2">
-                    <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3">
-                    <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4">
+                    <img src="assets/pictures/CASTLECART1.png" alt="Castle Cart Screenshot 1">
+                    <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2" style="display:none;">
+                    <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3" style="display:none;">
+                    <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4" style="display:none;">
+                    <span class="prev">&#10094;</span>
+                    <span class="next">&#10095;</span>
                 </div>
                 <div class="project-description">
                     <span class="label">Gameplay</span>
-                    <video controls class="enlarge">
+                    <video controls>
                         <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
@@ -269,20 +313,22 @@
             </div>
         </div>
 
-        <!-- Project 2 -->
+        <!-- Project 2: Mushroom Survivors -->
         <div class="project-item">
             <h3>Mushroom Survivors</h3>
             <div class="project-content">
                 <div class="project-images">
                     <span class="label">Screenshots</span>
-                    <img src="assets/pictures/MUSHROOM1.png" class="active enlarge" alt="Mushroom Survivors Screenshot 1">
-                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2">
-                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
-                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4">
+                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1">
+                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" style="display:none;">
+                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" style="display:none;">
+                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" style="display:none;">
+                    <span class="prev">&#10094;</span>
+                    <span class="next">&#10095;</span>
                 </div>
                 <div class="project-description">
                     <span class="label">Gameplay</span>
-                    <video controls class="enlarge">
+                    <video controls>
                         <source src="assets/videos/MushroomVID.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
@@ -293,20 +339,22 @@
             </div>
         </div>
 
-        <!-- Project 3 -->
+        <!-- Project 3: UE Demo -->
         <div class="project-item">
             <h3>UE DEMO</h3>
             <div class="project-content">
                 <div class="project-images">
                     <span class="label">Screenshots</span>
-                    <img src="assets/pictures/UEDEMO1.png" class="active enlarge" alt="Unreal Demo Screenshot 1">
-                    <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2">
-                    <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3">
-                    <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4">
+                    <img src="assets/pictures/UEDEMO1.png" alt="Unreal Demo Screenshot 1">
+                    <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2" style="display:none;">
+                    <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3" style="display:none;">
+                    <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4" style="display:none;">
+                    <span class="prev">&#10094;</span>
+                    <span class="next">&#10095;</span>
                 </div>
                 <div class="project-description">
                     <span class="label">Gameplay</span>
-                    <video controls class="enlarge">
+                    <video controls>
                         <source src="assets/videos/UEVID.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
@@ -316,6 +364,7 @@
                 </div>
             </div>
         </div>
+
     </section>
 
     <footer id="contact">
@@ -329,69 +378,92 @@
     </footer>
 
     <script>
-        const sliders = document.querySelectorAll('.slider');
-        sliders.forEach(slider => {
-            let index = 0;
-            const images = slider.querySelectorAll('img');
-            const prev = slider.querySelector('.prev');
-            const next = slider.querySelector('.next');
+        // Handle image switching within projects
+        const projectImages = document.querySelectorAll('.project-images');
+        projectImages.forEach(project => {
+            let currentIndex = 0;
+            const images = project.querySelectorAll('img');
+            const prev = project.querySelector('.prev');
+            const next = project.querySelector('.next');
 
-            function showImage(n) {
+            function showImage(index) {
                 images.forEach((img, i) => {
-                    img.classList.toggle('active', i === n);
+                    img.style.display = i === index ? 'block' : 'none';
                 });
             }
 
             prev.addEventListener('click', () => {
-                index = (index - 1 + images.length) % images.length;
-                showImage(index);
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
             });
 
             next.addEventListener('click', () => {
-                index = (index + 1) % images.length;
-                showImage(index);
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
             });
-        });
 
-        // Modal logic for image enlargement
-        const enlargeImage = document.querySelectorAll('.enlarge');
-        enlargeImage.forEach(img => {
-            img.addEventListener('click', () => {
-                const modal = document.createElement('div');
-                modal.classList.add('modal');
-                const modalContent = document.createElement('div');
-                modalContent.classList.add('modal-content');
+            // Initial display
+            showImage(currentIndex);
 
-                if (img.tagName === 'IMG') {
-                    const modalImg = document.createElement('img');
-                    modalImg.src = img.src;
-                    modalContent.appendChild(modalImg);
-                } else if (img.tagName === 'VIDEO') {
-                    const modalVid = document.createElement('video');
-                    modalVid.src = img.src;
-                    modalVid.controls = true;
-                    modalContent.appendChild(modalVid);
-                }
-
-                modal.appendChild(modalContent);
-                document.body.appendChild(modal);
-                modal.style.display = 'block';
-
-                modal.addEventListener('click', () => {
-                    modal.style.display = 'none';
-                    document.body.removeChild(modal);
+            // Handle image enlargement in modal
+            images.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    openModal(images, index);
                 });
             });
         });
 
-        // Stop video when a modal is opened
-        document.querySelectorAll('video').forEach((video) => {
-            video.addEventListener('play', function() {
-                document.querySelectorAll('video').forEach(v => {
-                    if (v !== video) v.pause();
+        // Modal logic for enlarged images
+        function openModal(images, startIndex) {
+            const modal = document.createElement('div');
+            modal.classList.add('modal');
+            const modalContent = document.createElement('div');
+            modalContent.classList.add('modal-content');
+            let currentIndex = startIndex;
+
+            function updateModalImage() {
+                modalContent.innerHTML = ''; // Clear previous content
+                const modalImg = document.createElement('img');
+                modalImg.src = images[currentIndex].src;
+                modalContent.appendChild(modalImg);
+
+                // Add navigation arrows
+                const prevArrow = document.createElement('span');
+                prevArrow.classList.add('prev');
+                prevArrow.innerHTML = '&#10094;';
+                prevArrow.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    updateModalImage();
                 });
+
+                const nextArrow = document.createElement('span');
+                nextArrow.classList.add('next');
+                nextArrow.innerHTML = '&#10095;';
+                nextArrow.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    updateModalImage();
+                });
+
+                modalContent.appendChild(prevArrow);
+                modalContent.appendChild(nextArrow);
+            }
+
+            // Close button
+            const closeBtn = document.createElement('span');
+            closeBtn.classList.add('close');
+            closeBtn.innerHTML = '&times;';
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                modal.remove();
             });
-        });
+
+            modalContent.appendChild(closeBtn);
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            modal.style.display = 'block';
+
+            updateModalImage();
+        }
     </script>
 
 </body>
