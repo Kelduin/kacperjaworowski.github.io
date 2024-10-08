@@ -27,6 +27,8 @@
         header h1 {
             margin: 0;
             font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
         }
 
         section {
@@ -88,37 +90,51 @@
         .project-images img {
             width: 100%;
             border-radius: 10px;
-        }
-
-        .project-images .slider {
-            position: relative;
-        }
-
-        .slider img {
-            display: none;
-        }
-
-        .slider img.active {
-            display: block;
-        }
-
-        .slider .prev, .slider .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            padding: 10px;
             cursor: pointer;
-            border-radius: 50%;
+            transition: transform 0.3s ease;
         }
 
-        .slider .prev {
-            left: 10px;
+        .project-images img:hover {
+            transform: scale(1.05);
         }
 
-        .slider .next {
-            right: 10px;
+        /* Modal for enlarged images */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: 10% auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .modal-content img {
+            width: 100%;
+        }
+
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: #999;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .project-description {
@@ -133,6 +149,7 @@
         .project-description video {
             width: 100%;
             border-radius: 10px;
+            height: 300px; /* Adjust the video height */
         }
 
         footer {
@@ -189,15 +206,14 @@
             <h3>The Castle Cart</h3>
             <div class="project-content">
                 <div class="project-images">
-                    <div class="slider">
-                        <img src="assets/pictures/CASTLECART1.png" class="active" alt="Castle Cart Screenshot 1">
-                        <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2">
-                        <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3">
-                        <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4">
-                        <span class="prev">&#10094;</span>
-                        <span class="next">&#10095;</span>
+                    <img src="assets/pictures/CASTLECART1.png" alt="Castle Cart Screenshot 1" class="enlarge">
+                    <!-- Modal for Enlarging Image -->
+                    <div class="modal" id="castleModal">
+                        <span class="close" id="closeModal">&times;</span>
+                        <div class="modal-content">
+                            <img src="assets/pictures/CASTLECART1.png" alt="Enlarged Castle Cart Screenshot 1">
+                        </div>
                     </div>
-                    <p><strong>Technologies used:</strong> Unity, C#</p>
                 </div>
                 <div class="project-description">
                     <video controls>
@@ -205,6 +221,7 @@
                         Your browser does not support the video tag.
                     </video>
                     <p>Project description: A racing game based in a fantasy world with classes and magic. This is a project I made with my friends from Uni. I mainly worked on the gameplay mechanics and designed most of the classes and their spells.</p>
+                    <p><strong>Technologies used:</strong> Unity, C#</p>
                     <p><a href="https://gambik.itch.io/the-castle-cart">Check out the itch.io page!</a></p>
                 </div>
             </div>
@@ -215,23 +232,16 @@
             <h3>Mushroom Survivors</h3>
             <div class="project-content">
                 <div class="project-images">
-                    <div class="slider">
-                        <img src="assets/pictures/MUSHROOM1.png" class="active" alt="Mushroom Survivors Screenshot 1">
-                        <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2">
-                        <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
-                        <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4">
-                        <span class="prev">&#10094;</span>
-                        <span class="next">&#10095;</span>
-                    </div>
-                    <p><strong>Technologies used:</strong> Unity, C#</p>
+                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="enlarge">
                 </div>
                 <div class="project-description">
                     <video controls>
-                        <source src="assets/videos/CASTLECARTVID.mp4" type="video/mp4">
+                        <source src="assets/videos/MushroomVID.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <p>Project description: A survivors-style game where enemies become your allies. I worked on the core gameplay mechanics and designed the boss fight. The game is in a very raw state.</p>
-                    <p><a href="assets/demos/MushroomSurvivors.rar" download>Download Mushroom Survivors Demo (RAR)</a></p>
+                    <p><strong>Technologies used:</strong> Unity, C#</p>
+                    <p><a href="assets/demos/MushroomSurvivors.rar">Download Mushroom Survivors Demo (RAR)</a></p>
                 </div>
             </div>
         </div>
@@ -241,15 +251,7 @@
             <h3>UE DEMO</h3>
             <div class="project-content">
                 <div class="project-images">
-                    <div class="slider">
-                        <img src="assets/pictures/UEDEMO1.png" class="active" alt="Unreal Demo Screenshot 1">
-                        <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2">
-                        <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3">
-                        <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4">
-                        <span class="prev">&#10094;</span>
-                        <span class="next">&#10095;</span>
-                    </div>
-                    <p><strong>Technologies used:</strong> Unreal Engine 5, C++ Blueprints</p>
+                    <img src="assets/pictures/UEDEMO1.png" alt="Unreal Demo Screenshot 1" class="enlarge">
                 </div>
                 <div class="project-description">
                     <video controls>
@@ -257,7 +259,7 @@
                         Your browser does not support the video tag.
                     </video>
                     <p>Project description: One of my first solo projects I did for fun, I tried making a demo for a 2.5D game where you play as a 2D character in a 3D environment.</p>
-                    <p><a href="https://drive.google.com/file/d/1YQXjmgzVkSCG0LeMXgMU2KdQI5eFM7kh/view?usp=sharing" target="_blank">Download UE Demo</a></p>
+                    <p><a href="https://drive.google.com/file/d/1YQXjmgzVkSCG0LeMXgMU2KdQI5eFM7kh/view?usp=sharing">Download UE Demo</a></p>
                 </div>
             </div>
         </div>
@@ -267,38 +269,36 @@
     <footer>
         <h3>Contact Me</h3>
         <ul>
-          <li>Email: <a href="mailto:htujer@gmail.com">htujer@gmail.com</a></li>
+            <li>Email: <a href="mailto:kacperjaworowski@gmail.com">kacperjaworowski@gmail.com</a></li>
             <li>LinkedIn: <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">Kacper Jaworowski</a></li>
             <li>GitHub: <a href="https://github.com/Kelduin" target="_blank">github.com/Kelduin</a></li>
-         </ul>
+        </ul>
         <p>© 2024 Kacper Jaworowski. All rights reserved.</p>
     </footer>
 
     <script>
-        const sliders = document.querySelectorAll('.slider');
-        sliders.forEach(slider => {
-            let index = 0;
-            const images = slider.querySelectorAll('img');
-            const prev = slider.querySelector('.prev');
-            const next = slider.querySelector('.next');
+        // Image Enlargement Modal
+        const enlargeImage = document.querySelectorAll('.enlarge');
+        const modal = document.getElementById('castleModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalImg = modal.querySelector('.modal-content img');
 
-            function showImage(n) {
-                images.forEach((img, i) => {
-                    img.classList.toggle('active', i === n);
-                });
-            }
-
-            prev.addEventListener('click', () => {
-                index = (index - 1 + images.length) % images.length;
-                showImage(index);
-            });
-
-            next.addEventListener('click', () => {
-                index = (index + 1) % images.length;
-                showImage(index);
+        enlargeImage.forEach(img => {
+            img.addEventListener('click', () => {
+                modal.style.display = 'block';
+                modalImg.src = img.src;
             });
         });
-    </script>
 
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
 </body>
 </html>
