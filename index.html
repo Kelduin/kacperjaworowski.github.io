@@ -29,68 +29,80 @@
 
         header {
             background-color: #1a1a1a;
-            padding: 30px 0;
+            padding: 40px 0;
             text-align: center;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: #fff;
             margin: 0;
         }
 
         header p {
             color: #ccc;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
+            margin: 10px 0;
         }
 
         section {
-            padding: 40px 0;
+            padding: 60px 0;
         }
 
         .bio h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
             text-align: center;
             color: #fff;
         }
 
         .bio p {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color: #ddd;
+            margin: 0 auto;
+            max-width: 700px;
         }
 
         .interactive-btn {
             display: block;
             text-align: center;
-            background-color: #007BFF;
+            background-color: #00AEEF;
             color: white;
             padding: 15px 40px;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
-            margin: 20px auto;
+            margin: 25px auto;
             width: fit-content;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .interactive-btn:hover {
-            background-color: #0056b3;
+            background-color: #008bbd;
+            transform: scale(1.05);
         }
 
         /* Projects */
         .projects h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: #fff;
+            margin-bottom: 50px;
         }
 
         .project-item {
             background-color: #333;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 40px;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .project-content {
@@ -106,12 +118,14 @@
         .carousel img {
             width: 100%;
             height: auto;
-            border-radius: 12px;
+            border-radius: 15px;
             display: none;
+            transition: opacity 0.5s ease;
         }
 
         .carousel img.active {
             display: block;
+            opacity: 1;
         }
 
         .carousel .prev, .carousel .next {
@@ -123,10 +137,10 @@
             padding: 16px;
             color: white;
             font-weight: bold;
-            font-size: 24px;
+            font-size: 30px;
             border-radius: 0 3px 3px 0;
             user-select: none;
-            transition: 0.6s ease;
+            transition: background-color 0.3s;
         }
 
         .carousel .prev {
@@ -140,7 +154,7 @@
         }
 
         .carousel .prev:hover, .carousel .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         .project-description-container {
@@ -160,7 +174,7 @@
         .technologies-used p {
             font-weight: bold;
             margin: 0;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
         }
 
         .technologies-used ul {
@@ -176,7 +190,8 @@
         .project-description {
             width: 55%;
             color: #ddd;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            line-height: 1.6;
         }
 
         .project-description h3 {
@@ -193,16 +208,17 @@
 
         .btn {
             display: inline-block;
-            padding: 10px 20px;
-            background-color: #007BFF;
+            padding: 12px 25px;
+            background-color: #00AEEF;
             color: #fff;
             border-radius: 8px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
 
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #008bbd;
+            transform: scale(1.05);
         }
 
         .download-btn {
@@ -215,12 +231,12 @@
         footer {
             background-color: #1a1a1a;
             text-align: center;
-            padding: 40px 0;
-            border-top: 4px solid #007BFF;
+            padding: 60px 0;
+            border-top: 4px solid #00AEEF;
         }
 
         footer h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #fff;
         }
 
@@ -230,12 +246,13 @@
         }
 
         footer ul li {
-            margin: 10px 0;
+            margin: 12px 0;
         }
 
         footer ul li a {
-            color: #007BFF;
+            color: #00AEEF;
             text-decoration: none;
+            font-size: 1.2rem;
         }
 
         footer ul li a:hover {
@@ -244,7 +261,8 @@
 
         footer p {
             color: #ccc;
-            margin-top: 20px;
+            margin-top: 25px;
+            font-size: 1rem;
         }
 
         /* Media Queries */
@@ -261,6 +279,10 @@
 
             .carousel img {
                 height: auto;
+            }
+
+            .bio p {
+                font-size: 1.2rem;
             }
         }
     </style>
