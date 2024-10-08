@@ -8,7 +8,8 @@
     <title>Kacper Jaworowski - Game Developer Portfolio</title>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300&display=swap"
+        rel="stylesheet">
 
     <style>
         /* Base Styles */
@@ -82,29 +83,32 @@
             transform: scale(1.05);
         }
 
-        /* Skills Section */
+        /* Skills Summary */
         .skills {
-            background-color: #1a1a1a;
-            padding: 60px 0;
-            color: #fff;
+            background-color: #333;
+            padding: 40px 0;
+            margin-bottom: 60px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .skills h2 {
-            font-size: 2.8rem;
             text-align: center;
-            margin-bottom: 30px;
+            font-size: 2.4rem;
+            color: #fff;
+            margin-bottom: 20px;
         }
 
         .skills ul {
             list-style: none;
-            padding: 0;
             text-align: center;
+            color: #ddd;
+            font-size: 1.4rem;
+            padding-left: 0;
         }
 
         .skills ul li {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: #ddd;
+            margin: 10px 0;
         }
 
         /* Projects */
@@ -337,21 +341,24 @@
     <section class="bio">
         <div class="container">
             <h2>About Me</h2>
-            <p>Hi, my name is Kacper, and I'm a long-time passionate gamer and game developer. I'm learning game development in Unity and Godot. I have worked on various projects during my learning process, mainly focusing on Unity but also in UE5. <strong>This portfolio was hand-coded by myself using HTML, CSS, and JavaScript to showcase not only my game development projects but also my front-end web development skills.</strong></p>
+            <p>Hi, my name is Kacper, and I'm a long-time passionate gamer and game developer. I'm learning game
+                development in Unity and Godot. I have worked on various projects during my learning process, mainly
+                focusing on Unity but also in UE5. My goal is to make fun games that reflect the care and love I put
+                into them.</p>
 
+            <a href="assets/files/Kacper_Jaworowski_Resume.pdf" class="interactive-btn">Download My Resume</a>
             <a href="https://game.kacperjaworowski.com" class="interactive-btn">Play My Interactive Portfolio</a>
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section class="skills">
         <div class="container">
             <h2>Skills Summary</h2>
             <ul>
-                <li>Game Development: Unity, Unreal Engine 5, C#, C++ Blueprints</li>
-                <li>Front-End Web Development: HTML, CSS, JavaScript</li>
-                <li>Version Control: Git, GitHub</li>
-                <li>Team Collaboration: Game Design, Multiplayer Game Mechanics</li>
+                <li><strong>Game Engines:</strong> Unity, Unreal Engine 5</li>
+                <li><strong>Languages:</strong> C#, C++</li>
+                <li><strong>Game Design:</strong> Class design, AI programming, gameplay mechanics</li>
+                <li><strong>Tools:</strong> Git, Blender, Photoshop</li>
             </ul>
         </div>
     </section>
@@ -382,7 +389,11 @@
 
                     <div class="project-description-container">
                         <div class="project-description">
-                            <p>Project description: A racing game based in a fantasy world with classes and magic. This is a project I made with my friends from Uni. I mainly worked on the gameplay mechanics and designed most of the classes and their spells.</p>
+                            <p><strong>Context:</strong> "The Castle Cart" is a multiplayer racing game set in a fantasy world with classes and magic. We wanted to create a game that combines racing with a class-based mechanic. Each character has its unique abilities, making the races dynamic and strategic.</p>
+                            <p><strong>Lessons Learned:</strong> During the development, I learned how to efficiently manage multiplayer synchronization using Unity's networking features. I also got more experience designing class abilities and balancing gameplay.</p>
+                            <p>Project description: A racing game based in a fantasy world with classes and magic. This is
+                                a project I made with my friends from Uni. I mainly worked on the gameplay mechanics
+                                and designed most of the classes and their spells.</p>
                             <a href="https://gambik.itch.io/the-castle-cart" class="btn download-btn">Check out the itch.io page!</a>
                         </div>
                     </div>
@@ -412,7 +423,10 @@
 
                     <div class="project-description-container">
                         <div class="project-description">
-                            <p>Project description: A survivors-style game where enemies become your allies. I worked on the core gameplay mechanics and designed the boss fight. <strong>This project is currently confidential.</strong></p>
+                            <p><strong>Context:</strong> "Mushroom Survivors" is a survival game where players use enemies they've defeated as allies to defeat more enemies. The idea was to create a twist on the survival genre where the player doesn’t directly attack but manipulates enemies.</p>
+                            <p><strong>Lessons Learned:</strong> This project helped me improve my AI programming skills as I needed to design complex enemy behaviors and control the "swarm" of allied enemies. I also gained experience with balancing a game's difficulty curve.</p>
+                            <p>Project description: A survivors-style game where enemies become your allies. I worked on
+                                the core gameplay mechanics and designed the boss fight. <strong>This project is currently confidential.</strong></p>
                         </div>
                     </div>
 
@@ -448,7 +462,10 @@
 
                     <div class="project-description-container">
                         <div class="project-description">
-                            <p>Project description: One of my first solo projects I did for fun, I tried making a demo for a 2.5D game where you play as a 2D character in a 3D environment.</p>
+                            <p><strong>Context:</strong> "UE DEMO" is one of my first solo projects, where I wanted to explore creating a 2.5D game with a 2D character interacting in a 3D world.</p>
+                            <p><strong>Lessons Learned:</strong> I learned a lot about Unreal Engine’s C++ and Blueprint systems. It also gave me an opportunity to explore level design and combining 2D and 3D assets in a game world.</p>
+                            <p>Project description: One of my first solo projects I did for fun, I tried making a demo
+                                for a 2.5D game where you play as a 2D character in a 3D environment.</p>
                             <a href="https://drive.google.com/file/d/1YQXjmgzVkSCG0LeMXgMU2KdQI5eFM7kh/view?usp=sharing" class="btn download-btn">Download UE Demo</a>
                         </div>
                     </div>
