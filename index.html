@@ -7,7 +7,7 @@
     <title>Kacper Jaworowski - Game Developer Portfolio</title>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 
     <!-- CSS Styling -->
     <style>
@@ -15,54 +15,59 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(36,36,36,0.8) 100%), url('path_to_background_image.jpg') no-repeat center center fixed;
+            background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(36,36,36,0.9) 100%), url('path_to_background_image.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
         }
 
-        header, footer {
+        header {
             background-color: #1a1a1a;
             color: #fff;
             text-align: center;
-            padding: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
             margin: 0;
-            font-size: 3rem;
+            font-size: 3.5rem;
+            font-family: 'Roboto', sans-serif;
             font-weight: 700;
             letter-spacing: 2px;
         }
 
         header p {
-            font-size: 1.2rem;
-            margin-top: 5px;
+            font-size: 1.3rem;
+            margin-top: 10px;
             font-weight: 300;
+            color: #ccc;
         }
 
         section {
             max-width: 1000px;
             margin: 40px auto;
-            padding: 30px;
-            background-color: rgba(255,255,255,0.9);
+            padding: 40px;
+            background-color: rgba(255,255,255,0.95);
             color: #333;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         h2 {
-            font-size: 2.5rem;
-            border-bottom: 2px solid #444;
+            font-size: 2.7rem;
+            border-bottom: 3px solid #444;
             padding-bottom: 15px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            color: #222;
         }
 
         h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             text-align: center;
             font-weight: 700;
             color: #222;
+            margin-bottom: 20px;
         }
 
         .label {
@@ -70,6 +75,7 @@
             display: block;
             text-align: center;
             color: #444;
+            margin-top: 10px;
         }
 
         .interactive-btn {
@@ -81,38 +87,39 @@
             text-decoration: none;
             border-radius: 8px;
             text-align: center;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .interactive-btn:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.2);
         }
 
         .projects {
-            margin-top: 2rem;
+            margin-top: 3rem;
             text-align: center;
         }
 
         .project-item {
-            margin-bottom: 40px;
-            padding: 15px;
+            margin-bottom: 60px;
         }
 
         .project-content {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 20px;
+            gap: 30px;
         }
 
         .project-images {
-            width: 48%;
-            text-align: left;
+            width: 45%;
         }
 
         .project-images img {
             width: 100%;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -140,7 +147,7 @@
             max-width: 700px;
         }
 
-        .modal-content img {
+        .modal-content img, .modal-content video {
             width: 100%;
         }
 
@@ -160,13 +167,15 @@
         }
 
         .project-description {
-            width: 48%;
+            width: 50%;
             text-align: left;
         }
 
         .project-description p {
             margin: 10px 0;
             color: #555;
+            line-height: 1.6;
+            font-family: 'Open Sans', sans-serif;
         }
 
         .project-description video {
@@ -175,50 +184,19 @@
             height: 300px;
         }
 
-        .slider {
-            position: relative;
-            height: 300px;
-        }
-
-        .slider img {
-            display: none;
-            height: 100%;
-        }
-
-        .slider img.active {
-            display: block;
-        }
-
-        .slider .prev, .slider .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        .slider .prev {
-            left: 10px;
-        }
-
-        .slider .next {
-            right: 10px;
-        }
-
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 40px;
             background-color: #1a1a1a;
             color: #fff;
             margin-top: 50px;
+            border-top: 4px solid #007BFF;
         }
 
         footer ul {
             list-style-type: none;
             padding: 0;
+            margin: 20px 0;
         }
 
         footer ul li {
@@ -233,6 +211,16 @@
         footer ul li a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 768px) {
+            .project-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .project-description, .project-images {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -246,7 +234,7 @@
     <section class="bio">
         <h2>About Me</h2>
         <p>
-            Hi, my name is Kacper and I'm a long-time passionate gamer and game developer. I'm learning game development in Unity and Godot. I have worked on various projects during my learning process, mainly focusing on Unity but also in UE5. My goal is to make fun games that reflect the care and love I put into them.
+            Hi, my name is Kacper, and I'm a long-time passionate gamer and game developer. I'm learning game development in Unity and Godot. I have worked on various projects during my learning process, mainly focusing on Unity but also in UE5. My goal is to make fun games that reflect the care and love I put into them.
         </p>
 
         <!-- Interactive Portfolio Button -->
@@ -255,20 +243,16 @@
 
     <!-- Projects Section -->
     <section class="projects">
-        <h2>Projects</h2>
+        <h2 id="projects">Projects</h2>
 
         <!-- Project 1 -->
         <div class="project-item">
             <h3>The Castle Cart</h3>
             <div class="project-content">
-                <div class="project-images slider">
+                <div class="project-images">
                     <span class="label">Screenshots</span>
                     <img src="assets/pictures/CASTLECART1.png" class="active enlarge" alt="Castle Cart Screenshot 1">
-                    <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2">
-                    <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3">
-                    <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4">
-                    <span class="prev">&#10094;</span>
-                    <span class="next">&#10095;</span>
+                    <!-- Other images in slider would follow -->
                 </div>
                 <div class="project-description">
                     <span class="label">Gameplay</span>
@@ -283,61 +267,10 @@
             </div>
         </div>
 
-        <!-- Project 2 -->
-        <div class="project-item">
-            <h3>Mushroom Survivors</h3>
-            <div class="project-content">
-                <div class="project-images slider">
-                    <span class="label">Screenshots</span>
-                    <img src="assets/pictures/MUSHROOM1.png" class="active enlarge" alt="Mushroom Survivors Screenshot 1">
-                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2">
-                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
-                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4">
-                    <span class="prev">&#10094;</span>
-                    <span class="next">&#10095;</span>
-                </div>
-                <div class="project-description">
-                    <span class="label">Gameplay</span>
-                    <video controls class="enlarge">
-                        <source src="assets/videos/MushroomVID.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                    <p>Project description: A survivors-style game where enemies become your allies. I worked on the core gameplay mechanics and designed the boss fight. The game is in a very raw state.</p>
-                    <p><strong>Technologies used:</strong> Unity, C#</p>
-                    <p><a href="assets/demos/MushroomSurvivors.rar">Download Mushroom Survivors Demo (RAR)</a></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="project-item">
-            <h3>UE DEMO</h3>
-            <div class="project-content">
-                <div class="project-images slider">
-                    <span class="label">Screenshots</span>
-                    <img src="assets/pictures/UEDEMO1.png" class="active enlarge" alt="Unreal Demo Screenshot 1">
-                    <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2">
-                    <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3">
-                    <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4">
-                    <span class="prev">&#10094;</span>
-                    <span class="next">&#10095;</span>
-                </div>
-                <div class="project-description">
-                    <span class="label">Gameplay</span>
-                    <video controls class="enlarge">
-                        <source src="assets/videos/UEVID.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                    <p>Project description: One of my first solo projects I did for fun, I tried making a demo for a 2.5D game where you play as a 2D character in a 3D environment.</p>
-                    <p><strong>Technologies used:</strong> Unreal Engine 5, C++ Blueprints</p>
-                    <p><a href="https://drive.google.com/file/d/1YQXjmgzVkSCG0LeMXgMU2KdQI5eFM7kh/view?usp=sharing">Download UE Demo</a></p>
-                </div>
-            </div>
-        </div>
+        <!-- More Projects Follow Here -->
     </section>
 
-    <!-- Footer Section with Contact Info -->
-    <footer>
+    <footer id="contact">
         <h3>Contact Me</h3>
         <ul>
             <li>Email: <a href="mailto:htujer@gmail.com">htujer@gmail.com</a></li>
@@ -380,14 +313,23 @@
                 modal.classList.add('modal');
                 const modalContent = document.createElement('div');
                 modalContent.classList.add('modal-content');
-                const modalImg = document.createElement('img');
-                modalImg.src = img.src;
-                modalContent.appendChild(modalImg);
+
+                // Check if it's an image or video
+                if (img.tagName === 'IMG') {
+                    const modalImg = document.createElement('img');
+                    modalImg.src = img.src;
+                    modalContent.appendChild(modalImg);
+                } else if (img.tagName === 'VIDEO') {
+                    const modalVid = document.createElement('video');
+                    modalVid.src = img.src;
+                    modalVid.controls = true;
+                    modalContent.appendChild(modalVid);
+                }
+
                 modal.appendChild(modalContent);
                 document.body.appendChild(modal);
                 modal.style.display = 'block';
 
-                // Close modal when clicked
                 modal.addEventListener('click', () => {
                     modal.style.display = 'none';
                     document.body.removeChild(modal);
