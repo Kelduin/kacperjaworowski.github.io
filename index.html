@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
     <title>Kacper Jaworowski - Game Developer Portfolio</title>
-
+    
     <!-- CSS Styling -->
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(36, 36, 36, 0.8) 100%), url('path_to_background_image.jpg') no-repeat center center fixed;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(36,36,36,0.8) 100%), url('path_to_background_image.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
         }
 
-        header,
-        footer {
+        header, footer {
             background-color: #222;
             color: #fff;
             text-align: center;
@@ -37,14 +35,14 @@
             max-width: 1000px;
             margin: 20px auto;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255,255,255,0.9);
             color: #333;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: 2.5rem; /* Increased project name size */
             border-bottom: 2px solid #555;
             padding-bottom: 10px;
             text-align: center;
@@ -55,6 +53,13 @@
             margin-top: 40px;
             text-align: center;
             font-weight: 700;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            text-align: center;
         }
 
         /* Button Styling */
@@ -87,7 +92,7 @@
         .project-content {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             gap: 20px;
         }
 
@@ -107,7 +112,7 @@
             transform: scale(1.05);
         }
 
-        /* Modal for enlarged images and videos */
+        /* Modal for enlarged images */
         .modal {
             display: none;
             position: fixed;
@@ -121,10 +126,14 @@
         }
 
         .modal-content {
-            margin: 5% auto;
+            margin: 10% auto;
             display: block;
             width: 80%;
-            max-width: 900px;
+            max-width: 700px;
+        }
+
+        .modal-content img {
+            width: 100%;
         }
 
         .close {
@@ -136,8 +145,7 @@
             font-weight: bold;
         }
 
-        .close:hover,
-        .close:focus {
+        .close:hover, .close:focus {
             color: #999;
             text-decoration: none;
             cursor: pointer;
@@ -155,7 +163,40 @@
         .project-description video {
             width: 100%;
             border-radius: 10px;
-            height: 300px;
+            height: 300px; /* Adjust the video height */
+        }
+
+        .slider {
+            position: relative;
+            height: 300px; /* Match video height */
+        }
+
+        .slider img {
+            display: none;
+            height: 100%; /* Match video height */
+        }
+
+        .slider img.active {
+            display: block;
+        }
+
+        .slider .prev, .slider .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .slider .prev {
+            left: 10px;
+        }
+
+        .slider .next {
+            right: 10px;
         }
 
         footer {
@@ -183,42 +224,8 @@
         footer ul li a:hover {
             text-decoration: underline;
         }
-
-        /* Slider Arrows */
-        .slider {
-            position: relative;
-        }
-
-        .slider img {
-            display: none;
-        }
-
-        .slider img.active {
-            display: block;
-        }
-
-        .slider .prev,
-        .slider .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        .slider .prev {
-            left: 10px;
-        }
-
-        .slider .next {
-            right: 10px;
-        }
     </style>
 </head>
-
 <body>
 
     <header>
@@ -246,6 +253,7 @@
             <h3>The Castle Cart</h3>
             <div class="project-content">
                 <div class="project-images slider">
+                    <span class="label">Screenshots</span>
                     <img src="assets/pictures/CASTLECART1.png" class="active enlarge" alt="Castle Cart Screenshot 1">
                     <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2">
                     <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3">
@@ -254,6 +262,7 @@
                     <span class="next">&#10095;</span>
                 </div>
                 <div class="project-description">
+                    <span class="label">Gameplay</span>
                     <video controls class="enlarge">
                         <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
                         Your browser does not support the video tag.
@@ -270,6 +279,7 @@
             <h3>Mushroom Survivors</h3>
             <div class="project-content">
                 <div class="project-images slider">
+                    <span class="label">Screenshots</span>
                     <img src="assets/pictures/MUSHROOM1.png" class="active enlarge" alt="Mushroom Survivors Screenshot 1">
                     <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2">
                     <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
@@ -278,6 +288,7 @@
                     <span class="next">&#10095;</span>
                 </div>
                 <div class="project-description">
+                    <span class="label">Gameplay</span>
                     <video controls class="enlarge">
                         <source src="assets/videos/MushroomVID.webm" type="video/webm">
                         Your browser does not support the video tag.
@@ -294,6 +305,7 @@
             <h3>UE DEMO</h3>
             <div class="project-content">
                 <div class="project-images slider">
+                    <span class="label">Screenshots</span>
                     <img src="assets/pictures/UEDEMO1.png" class="active enlarge" alt="Unreal Demo Screenshot 1">
                     <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2">
                     <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3">
@@ -302,6 +314,7 @@
                     <span class="next">&#10095;</span>
                 </div>
                 <div class="project-description">
+                    <span class="label">Gameplay</span>
                     <video controls class="enlarge">
                         <source src="assets/videos/UEVID.webm" type="video/webm">
                         Your browser does not support the video tag.
@@ -326,69 +339,62 @@
     </footer>
 
     <script>
-        // Handle the image modal
-        const enlargeImages = document.querySelectorAll('.enlarge');
-        const imageModal = document.getElementById('imageModal');
-        const closeButtons = document.querySelectorAll('.close');
-        const modalImages = imageModal.querySelectorAll('.modal-content img');
+        const sliders = document.querySelectorAll('.slider');
+        sliders.forEach(slider => {
+            let index = 0;
+            const images = slider.querySelectorAll('img');
+            const prev = slider.querySelector('.prev');
+            const next = slider.querySelector('.next');
 
-        // Handle opening image modal
-        enlargeImages.forEach(img => {
+            function showImage(n) {
+                images.forEach((img, i) => {
+                    img.classList.toggle('active', i === n);
+                });
+            }
+
+            prev.addEventListener('click', () => {
+                index = (index - 1 + images.length) % images.length;
+                showImage(index);
+            });
+
+            next.addEventListener('click', () => {
+                index = (index + 1) % images.length;
+                showImage(index);
+            });
+        });
+
+        // Modal logic for image enlargement
+        const enlargeImage = document.querySelectorAll('.enlarge');
+        enlargeImage.forEach(img => {
             img.addEventListener('click', () => {
-                // Pause playing videos
-                document.querySelectorAll('video').forEach(video => video.pause());
+                const modal = document.createElement('div');
+                modal.classList.add('modal');
+                const modalContent = document.createElement('div');
+                modalContent.classList.add('modal-content');
+                const modalImg = document.createElement('img');
+                modalImg.src = img.src;
+                modalContent.appendChild(modalImg);
+                modal.appendChild(modalContent);
+                document.body.appendChild(modal);
+                modal.style.display = 'block';
 
-                imageModal.style.display = 'block';
-                // Activate corresponding image in modal
-                modalImages.forEach(modalImg => {
-                    modalImg.classList.toggle('active', modalImg.src === img.src);
+                // Close modal when clicked
+                modal.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    document.body.removeChild(modal);
                 });
             });
         });
 
-        // Close the modal when clicking the close button or outside
-        closeButtons.forEach(btn => {
-            btn.onclick = function () {
-                imageModal.style.display = 'none';
-                document.querySelectorAll('video').forEach(video => video.pause());
-            }
-        });
-
-        // Handle slider functionality
-        document.querySelectorAll('.prev, .next').forEach(arrow => {
-            arrow.addEventListener('click', function () {
-                const activeImg = this.closest('.slider').querySelector('img.active');
-                let index = Array.from(activeImg.parentElement.children).indexOf(activeImg);
-                if (this.classList.contains('prev')) {
-                    index = (index - 1 + activeImg.parentElement.children.length) % activeImg.parentElement.children.length;
-                } else {
-                    index = (index + 1) % activeImg.parentElement.children.length;
-                }
-                activeImg.classList.remove('active');
-                activeImg.parentElement.children[index].classList.add('active');
+        // Stop video when a modal is opened
+        document.querySelectorAll('video').forEach((video) => {
+            video.addEventListener('play', function() {
+                document.querySelectorAll('video').forEach(v => {
+                    if (v !== video) v.pause();
+                });
             });
-        });
-
-        // Handle enlarged video modal
-        document.querySelectorAll('video.enlarge').forEach(video => {
-            video.addEventListener('click', function () {
-                document.querySelectorAll('video').forEach(vid => vid.pause()); // Pause all playing videos
-                const videoModal = document.getElementById('videoModal');
-                const modalVideo = videoModal.querySelector('video');
-                modalVideo.src = this.querySelector('source').src;
-                videoModal.style.display = 'block';
-                modalVideo.play();
-            });
-        });
-
-        closeButtons.forEach(btn => {
-            btn.onclick = function () {
-                videoModal.style.display = 'none';
-                videoModal.querySelector('video').pause();
-            }
         });
     </script>
 
 </body>
-
 </html>
