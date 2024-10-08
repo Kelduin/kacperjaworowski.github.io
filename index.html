@@ -95,10 +95,11 @@
 
         .project-content {
             display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
+            justify-content: space-between;
         }
 
+        /* Carousel */
         .carousel {
             position: relative;
             max-width: 600px;
@@ -109,19 +110,23 @@
             width: 100%;
             height: auto;
             border-radius: 12px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
         }
 
         .carousel .prev, .carousel .next {
             cursor: pointer;
             position: absolute;
             top: 50%;
+            transform: translateY(-50%);
             width: auto;
             padding: 16px;
-            margin-top: -22px;
             color: white;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 24px;
             border-radius: 0 3px 3px 0;
             user-select: none;
             transition: 0.6s ease;
@@ -141,6 +146,7 @@
             background-color: rgba(0, 0, 0, 0.8);
         }
 
+        /* Project Description */
         .project-description {
             flex: 1;
             margin-left: 30px;
@@ -260,10 +266,10 @@
             <div class="project-item">
                 <div class="project-content">
                     <div class="carousel">
-                        <img src="assets/pictures/CASTLECART1.png" class="carousel-image" alt="Castle Cart Screenshot 1">
-                        <img src="assets/pictures/CASTLECART2.png" class="carousel-image" alt="Castle Cart Screenshot 2" style="display: none;">
-                        <img src="assets/pictures/CASTLECART3.png" class="carousel-image" alt="Castle Cart Screenshot 3" style="display: none;">
-                        <img src="assets/pictures/CASTLECART4.png" class="carousel-image" alt="Castle Cart Screenshot 4" style="display: none;">
+                        <img src="assets/pictures/CASTLECART1.png" class="carousel-image active" alt="Castle Cart Screenshot 1">
+                        <img src="assets/pictures/CASTLECART2.png" class="carousel-image" alt="Castle Cart Screenshot 2">
+                        <img src="assets/pictures/CASTLECART3.png" class="carousel-image" alt="Castle Cart Screenshot 3">
+                        <img src="assets/pictures/CASTLECART4.png" class="carousel-image" alt="Castle Cart Screenshot 4">
                         <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
                         <a class="next" onclick="changeSlide(1)">&#10095;</a>
                     </div>
@@ -286,10 +292,10 @@
             <div class="project-item">
                 <div class="project-content">
                     <div class="carousel">
-                        <img src="assets/pictures/MUSHROOM1.png" class="carousel-image" alt="Mushroom Survivors Screenshot 1">
-                        <img src="assets/pictures/MUSHROOM2.png" class="carousel-image" alt="Mushroom Survivors Screenshot 2" style="display: none;">
-                        <img src="assets/pictures/MUSHROOM3.png" class="carousel-image" alt="Mushroom Survivors Screenshot 3" style="display: none;">
-                        <img src="assets/pictures/MUSHROOM4.png" class="carousel-image" alt="Mushroom Survivors Screenshot 4" style="display: none;">
+                        <img src="assets/pictures/MUSHROOM1.png" class="carousel-image active" alt="Mushroom Survivors Screenshot 1">
+                        <img src="assets/pictures/MUSHROOM2.png" class="carousel-image" alt="Mushroom Survivors Screenshot 2">
+                        <img src="assets/pictures/MUSHROOM3.png" class="carousel-image" alt="Mushroom Survivors Screenshot 3">
+                        <img src="assets/pictures/MUSHROOM4.png" class="carousel-image" alt="Mushroom Survivors Screenshot 4">
                         <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
                         <a class="next" onclick="changeSlide(1)">&#10095;</a>
                     </div>
@@ -304,6 +310,32 @@
                             core gameplay mechanics and designed the boss fight. The game is in a very raw state.</p>
                         <a href="assets/demos/MushroomSurvivors.rar" class="btn">Download Mushroom Survivors Demo
                             (RAR)</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: UE Demo -->
+            <div class="project-item">
+                <div class="project-content">
+                    <div class="carousel">
+                        <img src="assets/pictures/UEDEMO1.png" class="carousel-image active" alt="Unreal Demo Screenshot 1">
+                        <img src="assets/pictures/UEDEMO2.png" class="carousel-image" alt="Unreal Demo Screenshot 2">
+                        <img src="assets/pictures/UEDEMO3.png" class="carousel-image" alt="Unreal Demo Screenshot 3">
+                        <img src="assets/pictures/UEDEMO4.png" class="carousel-image" alt="Unreal Demo Screenshot 4">
+                        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                    </div>
+                    <div class="project-description">
+                        <h3>UE DEMO</h3>
+                        <p><strong>Technologies used:</strong> Unreal Engine 5, C++ Blueprints</p>
+                        <video controls>
+                            <source src="assets/videos/UEVID.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p>Project description: One of my first solo projects I did for fun, I tried making a demo for a
+                            2.5D game where you play as a 2D character in a 3D environment.</p>
+                        <a href="https://drive.google.com/file/d/1YQXjmgzVkSCG0LeMXgMU2KdQI5eFM7kh/view?usp=sharing"
+                            class="btn">Download UE Demo</a>
                     </div>
                 </div>
             </div>
@@ -328,16 +360,10 @@
 
         function changeSlide(n) {
             let images = document.querySelectorAll('.carousel-image');
-            images[currentSlideIndex].style.display = "none"; // Hide current image
-            currentSlideIndex = (currentSlideIndex + n + images.length) % images.length; // Update index
-            images[currentSlideIndex].style.display = "block"; // Show new image
+            images.forEach((img) => img.classList.remove('active'));  // Hide all images
+            currentSlideIndex = (currentSlideIndex + n + images.length) % images.length;  // Update index
+            images[currentSlideIndex].classList.add('active');  // Show the new active image
         }
-
-        // Initialize first image to be displayed
-        document.addEventListener('DOMContentLoaded', function () {
-            let images = document.querySelectorAll('.carousel-image');
-            images[currentSlideIndex].style.display = "block"; // Show first image
-        });
     </script>
 
 </body>
