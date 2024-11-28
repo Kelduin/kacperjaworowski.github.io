@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
     <title>Kacper Jaworowski - Game Developer Portfolio</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <style>
         /* Base Styles */
         body {
@@ -19,17 +15,6 @@
             padding: 0;
             background-color: #222;
             color: #fff;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
         }
 
         .container {
@@ -42,26 +27,11 @@
             background-color: #1a1a1a;
             padding: 40px 0;
             text-align: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            animation: slideInFromTop 1s forwards;
-        }
-
-        @keyframes slideInFromTop {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
         }
 
         header h1 {
             font-size: 3.5rem;
-            color: #fff;
-            margin: 0;
+            color: #00AEEF;
         }
 
         header p {
@@ -70,255 +40,70 @@
             margin: 10px 0;
         }
 
-        section {
-            padding: 60px 0;
-            opacity: 0;
-            animation: slideInFromLeft 1.5s forwards;
-        }
-
-        @keyframes slideInFromLeft {
-            from {
-                transform: translateX(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .bio h2 {
-            font-size: 2.8rem;
-            margin-bottom: 25px;
-            text-align: center;
-            color: #fff;
-        }
-
-        .bio p {
-            text-align: center;
-            font-size: 1.4rem;
-            color: #ddd;
-            margin: 0 auto;
-            max-width: 700px;
-        }
-
-        .interactive-btn {
-            display: block;
-            text-align: center;
-            background-color: #00AEEF;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 8px;
-            text-decoration: none;
-            margin: 25px auto;
-            width: fit-content;
-            transition: all 0.3s ease;
-        }
-
-        .interactive-btn:hover {
-            background-color: #008bbd;
-            transform: scale(1.05);
-        }
-
-        /* Skills Summary */
-        .skills {
-            background-color: #333;
-            padding: 40px 0;
-            margin-bottom: 60px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .skills h2 {
-            text-align: center;
-            font-size: 2.4rem;
-            color: #fff;
-            margin-bottom: 20px;
-        }
-
-        .skills ul {
-            list-style: none;
-            text-align: center;
-            color: #ddd;
-            font-size: 1.4rem;
-            padding-left: 0;
-        }
-
-        .skills ul li {
-            margin: 10px 0;
-        }
-
-        /* Projects */
-        .projects h2 {
-            text-align: center;
-            font-size: 2.8rem;
-            color: #fff;
-            margin-bottom: 50px;
-        }
-
-        .project-item {
-            background-color: #333;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 50px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .project-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .project-content {
-            text-align: center;
-        }
-
-        .project-item h3 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
+        header a {
             color: #00AEEF;
-            text-align: center;
-        }
-
-        .carousel,
-        .video-container {
-            max-width: 100%;
-            margin: 0 auto 20px auto;
-            position: relative;
-        }
-
-        .carousel img {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            display: none;
-            transition: opacity 0.5s ease;
-        }
-
-        .carousel img.active {
-            display: block;
-            opacity: 1;
-            transition: transform 0.3s;
-        }
-
-        .carousel img:hover {
-            transform: scale(1.05);
-        }
-
-        .carousel .prev,
-        .carousel .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: auto;
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 30px;
-            user-select: none;
-            transition: background-color 0.3s;
-        }
-
-        .carousel .prev {
-            left: 5px;
-            border-radius: 3px 0 0 3px;
-        }
-
-        .carousel .next {
-            right: 5px;
-            border-radius: 0 3px 3px 0;
-        }
-
-        .carousel .prev:hover,
-        .carousel .next:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        .project-description-container {
-            text-align: center;
-        }
-
-        .project-description {
-            margin-top: 20px;
-            color: #ddd;
-            font-size: 1.4rem;
-            line-height: 1.6;
-        }
-
-        .project-description p {
-            margin-bottom: 15px;
-        }
-
-        .video-container {
-            max-width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .video-container video {
-            width: 100%;
-            max-width: 1000px;
-            margin: 20px auto;
-            transition: transform 0.3s;
-        }
-
-        .video-container video:hover {
-            transform: scale(1.05);
-        }
-
-        .technologies-used {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .technologies-used p {
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-        .technologies-used ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .technologies-used li {
-            margin: 5px 0;
+            text-decoration: none;
             font-size: 1.2rem;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: #00AEEF;
-            color: #fff;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #008bbd;
-            transform: scale(1.05);
-        }
-
-        .download-btn {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #1a1a1a;
-            text-align: center;
+        section {
             padding: 60px 0;
-            border-top: 4px solid #00AEEF;
         }
 
-        footer h3 {
-            font-size: 2.2rem;
+        section h2 {
+            font-size: 2.5rem;
             color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 1.2rem;
+            color: #ddd;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .skills ul {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            list-style: none;
+        }
+
+        .skills ul li {
+            background: #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 5px;
+        }
+
+        .skills ul li strong {
+            color: #00AEEF;
+        }
+
+        .projects .project-item {
+            background-color: #333;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .projects .project-item h3 {
+            font-size: 2rem;
+            color: #00AEEF;
+        }
+
+        .projects .project-item a {
+            color: #00AEEF;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #1a1a1a;
+            padding: 20px 0;
+            text-align: center;
         }
 
         footer ul {
@@ -327,52 +112,12 @@
         }
 
         footer ul li {
-            margin: 12px 0;
+            margin: 10px 0;
         }
 
         footer ul li a {
             color: #00AEEF;
             text-decoration: none;
-            font-size: 1.2rem;
-        }
-
-        footer ul li a:hover {
-            text-decoration: underline;
-        }
-
-        footer p {
-            color: #ccc;
-            margin-top: 25px;
-            font-size: 1rem;
-        }
-
-        /* Media Queries */
-        @media (max-width: 768px) {
-            .project-description-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .carousel img {
-                height: auto;
-            }
-
-            .bio p {
-                font-size: 1.2rem;
-            }
-
-            .technologies-used p,
-            .project-description {
-                text-align: center;
-            }
-
-            .carousel .prev {
-                left: 5px;
-            }
-
-            .carousel .next {
-                right: 5px;
-            }
         }
     </style>
 </head>
@@ -382,19 +127,14 @@
         <div class="container">
             <h1>Kacper Jaworowski</h1>
             <p>Game Developer | Unity Enthusiast & Hardcore Gamer</p>
+            <a href="https://github.com/Kelduin" target="_blank">My GitHub</a>
         </div>
     </header>
 
     <section class="bio">
         <div class="container">
             <h2>About Me</h2>
-            <p>Hi, my name is Kacper, and I'm a long-time passionate gamer and game developer. I'm learning game
-                development in Unity and Godot. I have worked on various projects during my learning process, mainly
-                focusing on Unity but also in UE5. My goal is to make fun games that reflect the care and love I put
-                into them.</p>
-
-           <a href="assets/files/MyResume.pdf" class="interactive-btn" download>Download My Resume</a>
-            <a href="https://game.kacperjaworowski.com" class="interactive-btn">Play My Interactive Portfolio(WIP NOT WORKING)</a>
+            <p>Hi, I'm Kacper, a game developer with a passion for creating immersive experiences. I specialize in Unity and Unreal Engine, blending technical skills with creative design to craft memorable gameplay moments.</p>
         </div>
     </section>
 
@@ -402,10 +142,9 @@
         <div class="container">
             <h2>Skills Summary</h2>
             <ul>
-                <li><strong>Game Engines:</strong> Unity, Unreal Engine 5</li>
-                <li><strong>Languages:</strong> C#, C++</li>
-                <li><strong>Game Design:</strong> Class design, AI programming, gameplay mechanics</li>
-                <li><strong>Tools:</strong> Git, Kenney Shape, Photoshop</li>
+                <li><strong>Game Engines:</strong> Unity (Advanced), Unreal Engine (Intermediate)</li>
+                <li><strong>Programming:</strong> C# (Advanced), C++ (Intermediate)</li>
+                <li><strong>Soft Skills:</strong> Teamwork, Problem Solving, Adaptability</li>
             </ul>
         </div>
     </section>
@@ -413,154 +152,21 @@
     <section class="projects">
         <div class="container">
             <h2>Projects</h2>
-
-            <!-- Project 1: The Castle Cart -->
             <div class="project-item">
                 <h3>The Castle Cart</h3>
-                <div class="project-content">
-                    <div class="carousel" id="carousel1">
-                        <img src="assets/pictures/CASTLECART1.png" class="active" alt="Castle Cart Screenshot 1">
-                        <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2">
-                        <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3">
-                        <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4">
-                        <a class="prev" onclick="changeSlide(-1, 'carousel1')">&#10094;</a>
-                        <a class="next" onclick="changeSlide(1, 'carousel1')">&#10095;</a>
-                    </div>
-
-                    <div class="video-container">
-                        <video controls>
-                            <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-
-                    <div class="project-description-container">
-                        <div class="project-description">
-                            <p><strong>Context:</strong> "The Castle Cart" is a Couch LAN racing game set in a fantasy world with classes and magic. We wanted to create a game that combines racing with a class-based mechanic. Each character has its unique abilities, making the races dynamic and strategic.</p>
-                            <p><strong>Lessons Learned:</strong> During the development, I learned how to efficiently manage couch co-op synchronization using Unity and C#. I also got more experience designing class abilities and balancing the gameplay.</p>
-                            <p><strong>Project description:<strong> A racing game based in a fantasy world with classes and magic. This is
-                                a project I made with my friends from Uni. I mainly worked on the gameplay mechanics
-                                and designed most of the classes and their spells.</p>
-                            <a href="https://gambik.itch.io/the-castle-cart" class="btn download-btn">Check out the itch.io page!</a>
-                        </div>
-                    </div>
-
-                    <div class="technologies-used">
-                        <p>Technologies used:</p>
-                        <ul>
-                            <li>Unity</li>
-                            <li>C#</li>
-                        </ul>
-                    </div>
-                </div>
+                <p>A LAN racing game with class-based mechanics. <strong>GitHub:</strong> <a href="#">GitHub Link</a></p>
             </div>
-
-            <!-- Project 2: Mushroom Survivors (Confidential) -->
-            <div class="project-item">
-                <h3>Mushroom Survivors</h3>
-                <div class="project-content">
-                    <div class="carousel" id="carousel2">
-                        <img src="assets/pictures/MUSHROOM1.png" class="active" alt="Mushroom Survivors Screenshot 1">
-                        <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2">
-                        <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
-                        <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4">
-                        <a class="prev" onclick="changeSlide(-1, 'carousel2')">&#10094;</a>
-                        <a class="next" onclick="changeSlide(1, 'carousel2')">&#10095;</a>
-                    </div>
-
-                    <div class="project-description-container">
-                        <div class="project-description">
-                            <p><strong>Context:</strong> "Mushroom Survivors" is a  game where players use enemies they've defeated as allies to defeat more enemies. The idea was to create a twist on the "survivors" genre where the player doesn’t directly attack but manipulates enemies.</p>
-                            <p><strong>Lessons Learned:</strong> This project helped me improve my AI programming skills as I needed to design complex enemy behaviors and control the "swarm" of allied enemies. I also gained experience with balancing a game's difficulty curve.</p>
-                            <p><strong>Project description:<strong> A survivors-style game where enemies become your allies. I worked on
-                                the core gameplay mechanics and designed the boss fight. <strong>This project is currently confidential in development.</strong></p>
-                        </div>
-                    </div>
-
-                    <div class="technologies-used">
-                        <p>Technologies used:</p>
-                        <ul>
-                            <li>Unity</li>
-                            <li>C#</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 3: UE Demo -->
-            <div class="project-item">
-                <h3>UE DEMO</h3>
-                <div class="project-content">
-                    <div class="carousel" id="carousel3">
-                        <img src="assets/pictures/UEDEMO1.png" class="active" alt="Unreal Demo Screenshot 1">
-                        <img src="assets/pictures/UEDEMO2.png" alt="Unreal Demo Screenshot 2">
-                        <img src="assets/pictures/UEDEMO3.png" alt="Unreal Demo Screenshot 3">
-                        <img src="assets/pictures/UEDEMO4.png" alt="Unreal Demo Screenshot 4">
-                        <a class="prev" onclick="changeSlide(-1, 'carousel3')">&#10094;</a>
-                        <a class="next" onclick="changeSlide(1, 'carousel3')">&#10095;</a>
-                    </div>
-
-                    <div class="video-container">
-                        <video controls>
-                            <source src="assets/videos/UEVID.webm" type="video/webm">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-
-                    <div class="project-description-container">
-                        <div class="project-description">
-                            <p><strong>Context:</strong> "UE DEMO" is one of my first solo projects, where I wanted to explore creating a 2.5D game with a 2D character interacting in a 3D world.</p>
-                            <p><strong>Lessons Learned:</strong> I learned a lot about Unreal Engine’s C++ and Blueprint systems. It also gave me an opportunity to explore level design and combining 2D and 3D assets in a game world.</p>
-                            <p><strong>Project description:<strong> One of my first solo projects I did for fun, I tried making a demo
-                                for a 2.5D game where you play as a 2D character in a 3D environment.</p>
-                            <a href="https://drive.google.com/file/d/1YQXjmgzVkSCG0LeMXgMU2KdQI5eFM7kh/view?usp=sharing" class="btn download-btn">Download UE Demo</a>
-                        </div>
-                    </div>
-
-                    <div class="technologies-used">
-                        <p>Technologies used:</p>
-                        <ul>
-                            <li>Unreal Engine 5</li>
-                            <li>C++ Blueprints</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <h3>Contact Me</h3>
             <ul>
                 <li>Email: <a href="mailto:htujer@gmail.com">htujer@gmail.com</a></li>
-                <li>LinkedIn: <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">Kacper Jaworowski</a></li>
-                <li>GitHub: <a href="https://github.com/Kelduin" target="_blank">github.com/Kelduin</a></li>
+                <li>LinkedIn: <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a></li>
             </ul>
-            <p>© 2024 Kacper Jaworowski. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        function changeSlide(n, carouselId) {
-            const carousel = document.getElementById(carouselId);
-            const images = carousel.getElementsByTagName('img');
-            let currentSlideIndex;
-
-            for (let i = 0; i < images.length; i++) {
-                if (images[i].classList.contains('active')) {
-                    currentSlideIndex = i;
-                    break;
-                }
-            }
-
-            images[currentSlideIndex].classList.remove('active');
-            currentSlideIndex = (currentSlideIndex + n + images.length) % images.length;
-            images[currentSlideIndex].classList.add('active');
-        }
-    </script>
-
 </body>
 
 </html>
