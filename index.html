@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
     <title>Kacper Jaworowski - Game Developer Portfolio</title>
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
     <style>
         /* Base Styles */
         body {
@@ -32,18 +35,20 @@
         header h1 {
             font-size: 3.5rem;
             color: #00AEEF;
+            margin-bottom: 10px;
         }
 
         header p {
             color: #ccc;
             font-size: 1.5rem;
-            margin: 10px 0;
         }
 
         header a {
             color: #00AEEF;
             text-decoration: none;
             font-size: 1.2rem;
+            margin-top: 15px;
+            display: inline-block;
         }
 
         section {
@@ -51,7 +56,7 @@
         }
 
         section h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: #fff;
             text-align: center;
             margin-bottom: 20px;
@@ -76,10 +81,12 @@
             padding: 10px 20px;
             border-radius: 8px;
             margin: 5px;
+            text-align: center;
         }
 
         .skills ul li strong {
             color: #00AEEF;
+            display: block;
         }
 
         .projects .project-item {
@@ -91,7 +98,7 @@
         }
 
         .projects .project-item h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #00AEEF;
         }
 
@@ -100,9 +107,26 @@
             text-decoration: none;
         }
 
+        .projects .project-description {
+            margin: 20px 0;
+            font-size: 1.2rem;
+            color: #ddd;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
+        }
+
         footer {
-            background: #1a1a1a;
-            padding: 20px 0;
+            background-color: #1a1a1a;
+            padding: 40px 0;
             text-align: center;
         }
 
@@ -134,7 +158,11 @@
     <section class="bio">
         <div class="container">
             <h2>About Me</h2>
-            <p>Hi, I'm Kacper, a game developer with a passion for creating immersive experiences. I specialize in Unity and Unreal Engine, blending technical skills with creative design to craft memorable gameplay moments.</p>
+            <p>
+                Hi, my name is Kacper, and I'm a game developer passionate about creating engaging and memorable experiences.
+                With experience in Unity and Unreal Engine, I strive to combine technical skills with creativity to develop games
+                that resonate with players.
+            </p>
         </div>
     </section>
 
@@ -154,7 +182,24 @@
             <h2>Projects</h2>
             <div class="project-item">
                 <h3>The Castle Cart</h3>
-                <p>A LAN racing game with class-based mechanics. <strong>GitHub:</strong> <a href="#">GitHub Link</a></p>
+                <div class="carousel">
+                    <img src="assets/pictures/CASTLECART1.png" class="active" alt="Castle Cart Screenshot 1">
+                </div>
+                <p class="project-description">
+                    A LAN racing game with class-based mechanics. Players can choose unique characters with special abilities
+                    for dynamic gameplay. <strong>GitHub:</strong> <a href="#">GitHub Link</a>
+                </p>
+            </div>
+
+            <div class="project-item">
+                <h3>Mushroom Survivors</h3>
+                <div class="carousel">
+                    <img src="assets/pictures/MUSHROOM1.png" class="active" alt="Mushroom Survivors Screenshot 1">
+                </div>
+                <p class="project-description">
+                    A "Survivors"-style game where enemies become allies. The project taught me advanced AI programming
+                    and game balance. <strong>GitHub:</strong> <a href="#">GitHub Link</a>
+                </p>
             </div>
         </div>
     </section>
@@ -164,6 +209,7 @@
             <ul>
                 <li>Email: <a href="mailto:htujer@gmail.com">htujer@gmail.com</a></li>
                 <li>LinkedIn: <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a></li>
+                <li>GitHub: <a href="https://github.com/Kelduin" target="_blank">GitHub</a></li>
             </ul>
         </div>
     </footer>
