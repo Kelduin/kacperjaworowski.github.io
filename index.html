@@ -351,6 +351,7 @@
             flex-direction: column;
             transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
             position: relative;
+            border: 1px solid #555; /* Gray Outline */
         }
 
         .project-item:hover {
@@ -580,59 +581,6 @@
 
         .lightbox-nav:hover {
             background: rgba(0, 0, 0, 0.9);
-        }
-
-        /* Contact Form Styles */
-        .contact-form {
-            max-width: 600px;
-            margin: 40px auto;
-            text-align: left;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px var(--card-shadow);
-        }
-
-        .contact-form h2 {
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: var(--subtext-color);
-        }
-
-        .contact-form button {
-            width: 100%;
-            padding: 12px;
-            background: var(--button-bg);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background var(--transition-duration) ease, transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
-            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
-        }
-
-        .contact-form button:hover {
-            background: var(--button-hover-bg);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
         }
 
         /* Footer Styles */
@@ -1020,21 +968,7 @@
         </div>
     </section>
 
-    <!-- Contact Form Section -->
-    <section class="contact" id="contact-me">
-        <h2 class="section-title">Contact Me</h2>
-        <div class="contact-form">
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <h2>Get in Touch</h2>
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="_replyto" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <footer>
+    <footer id="contact-me">
         <p>&copy; 2024 Kacper Jaworowski. All rights reserved.</p>
         <a href="mailto:htujer@gmail.com">htujer@gmail.com</a>
         <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a>
@@ -1138,7 +1072,7 @@
             e.preventDefault();
         }, { passive: false });
 
-        // Show More / Show Less Functionality
+        // Show More / Show Less Functionality with Smooth Scroll
         function toggleDetails(button) {
             const projectItem = button.parentElement;
             const description = projectItem.querySelector('.project-description');
@@ -1146,9 +1080,13 @@
             if (description.classList.contains('open')) {
                 description.classList.remove('open');
                 button.textContent = 'Show More';
+                // Scroll back to the project title
+                projectItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
                 description.classList.add('open');
                 button.textContent = 'Show Less';
+                // Optionally, scroll to the description
+                // description.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     </script>
