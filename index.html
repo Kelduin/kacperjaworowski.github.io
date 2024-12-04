@@ -753,12 +753,12 @@
 
     <header>
         <h1>Kacper Jaworowski</h1>
-        <p>Game Developer | Unity Enthusiast & Hardcore Gamer</p>
+        <p>Game Developer | Indie Game Enthusiast & Hardcore Gamer</p>
     </header>
 
     <section class="bio" id="about-me">
         <h2>About Me</h2>
-        <p>Hi, my name is Kacper, and I'm a passionate gamer and game developer with a strong background in creating engaging and immersive experiences. I specialize in Unity and Unreal Engine, and I thrive in collaborative environments where creativity and innovation are encouraged.</p>
+        <p>Hi, my name is Kacper, and I'm a passionate gamer and game developer with a strong background in creating engaging and immersive experiences. I specialize in Unity and Godot, and I thrive in collaborative environments where creativity and innovation are encouraged.</p>
         <a href="assets/files/MyResume.pdf" class="interactive-btn" download>Download My Resume</a>
         <!-- Removed the "Play My Interactive Portfolio" button as per your request -->
     </section>
@@ -769,25 +769,37 @@
             <div class="hard-skills">
                 <h3>Hard Skills</h3>
                 <div class="skill-bar">
-                    <span>Unity (Advanced)</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="90%"></div>
-                    </div>
-                </div>
-                <div class="skill-bar">
-                    <span>C# (Advanced)</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="85%"></div>
-                    </div>
-                </div>
-                <div class="skill-bar">
-                    <span>Unreal Engine 5 (Intermediate)</span>
+                    <span>Unity (Intermediate)</span>
                     <div class="bar">
                         <div class="progress" data-percentage="70%"></div>
                     </div>
                 </div>
                 <div class="skill-bar">
-                    <span>C++ (Intermediate)</span>
+                    <span>C# (Intermediate)</span>
+                    <div class="bar">
+                        <div class="progress" data-percentage="55%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <span>Godot (Intermediate)</span>
+                    <div class="bar">
+                        <div class="progress" data-percentage="65%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <span>C++ (learning)</span>
+                    <div class="bar">
+                        <div class="progress" data-percentage="40"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <span>Gscript (Intermediate)</span>
+                    <div class="bar">
+                        <div class="progress" data-percentage="65%"></div>
+                    </div>
+                     </div>
+                <div class="skill-bar">
+                    <span>Git Control (Intermediate)</span>
                     <div class="bar">
                         <div class="progress" data-percentage="65%"></div>
                     </div>
@@ -795,7 +807,7 @@
                 <div class="skill-bar">
                     <span>AI Programming</span>
                     <div class="bar">
-                        <div class="progress" data-percentage="75%"></div>
+                        <div class="progress" data-percentage="65%"></div>
                     </div>
                 </div>
             </div>
@@ -806,9 +818,11 @@
                     <li>Teamwork</li>
                     <li>Problem-solving</li>
                     <li>Communication</li>
+                    <li>Creativity</li>
                     <li>Time Management</li>
                     <li>Adaptability</li>
                     <li>Leadership</li>
+                    <li>Attention to Detail</li>
                 </ul>
             </div>
         </div>
@@ -821,23 +835,23 @@
             <div class="project-item">
                 <h3 class="project-title">Slimetastic</h3>
                 <div class="carousel">
-                    <img src="assets/slimetastic1.jpg" alt="Slimetastic Screenshot 1" class="active" data-project="slimetastic" data-index="1" onclick="openLightbox(this)">
-                    <img src="assets/slimetastic2.jpg" alt="Slimetastic Screenshot 2" data-project="slimetastic" data-index="2" onclick="openLightbox(this)">
-                    <img src="assets/slimetastic3.jpg" alt="Slimetastic Screenshot 3" data-project="slimetastic" data-index="3" onclick="openLightbox(this)">
-                    <img src="assets/slimetastic4.jpg" alt="Slimetastic Screenshot 4" data-project="slimetastic" data-index="4" onclick="openLightbox(this)">
+                    <img src="assets/pictures/SLIMETASTIC1.jpg" alt="Slimetastic Screenshot 1" class="active" data-project="slimetastic" data-index="1" onclick="openLightbox(this)">
+                    <img src="assets/pictures/SLIMETASTIC2.jpg" alt="Slimetastic Screenshot 2" data-project="slimetastic" data-index="2" onclick="openLightbox(this)">
+                    <img src="assets/pictures/SLIMETASTIC3.jpg" alt="Slimetastic Screenshot 3" data-project="slimetastic" data-index="3" onclick="openLightbox(this)">
+                    <img src="assets/pictures/SLIMETASTIC4.jpg" alt="Slimetastic Screenshot 4" data-project="slimetastic" data-index="4" onclick="openLightbox(this)">
                     <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
                 <div class="video-container">
                     <video controls>
-                        <source src="assets/slimetastic-video1.mp4" type="video/mp4">
+                        <source src="assets/videos/SLIMETASTICVIDEO.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="project-buttons">
                     <a href="https://github.com/Kelduin/Slimetastic" target="_blank">View on GitHub</a>
-                    <a href="https://game.kacperjaworowski.com/slimetastic" target="_blank">Play Project</a>
+                    <a href="https://game.kacperjaworowski.com" target="_blank">Play Project</a>
                 </div>
                 <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
                 <div class="project-description">
@@ -852,17 +866,17 @@
             <div class="project-item">
                 <h3 class="project-title">Puzzle Keeper</h3>
                 <div class="carousel">
-                    <img src="assets/puzzlekeeper1.jpg" alt="Puzzle Keeper Screenshot 1" class="active" data-project="puzzlekeeper" data-index="1" onclick="openLightbox(this)">
-                    <img src="assets/puzzlekeeper2.jpg" alt="Puzzle Keeper Screenshot 2" data-project="puzzlekeeper" data-index="2" onclick="openLightbox(this)">
-                    <img src="assets/puzzlekeeper3.jpg" alt="Puzzle Keeper Screenshot 3" data-project="puzzlekeeper" data-index="3" onclick="openLightbox(this)">
-                    <img src="assets/puzzlekeeper4.jpg" alt="Puzzle Keeper Screenshot 4" data-project="puzzlekeeper" data-index="4" onclick="openLightbox(this)">
+                    <img src="assets/pictures/puzzlekeeper1.jpg" alt="Puzzle Keeper Screenshot 1" class="active" data-project="puzzlekeeper" data-index="1" onclick="openLightbox(this)">
+                    <img src="assets/pictures/puzzlekeeper2.jpg" alt="Puzzle Keeper Screenshot 2" data-project="puzzlekeeper" data-index="2" onclick="openLightbox(this)">
+                    <img src="assets/pictures/puzzlekeeper3.jpg" alt="Puzzle Keeper Screenshot 3" data-project="puzzlekeeper" data-index="3" onclick="openLightbox(this)">
+                    <img src="assets/pictures/puzzlekeeper4.jpg" alt="Puzzle Keeper Screenshot 4" data-project="puzzlekeeper" data-index="4" onclick="openLightbox(this)">
                     <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
                 <div class="video-container">
                     <video controls>
-                        <source src="assets/puzzlekeeper-video2.mp4" type="video/mp4">
+                        <source src="assets/puzzlekeeper-video.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -898,7 +912,7 @@
                     </video>
                 </div>
                 <div class="project-buttons">
-                    <a href="https://github.com/Kelduin/CastleCart" target="_blank">View on GitHub</a>
+                    <a href="https://gitlab.com/aaa5460844/gierka" target="_blank">View on GitHub</a>
                     <a href="https://kelduin.itch.io/castle-cart" target="_blank">Play on itch.io</a>
                 </div>
                 <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
@@ -952,7 +966,7 @@
                     </video>
                 </div>
                 <div class="project-buttons">
-                    <a href="https://github.com/Kelduin/UE-Demo" target="_blank">View on GitHub</a>
+                    <a href="https://github.com/Kelduin/UE-DEMO" target="_blank">View on GitHub</a>
                 </div>
                 <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
                 <div class="project-description">
