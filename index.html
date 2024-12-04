@@ -26,6 +26,9 @@
             --nav-shadow: rgba(0, 0, 0, 0.6);
             --footer-bg: #111;
             --footer-text: #ccc;
+            --lightbox-bg: rgba(0, 0, 0, 0.8);
+            --lightbox-content-bg: #2c2c2c;
+            --close-btn-color: #fff;
         }
 
         /* Reset and Base Styles */
@@ -157,7 +160,7 @@
             font-size: 1.2rem;
             color: var(--subtext-color);
             margin-bottom: 30px;
-            text-align: center; /* Center the bio text */
+            text-align: center;
         }
 
         .interactive-btn {
@@ -179,7 +182,7 @@
             background: var(--button-hover-bg);
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
-            color: #fff; /* Ensure text color remains white on hover */
+            color: #fff;
         }
 
         /* Skills Section */
@@ -187,7 +190,7 @@
             background: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
             padding: 40px 20px;
-            text-align: center; /* Center the entire skills section */
+            text-align: center;
         }
 
         .skills h2 {
@@ -210,7 +213,7 @@
         .skills .container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Center the container content */
+            justify-content: center;
             max-width: 1000px;
             margin: auto;
         }
@@ -219,7 +222,7 @@
         .soft-skills {
             flex: 1 1 45%;
             margin: 20px;
-            min-width: 280px; /* Ensure minimum width to prevent overlap */
+            min-width: 280px;
         }
 
         .hard-skills h3,
@@ -266,7 +269,7 @@
         .bar .progress {
             height: 100%;
             background: var(--accent-color);
-            width: 0; /* Set initial width to 0 */
+            width: 0;
             border-radius: 10px;
             transition: width 1s ease-in-out;
         }
@@ -375,6 +378,7 @@
             object-fit: cover;
             display: none;
             transition: opacity 0.5s ease;
+            cursor: pointer; /* Change cursor to pointer */
         }
 
         .carousel img.active {
@@ -469,6 +473,55 @@
             background: var(--button-hover-bg);
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: var(--lightbox-bg);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--lightbox-content-bg);
+            color: var(--close-btn-color);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .close-btn:hover {
+            background: var(--button-hover-bg);
         }
 
         /* Footer Styles */
@@ -709,11 +762,11 @@
             <div class="project-item">
                 <h3 class="project-title">Slimetastic</h3>
                 <div class="carousel">
-                    <img src="assets/slimetastic1.jpg" alt="Slimetastic Screenshot 1" class="active">
-                    <img src="assets/slimetastic2.jpg" alt="Slimetastic Screenshot 2">
-                    <img src="assets/slimetastic3.jpg" alt="Slimetastic Screenshot 3">
-                    <img src="assets/slimetastic4.jpg" alt="Slimetastic Screenshot 4">
-                    <img src="assets/slimetastic5.jpg" alt="Slimetastic Screenshot 5">
+                    <img src="assets/slimetastic1.jpg" alt="Slimetastic Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/slimetastic2.jpg" alt="Slimetastic Screenshot 2" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/slimetastic3.jpg" alt="Slimetastic Screenshot 3" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/slimetastic4.jpg" alt="Slimetastic Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
@@ -739,11 +792,11 @@
             <div class="project-item">
                 <h3 class="project-title">Puzzle Keeper</h3>
                 <div class="carousel">
-                    <img src="assets/puzzlekeeper1.jpg" alt="Puzzle Keeper Screenshot 1" class="active">
-                    <img src="assets/puzzlekeeper2.jpg" alt="Puzzle Keeper Screenshot 2">
-                    <img src="assets/puzzlekeeper3.jpg" alt="Puzzle Keeper Screenshot 3">
-                    <img src="assets/puzzlekeeper4.jpg" alt="Puzzle Keeper Screenshot 4">
-                    <img src="assets/puzzlekeeper5.jpg" alt="Puzzle Keeper Screenshot 5">
+                    <img src="assets/puzzlekeeper1.jpg" alt="Puzzle Keeper Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/puzzlekeeper2.jpg" alt="Puzzle Keeper Screenshot 2" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/puzzlekeeper3.jpg" alt="Puzzle Keeper Screenshot 3" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/puzzlekeeper4.jpg" alt="Puzzle Keeper Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
@@ -761,7 +814,7 @@
                 </div>
                 <div class="project-buttons">
                     <!-- No GitHub link for this project -->
-                    <!-- Optionally, you can add a link to view videos or more screenshots -->
+                    <!-- Optionally, you can add links to view videos or more screenshots -->
                 </div>
             </div>
 
@@ -769,11 +822,11 @@
             <div class="project-item">
                 <h3 class="project-title">Castle Cart</h3>
                 <div class="carousel">
-                    <img src="assets/castlecart1.jpg" alt="Castle Cart Screenshot 1" class="active">
-                    <img src="assets/castlecart2.jpg" alt="Castle Cart Screenshot 2">
-                    <img src="assets/castlecart3.jpg" alt="Castle Cart Screenshot 3">
-                    <img src="assets/castlecart4.jpg" alt="Castle Cart Screenshot 4">
-                    <img src="assets/castlecart5.jpg" alt="Castle Cart Screenshot 5">
+                    <img src="assets/castlecart1.jpg" alt="Castle Cart Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/castlecart2.jpg" alt="Castle Cart Screenshot 2" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/castlecart3.jpg" alt="Castle Cart Screenshot 3" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/castlecart4.jpg" alt="Castle Cart Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
@@ -784,9 +837,9 @@
                     </video>
                 </div>
                 <div class="project-description">
-                    <p><strong>Context:</strong> "The Castle Cart" is a couch LAN racing game set in a fantasy world filled with classes and magic. The project aimed to blend fast-paced racing with class-based mechanics to create a unique multiplayer experience. The development involved a collaborative effort with my university peers over several months.</p>
-                    <p><strong>Development Process:</strong>  We started by brainstorming game mechanics and settled on combining racing with RPG elements. I took the lead on developing the gameplay mechanics and designing the various classes and their unique spells. We iterated through multiple prototypes to balance the game and ensure each class felt distinct and enjoyable.</p>
-                    <p><strong>Lessons Learned:</strong>  This project taught me a lot about team collaboration and project management. I enhanced my skills in Unity and C#, especially in synchronizing gameplay for couch co-op modes. I also gained valuable experience in game balance and class design.</p>
+                    <p><strong>Context:</strong> "Castle Cart" is a couch LAN racing game set in a fantasy world filled with classes and magic. The project aimed to blend fast-paced racing with class-based mechanics to create a unique multiplayer experience. The development involved a collaborative effort with my university peers over several months.</p>
+                    <p><strong>Development Process:</strong> We started by brainstorming game mechanics and settled on combining racing with RPG elements. I took the lead on developing the gameplay mechanics and designing the various classes and their unique spells. We iterated through multiple prototypes to balance the game and ensure each class felt distinct and enjoyable.</p>
+                    <p><strong>Lessons Learned:</strong> This project taught me a lot about team collaboration and project management. I enhanced my skills in Unity and C#, especially in synchronizing gameplay for couch co-op modes. I also gained valuable experience in game balance and class design.</p>
                     <p><strong>Skills Utilized:</strong> Unity, C#, 3D Game Development, Gameplay Design, Power-up Systems, Class Design, Teamwork</p>
                 </div>
                 <div class="project-buttons">
@@ -799,15 +852,15 @@
             <div class="project-item">
                 <h3 class="project-title">Mushroom Survivors</h3>
                 <div class="carousel">
-                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="active">
-                    <img src="assets/pictures/MUSHROOM2.png alt="Mushroom Survivors Screenshot 2">
-                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3">
-                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4">
-                    
+                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
-                
+                <!-- Removed the video-container div as per your request -->
                 <div class="project-description">
                     <p><strong>Context:</strong> "Mushroom Survivors" is a unique take on the 'survivors' genre, where defeated enemies become your allies. The project was developed with a focus on innovative gameplay mechanics that encourage strategic play.</p>
                     <p><strong>Development Process:</strong> In this project, I was responsible for designing and implementing the core gameplay mechanics. This involved programming enemy AI behaviors, the mechanics for converting enemies into allies, and designing challenging boss fights. The development process included extensive testing and balancing to ensure a smooth player experience.</p>
@@ -824,11 +877,11 @@
             <div class="project-item">
                 <h3 class="project-title">UE Demo</h3>
                 <div class="carousel">
-                    <img src="assets/pictures/UEDEMO1.png" alt="UE Demo Screenshot 1" class="active">
-                    <img src="assets/pictures/UEDEMO2.png alt="UE Demo Screenshot 2">
-                    <img src="assets/pictures/UEDEMO3.png" alt="UE Demo Screenshot 3">
-                    <img src="assets/pictures/UEDEMO4.png" alt="UE Demo Screenshot 4">
-                    
+                    <img src="assets/pictures/UEDEMO1.png" alt="UE Demo Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/pictures/UEDEMO2.png" alt="UE Demo Screenshot 2" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/pictures/UEDEMO3.png" alt="UE Demo Screenshot 3" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/pictures/UEDEMO4.png" alt="UE Demo Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
@@ -855,8 +908,16 @@
         <p>&copy; 2024 Kacper Jaworowski. All rights reserved.</p>
         <a href="mailto:htujer@gmail.com">htujer@gmail.com</a>
         <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a>
-        <a href="https://github.com/Kelduin" target="_blank">Github</a>
+        <a href="https://github.com/Kelduin" target="_blank">GitHub</a>
     </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeLightbox()">&times;</button>
+            <img id="lightbox-img" src="" alt="">
+        </div>
+    </div>
 
     <script>
         // Carousel Functionality
@@ -904,6 +965,26 @@
                 }
             }
         });
+
+        // Lightbox Functionality
+        function openLightbox(src, alt) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+
+        // Prevent scrolling when lightbox is open
+        const lightbox = document.getElementById('lightbox');
+        lightbox.addEventListener('wheel', function (e) {
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
 
