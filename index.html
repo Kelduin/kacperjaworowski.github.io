@@ -209,11 +209,12 @@
             border-radius: 2px;
         }
 
+        /* Change layout to vertical stack */
         .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 800px; /* Adjusted for better readability */
             margin: 0 auto;
         }
 
@@ -312,6 +313,12 @@
             margin-bottom: 10px;
         }
 
+        /* Style for description headers */
+        .project-description p strong {
+            color: #00AEEF;
+            font-size: 1.1rem;
+        }
+
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -341,6 +348,10 @@
 
             .project-title {
                 font-size: 1.5rem;
+            }
+
+            .project-description p strong {
+                font-size: 1rem;
             }
         }
     </style>
@@ -475,7 +486,83 @@
                 </div>
             </div>
 
-            <!-- Add more project-item divs as needed -->
+            <!-- Project 3 -->
+            <div class="project-item">
+                <h3 class="project-title">Project Name 3</h3>
+                <div class="carousel">
+                    <img src="assets/placeholder1.jpg" alt="Placeholder Image 1" class="active">
+                    <img src="assets/placeholder2.jpg" alt="Placeholder Image 2">
+                    <img src="assets/placeholder3.jpg" alt="Placeholder Image 3">
+                    <img src="assets/placeholder4.jpg" alt="Placeholder Image 4">
+                    <img src="assets/placeholder5.jpg" alt="Placeholder Image 5">
+                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
+                </div>
+                <div class="video-container">
+                    <video controls>
+                        <source src="assets/placeholder-video3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="project-description">
+                    <p><strong>Context:</strong> Brief description about what the project is about.</p>
+                    <p><strong>Development Process:</strong> Overview of the development process, challenges faced, and solutions implemented.</p>
+                    <p><strong>Lessons Learned:</strong> Key takeaways and skills gained from the project.</p>
+                    <p><strong>Skills Utilized:</strong> Python, Machine Learning, Data Analysis, etc.</p>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-item">
+                <h3 class="project-title">Project Name 4</h3>
+                <div class="carousel">
+                    <img src="assets/placeholder1.jpg" alt="Placeholder Image 1" class="active">
+                    <img src="assets/placeholder2.jpg" alt="Placeholder Image 2">
+                    <img src="assets/placeholder3.jpg" alt="Placeholder Image 3">
+                    <img src="assets/placeholder4.jpg" alt="Placeholder Image 4">
+                    <img src="assets/placeholder5.jpg" alt="Placeholder Image 5">
+                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
+                </div>
+                <div class="video-container">
+                    <video controls>
+                        <source src="assets/placeholder-video4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="project-description">
+                    <p><strong>Context:</strong> Brief description about what the project is about.</p>
+                    <p><strong>Development Process:</strong> Overview of the development process, challenges faced, and solutions implemented.</p>
+                    <p><strong>Lessons Learned:</strong> Key takeaways and skills gained from the project.</p>
+                    <p><strong>Skills Utilized:</strong> JavaScript, React, UI/UX Design, etc.</p>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-item">
+                <h3 class="project-title">Project Name 5</h3>
+                <div class="carousel">
+                    <img src="assets/placeholder1.jpg" alt="Placeholder Image 1" class="active">
+                    <img src="assets/placeholder2.jpg" alt="Placeholder Image 2">
+                    <img src="assets/placeholder3.jpg" alt="Placeholder Image 3">
+                    <img src="assets/placeholder4.jpg" alt="Placeholder Image 4">
+                    <img src="assets/placeholder5.jpg" alt="Placeholder Image 5">
+                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
+                </div>
+                <div class="video-container">
+                    <video controls>
+                        <source src="assets/placeholder-video5.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="project-description">
+                    <p><strong>Context:</strong> Brief description about what the project is about.</p>
+                    <p><strong>Development Process:</strong> Overview of the development process, challenges faced, and solutions implemented.</p>
+                    <p><strong>Lessons Learned:</strong> Key takeaways and skills gained from the project.</p>
+                    <p><strong>Skills Utilized:</strong> HTML, CSS, Web Development, etc.</p>
+                </div>
+            </div>
         </div>
     </section>
 
