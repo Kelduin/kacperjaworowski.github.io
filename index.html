@@ -6,24 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
     <title>Kacper Jaworowski - Game Developer Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables */
+        /* CSS Variables for Easy Theme Management */
         :root {
-            --primary-color: #1e1e2f;
-            --secondary-color: #2e2e3e;
-            --accent-color: #ff5722;
-            --background-gradient: linear-gradient(135deg, #1e1e2f, #2e2e3e);
-            --text-color: #ffffff;
-            --subtext-color: #b0b0b0;
-            --card-bg: #3e3e4e;
-            --button-bg: #ff5722;
-            --button-hover-bg: #e64a19;
-            --nav-height: 60px;
+            --primary-color: #00AEEF;
+            --secondary-color: #121212;
+            --background-gradient: linear-gradient(to bottom, #1a1a1a, #121212);
+            --header-gradient: radial-gradient(circle at top, #222, #111);
+            --text-color: #eaeaea;
+            --subtext-color: #ccc;
+            --accent-color: #00AEEF;
+            --card-bg: #2c2c2c;
+            --card-shadow: rgba(0, 0, 0, 0.5);
+            --button-bg: #00AEEF;
+            --button-hover-bg: #008bbd;
+            --nav-bg: rgba(0, 0, 0, 0.9);
+            --nav-shadow: rgba(0, 0, 0, 0.6);
+            --footer-bg: #111;
+            --footer-text: #ccc;
         }
 
-        /* Reset & Base Styles */
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -31,11 +35,15 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: var(--background-gradient);
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         a {
@@ -50,45 +58,32 @@
 
         /* Navigation Styles */
         nav {
-            position: fixed;
+            position: sticky;
             top: 0;
-            width: 100%;
-            height: var(--nav-height);
-            background: rgba(30, 30, 47, 0.9);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            transition: background 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(30, 30, 47, 1);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
+            z-index: 100;
+            box-shadow: 0 2px 4px var(--nav-shadow);
+            padding: 10px 0;
+            animation: fadeInDown 1s ease;
         }
 
         .nav-links {
             display: flex;
+            justify-content: center;
             list-style: none;
         }
 
         .nav-links li {
-            margin-left: 25px;
+            margin: 0 20px;
             position: relative;
         }
 
         .nav-links a {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
             padding: 5px 0;
+            display: inline-block;
             transition: color 0.3s ease;
         }
 
@@ -106,46 +101,68 @@
             width: 100%;
         }
 
-        /* Hamburger Menu */
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            color: var(--text-color);
-            cursor: pointer;
-        }
-
         /* Header Styles */
         header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 100px 20px;
+            background: var(--header-gradient);
             animation: fadeIn 2s ease;
         }
 
         header h1 {
             font-size: 4rem;
-            font-weight: 700;
             color: var(--accent-color);
             margin-bottom: 20px;
-            animation: slideInDown 1s ease;
+            animation: slideInLeft 1s ease;
         }
 
         header p {
             font-size: 1.5rem;
             color: var(--subtext-color);
-            max-width: 600px;
-            animation: slideInUp 1s ease;
+            animation: slideInRight 1s ease;
         }
 
-        /* Button Styles */
-        .btn {
+        /* Section Styles */
+        section {
+            padding: 60px 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* About Me Section */
+        .bio {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .bio h2 {
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .bio h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .bio p {
+            font-size: 1.2rem;
+            color: var(--subtext-color);
+            margin-bottom: 30px;
+            text-align: center; /* Center the bio text */
+        }
+
+        .interactive-btn {
             display: inline-block;
-            margin: 15px 10px 0 10px;
-            padding: 12px 30px;
+            margin: 10px;
+            padding: 15px 35px;
             background: var(--button-bg);
             color: #fff;
             border: none;
@@ -153,80 +170,35 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
         }
 
-        .btn:hover {
+        .interactive-btn:hover {
             background: var(--button-hover-bg);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.6);
-        }
-
-        /* Sections */
-        section {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        /* About Me Section */
-        #about-me {
-            background: rgba(46, 46, 62, 0.9);
-            border-radius: 15px;
-            margin-top: calc(var(--nav-height) + 20px);
-            padding: 60px 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1.5s ease;
-        }
-
-        #about-me h2 {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        #about-me h2::after {
-            content: '';
-            width: 60px;
-            height: 4px;
-            background: var(--accent-color);
-            display: block;
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        #about-me p {
-            font-size: 1.1rem;
-            color: var(--subtext-color);
-            margin-bottom: 30px;
-            line-height: 1.8;
-            text-align: center;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
+            color: #fff; /* Ensure text color remains white on hover */
         }
 
         /* Skills Section */
-        #skills-summary {
-            background: rgba(30, 30, 47, 0.9);
+        .skills {
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
-            padding: 60px 40px;
-            margin-top: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1.7s ease;
+            padding: 40px 20px;
+            text-align: center; /* Center the entire skills section */
         }
 
-        #skills-summary h2 {
-            font-size: 2.5rem;
+        .skills h2 {
+            font-size: 2.8rem;
             color: var(--accent-color);
             margin-bottom: 30px;
-            text-align: center;
             position: relative;
         }
 
-        #skills-summary h2::after {
+        .skills h2::after {
             content: '';
-            width: 60px;
+            width: 80px;
             height: 4px;
             background: var(--accent-color);
             display: block;
@@ -234,32 +206,34 @@
             border-radius: 2px;
         }
 
-        .skills-container {
+        .skills .container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
+            justify-content: center; /* Center the container content */
+            max-width: 1000px;
+            margin: auto;
         }
 
-        .skill-category {
-            flex: 1 1 400px;
-            background: var(--secondary-color);
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease;
+        .hard-skills,
+        .soft-skills {
+            flex: 1 1 45%;
+            margin: 20px;
+            min-width: 280px; /* Ensure minimum width to prevent overlap */
         }
 
-        .skill-category h3 {
-            font-size: 1.8rem;
+        .hard-skills h3,
+        .soft-skills h3 {
+            font-size: 2rem;
             color: var(--accent-color);
             margin-bottom: 20px;
+            text-align: left;
             position: relative;
         }
 
-        .skill-category h3::after {
+        .hard-skills h3::after,
+        .soft-skills h3::after {
             content: '';
-            width: 40px;
+            width: 50px;
             height: 3px;
             background: var(--accent-color);
             display: block;
@@ -268,37 +242,39 @@
         }
 
         .skill-bar {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .skill-bar span {
             display: block;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
             margin-bottom: 5px;
-            color: var(--text-color);
+            text-align: left;
         }
 
         .bar {
             width: 100%;
-            height: 15px;
-            background: #555;
-            border-radius: 8px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
             overflow: hidden;
+            position: relative;
         }
 
         .bar .progress {
             height: 100%;
             background: var(--accent-color);
-            width: 0;
-            border-radius: 8px;
-            transition: width 1.5s ease-in-out;
+            width: 0; /* Set initial width to 0 */
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
         }
 
         .soft-skills ul {
             list-style: none;
             padding: 0;
-            font-size: 1.1rem;
+            text-align: left;
+            font-size: 1.2rem;
             color: var(--subtext-color);
         }
 
@@ -306,18 +282,16 @@
             margin: 10px 0;
             padding-left: 25px;
             position: relative;
-            transition: color 0.3s ease, transform 0.3s ease;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .soft-skills ul li::before {
-            content: "\f00c";
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
+            content: "✔";
             color: var(--accent-color);
             position: absolute;
             left: 0;
             top: 0;
-            font-size: 1rem;
+            font-size: 1.2rem;
             transition: transform 0.3s ease;
         }
 
@@ -327,22 +301,24 @@
         }
 
         /* Projects Section */
-        #projects {
-            margin-top: 60px;
-            animation: fadeInUp 2s ease;
+        .projects {
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 15px;
+            padding: 60px 20px;
+            margin-top: 40px;
         }
 
-        #projects h2 {
-            font-size: 2.5rem;
+        .projects .section-title {
+            font-size: 2.8rem;
             color: var(--accent-color);
-            margin-bottom: 30px;
             text-align: center;
+            margin-bottom: 50px;
             position: relative;
         }
 
-        #projects h2::after {
+        .projects .section-title::after {
             content: '';
-            width: 60px;
+            width: 100px;
             height: 4px;
             background: var(--accent-color);
             display: block;
@@ -354,38 +330,42 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
+            max-width: 1200px;
+            margin: auto;
         }
 
         .project-item {
             background: var(--card-bg);
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px var(--card-shadow);
+            padding: 25px;
+            color: var(--text-color);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
 
         .project-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 12px 25px var(--card-shadow);
         }
 
         .project-title {
             font-size: 1.8rem;
             color: var(--accent-color);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
+        /* Carousel Styles */
         .carousel {
             position: relative;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             overflow: hidden;
             border-radius: 10px;
             height: 200px;
-            background: #555;
+            background: #333;
         }
 
         .carousel img {
@@ -428,11 +408,12 @@
             right: 10px;
         }
 
+        /* Video Container */
         .video-container {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border-radius: 10px;
             overflow: hidden;
-            background: #555;
+            background: #333;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
@@ -441,10 +422,12 @@
             border-radius: 10px;
         }
 
+        /* Project Description */
         .project-description {
             font-size: 1rem;
             line-height: 1.6;
             color: var(--subtext-color);
+            flex-grow: 1;
         }
 
         .project-description p {
@@ -453,28 +436,54 @@
 
         .project-description p strong {
             color: var(--accent-color);
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+        }
+
+        /* Project Buttons */
+        .project-buttons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .project-buttons a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--button-bg);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
+        }
+
+        .project-buttons a:hover {
+            background: var(--button-hover-bg);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
         }
 
         /* Footer Styles */
         footer {
             text-align: center;
-            padding: 40px 20px;
-            background: var(--primary-color);
-            color: var(--subtext-color);
+            padding: 30px 20px;
+            background: var(--footer-bg);
+            color: var(--footer-text);
             margin-top: 60px;
-            animation: fadeInUp 2.5s ease;
-        }
-
-        footer p {
-            margin-bottom: 15px;
-            font-size: 1rem;
+            animation: fadeInUp 1s ease;
         }
 
         footer a {
             color: var(--accent-color);
             font-weight: 600;
-            transition: color 0.3s ease;
+            margin: 0 10px;
         }
 
         footer a:hover {
@@ -485,19 +494,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(-20px);
             }
 
             to {
@@ -509,7 +506,7 @@
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-40px);
+                transform: translateY(-30px);
             }
 
             to {
@@ -518,10 +515,10 @@
             }
         }
 
-        @keyframes slideInDown {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translateY(20px);
             }
 
             to {
@@ -530,30 +527,53 @@
             }
         }
 
-        @keyframes slideInUp {
+        @keyframes slideInLeft {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateX(-50px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
             }
         }
 
-        /* Responsive Styles */
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .projects-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
+            header {
+                padding: 80px 20px;
+            }
+
+            header h1 {
+                font-size: 3rem;
+            }
+
             .nav-links {
-                position: fixed;
-                top: var(--nav-height);
+                flex-direction: column;
+                background: var(--nav-bg);
+                position: absolute;
+                top: 60px;
                 left: -100%;
                 width: 100%;
-                height: calc(100% - var(--nav-height));
-                background: var(--primary-color);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
                 transition: left 0.3s ease;
             }
 
@@ -562,29 +582,11 @@
             }
 
             .nav-links li {
-                margin: 20px 0;
+                margin: 15px 0;
             }
 
             .menu-toggle {
                 display: block;
-            }
-
-            header h1 {
-                font-size: 3rem;
-            }
-
-            #about-me,
-            #skills-summary {
-                padding: 40px 20px;
-            }
-
-            .skills-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .skill-category {
-                flex: 1 1 100%;
             }
 
             .carousel {
@@ -592,19 +594,41 @@
             }
 
             .project-item {
-                padding: 15px;
+                padding: 20px;
+            }
+
+            .project-title {
+                font-size: 1.5rem;
+            }
+
+            .project-description p strong {
+                font-size: 1rem;
+            }
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0 20px;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 20px;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Navigation -->
     <nav>
-        <div class="logo">Kacper Jaworowski</div>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
         <ul class="nav-links">
             <li><a href="#about-me">About Me</a></li>
             <li><a href="#skills-summary">Skills</a></li>
@@ -614,63 +638,56 @@
         </ul>
     </nav>
 
-    <!-- Header -->
     <header>
-        <h1>Welcome to My Portfolio</h1>
-        <p>Game Developer | Unity & Unreal Engine Specialist | Passionate Gamer</p>
-        <div>
-            <a href="assets/files/MyResume.pdf" class="btn" download><i class="fas fa-download"></i> Download Resume</a>
-            <a href="https://game.kacperjaworowski.com" class="btn"><i class="fas fa-gamepad"></i> Play Portfolio Game</a>
-        </div>
+        <h1>Kacper Jaworowski</h1>
+        <p>Game Developer | Unity Enthusiast & Hardcore Gamer</p>
     </header>
 
-    <!-- About Me Section -->
-    <section id="about-me">
+    <section class="bio" id="about-me">
         <h2>About Me</h2>
-        <p>Hi, I'm Kacper Jaworowski, a passionate game developer with a knack for creating immersive and engaging gaming experiences. With expertise in Unity and Unreal Engine, I thrive in collaborative environments where innovation and creativity are paramount. Whether it's developing intricate game mechanics or designing captivating storylines, I bring dedication and enthusiasm to every project I undertake.</p>
+        <p>Hi, my name is Kacper, and I'm a passionate gamer and game developer with a strong background in creating engaging and immersive experiences. I specialize in Unity and Unreal Engine, and I thrive in collaborative environments where creativity and innovation are encouraged.</p>
+        <a href="assets/files/MyResume.pdf" class="interactive-btn" download>Download My Resume</a>
+        <!-- Removed the "Play My Interactive Portfolio" button as per your request -->
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills-summary">
+    <section class="skills" id="skills-summary">
         <h2>Skills Summary</h2>
-        <div class="skills-container">
-            <!-- Hard Skills -->
-            <div class="skill-category">
+        <div class="container">
+            <div class="hard-skills">
                 <h3>Hard Skills</h3>
                 <div class="skill-bar">
-                    <span>Unity</span>
+                    <span>Unity (Advanced)</span>
                     <div class="bar">
                         <div class="progress" data-percentage="90%"></div>
                     </div>
                 </div>
                 <div class="skill-bar">
-                    <span>C#</span>
+                    <span>C# (Advanced)</span>
                     <div class="bar">
                         <div class="progress" data-percentage="85%"></div>
                     </div>
                 </div>
                 <div class="skill-bar">
-                    <span>Unreal Engine 5</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="75%"></div>
-                    </div>
-                </div>
-                <div class="skill-bar">
-                    <span>C++</span>
+                    <span>Unreal Engine 5 (Intermediate)</span>
                     <div class="bar">
                         <div class="progress" data-percentage="70%"></div>
                     </div>
                 </div>
                 <div class="skill-bar">
+                    <span>C++ (Intermediate)</span>
+                    <div class="bar">
+                        <div class="progress" data-percentage="65%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
                     <span>AI Programming</span>
                     <div class="bar">
-                        <div class="progress" data-percentage="80%"></div>
+                        <div class="progress" data-percentage="75%"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Soft Skills -->
-            <div class="skill-category soft-skills">
+            <div class="soft-skills">
                 <h3>Soft Skills</h3>
                 <ul>
                     <li>Teamwork</li>
@@ -684,19 +701,20 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Projects</h2>
+    <section class="projects" id="projects">
+        <h2 class="section-title">Projects</h2>
         <div class="projects-container">
             <!-- Project 1 -->
             <div class="project-item">
-                <h3 class="project-title">Epic RPG Adventure</h3>
+                <h3 class="project-title">Project Name 1</h3>
                 <div class="carousel">
-                    <img src="assets/placeholder1.jpg" alt="Epic RPG Adventure Screenshot 1" class="active">
-                    <img src="assets/placeholder2.jpg" alt="Epic RPG Adventure Screenshot 2">
-                    <img src="assets/placeholder3.jpg" alt="Epic RPG Adventure Screenshot 3">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)"><i class="fas fa-chevron-right"></i></button>
+                    <img src="assets/placeholder1.jpg" alt="Placeholder Image 1" class="active">
+                    <img src="assets/placeholder2.jpg" alt="Placeholder Image 2">
+                    <img src="assets/placeholder3.jpg" alt="Placeholder Image 3">
+                    <img src="assets/placeholder4.jpg" alt="Placeholder Image 4">
+                    <img src="assets/placeholder5.jpg" alt="Placeholder Image 5">
+                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
                 <div class="video-container">
                     <video controls>
@@ -710,17 +728,23 @@
                     <p><strong>Lessons Learned:</strong> Gained deeper insights into AI programming and optimizing game performance across different platforms.</p>
                     <p><strong>Skills Utilized:</strong> Unity, C#, AI Programming, 3D Modeling, Animation</p>
                 </div>
+                <div class="project-buttons">
+                    <a href="https://github.com/Kelduin/Project1" target="_blank">View on GitHub</a>
+                    <a href="https://game.kacperjaworowski.com/project1" target="_blank">Play Project</a>
+                </div>
             </div>
 
             <!-- Project 2 -->
             <div class="project-item">
-                <h3 class="project-title">Multiplayer Shooter X</h3>
+                <h3 class="project-title">Project Name 2</h3>
                 <div class="carousel">
-                    <img src="assets/placeholder1.jpg" alt="Multiplayer Shooter X Screenshot 1" class="active">
-                    <img src="assets/placeholder2.jpg" alt="Multiplayer Shooter X Screenshot 2">
-                    <img src="assets/placeholder3.jpg" alt="Multiplayer Shooter X Screenshot 3">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)"><i class="fas fa-chevron-right"></i></button>
+                    <img src="assets/placeholder1.jpg" alt="Placeholder Image 1" class="active">
+                    <img src="assets/placeholder2.jpg" alt="Placeholder Image 2">
+                    <img src="assets/placeholder3.jpg" alt="Placeholder Image 3">
+                    <img src="assets/placeholder4.jpg" alt="Placeholder Image 4">
+                    <img src="assets/placeholder5.jpg" alt="Placeholder Image 5">
+                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
                 <div class="video-container">
                     <video controls>
@@ -734,17 +758,22 @@
                     <p><strong>Lessons Learned:</strong> Enhanced skills in network programming and real-time synchronization, as well as optimizing performance for smooth multiplayer experiences.</p>
                     <p><strong>Skills Utilized:</strong> Unreal Engine 5, C++, Networking, UI/UX Design</p>
                 </div>
+                <div class="project-buttons">
+                    <a href="https://github.com/Kelduin/Project2" target="_blank">View on GitHub</a>
+                </div>
             </div>
 
             <!-- Project 3 -->
             <div class="project-item">
-                <h3 class="project-title">Educational Programming Game</h3>
+                <h3 class="project-title">Project Name 3</h3>
                 <div class="carousel">
-                    <img src="assets/placeholder1.jpg" alt="Educational Programming Game Screenshot 1" class="active">
-                    <img src="assets/placeholder2.jpg" alt="Educational Programming Game Screenshot 2">
-                    <img src="assets/placeholder3.jpg" alt="Educational Programming Game Screenshot 3">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)"><i class="fas fa-chevron-right"></i></button>
+                    <img src="assets/placeholder1.jpg" alt="Placeholder Image 1" class="active">
+                    <img src="assets/placeholder2.jpg" alt="Placeholder Image 2">
+                    <img src="assets/placeholder3.jpg" alt="Placeholder Image 3">
+                    <img src="assets/placeholder4.jpg" alt="Placeholder Image 4">
+                    <img src="assets/placeholder5.jpg" alt="Placeholder Image 5">
+                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
                 <div class="video-container">
                     <video controls>
@@ -758,17 +787,22 @@
                     <p><strong>Lessons Learned:</strong> Learned to balance educational content with engaging gameplay and improved skills in machine learning integration within game development.</p>
                     <p><strong>Skills Utilized:</strong> Python, Machine Learning, Data Analysis, Game Design</p>
                 </div>
+                <div class="project-buttons">
+                    <a href="https://github.com/Kelduin/Project3" target="_blank">View on GitHub</a>
+                </div>
             </div>
 
             <!-- Project 4 -->
             <div class="project-item">
-                <h3 class="project-title">Interactive Web Portfolio</h3>
+                <h3 class="project-title">Project Name 4</h3>
                 <div class="carousel">
-                    <img src="assets/placeholder1.jpg" alt="Interactive Web Portfolio Screenshot 1" class="active">
-                    <img src="assets/placeholder2.jpg" alt="Interactive Web Portfolio Screenshot 2">
-                    <img src="assets/placeholder3.jpg" alt="Interactive Web Portfolio Screenshot 3">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)"><i class="fas fa-chevron-right"></i></button>
+                    <img src="assets/placeholder1.jpg" alt="Placeholder Image 1" class="active">
+                    <img src="assets/placeholder2.jpg" alt="Placeholder Image 2">
+                    <img src="assets/placeholder3.jpg" alt="Placeholder Image 3">
+                    <img src="assets/placeholder4.jpg" alt="Placeholder Image 4">
+                    <img src="assets/placeholder5.jpg" alt="Placeholder Image 5">
+                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
                 <div class="video-container">
                     <video controls>
@@ -782,17 +816,22 @@
                     <p><strong>Lessons Learned:</strong> Enhanced skills in front-end development and UI/UX design, ensuring the portfolio is both functional and visually appealing.</p>
                     <p><strong>Skills Utilized:</strong> JavaScript, React, UI/UX Design, Responsive Web Development</p>
                 </div>
+                <div class="project-buttons">
+                    <a href="https://github.com/Kelduin/Project4" target="_blank">View on GitHub</a>
+                </div>
             </div>
 
             <!-- Project 5 -->
             <div class="project-item">
-                <h3 class="project-title">Responsive Web Showcase</h3>
+                <h3 class="project-title">Project Name 5</h3>
                 <div class="carousel">
-                    <img src="assets/placeholder1.jpg" alt="Responsive Web Showcase Screenshot 1" class="active">
-                    <img src="assets/placeholder2.jpg" alt="Responsive Web Showcase Screenshot 2">
-                    <img src="assets/placeholder3.jpg" alt="Responsive Web Showcase Screenshot 3">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)"><i class="fas fa-chevron-right"></i></button>
+                    <img src="assets/placeholder1.jpg" alt="Placeholder Image 1" class="active">
+                    <img src="assets/placeholder2.jpg" alt="Placeholder Image 2">
+                    <img src="assets/placeholder3.jpg" alt="Placeholder Image 3">
+                    <img src="assets/placeholder4.jpg" alt="Placeholder Image 4">
+                    <img src="assets/placeholder5.jpg" alt="Placeholder Image 5">
+                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
                 <div class="video-container">
                     <video controls>
@@ -806,17 +845,19 @@
                     <p><strong>Lessons Learned:</strong> Improved expertise in front-end technologies and responsive design principles, creating a portfolio that effectively highlights various web development skills.</p>
                     <p><strong>Skills Utilized:</strong> HTML, CSS, JavaScript, Web Development, Responsive Design</p>
                 </div>
+                <div class="project-buttons">
+                    <a href="https://github.com/Kelduin/Project5" target="_blank">View on GitHub</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact-me">
         <p>&copy; 2024 Kacper Jaworowski. All rights reserved.</p>
-        <a href="mailto:htujer@gmail.com"><i class="fas fa-envelope"></i> htujer@gmail.com</a>
+        <a href="mailto:htujer@gmail.com">htujer@gmail.com</a>
+        <a href="https://www.linkedin.com/in/kacper-jaworowski" target="_blank">LinkedIn</a>
     </footer>
 
-    <!-- JavaScript -->
     <script>
         // Carousel Functionality
         function changeSlide(n, carousel) {
@@ -850,7 +891,7 @@
 
         // Animate Skill Progress Bars on Scroll into View
         window.addEventListener('scroll', () => {
-            const skillsSection = document.querySelector('#skills-summary');
+            const skillsSection = document.querySelector('.skills');
             const rect = skillsSection.getBoundingClientRect();
             if (rect.top <= window.innerHeight && rect.bottom >= 0) {
                 if (!skillsSection.classList.contains('visible')) {
@@ -862,20 +903,6 @@
                     });
                 }
             }
-
-            // Change nav background on scroll
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Initial load for skill bars if already in view
-        window.addEventListener('load', () => {
-            const event = new Event('scroll');
-            window.dispatchEvent(event);
         });
     </script>
 </body>
