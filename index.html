@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
+    <meta name="keywords" content="Game Developer, Unity, Unreal Engine, Portfolio, Kacper Jaworowski">
+    <meta name="author" content="Kacper Jaworowski">
     <title>Kacper Jaworowski - Game Developer Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap"
         rel="stylesheet">
@@ -29,6 +31,7 @@
             --lightbox-bg: rgba(0, 0, 0, 0.8);
             --lightbox-content-bg: #2c2c2c;
             --close-btn-color: #fff;
+            --transition-duration: 0.3s;
         }
 
         /* Reset and Base Styles */
@@ -53,7 +56,7 @@
         a {
             color: var(--accent-color);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color var(--transition-duration) ease;
         }
 
         a:hover {
@@ -88,7 +91,7 @@
             font-weight: 500;
             padding: 5px 0;
             display: inline-block;
-            transition: color 0.3s ease;
+            transition: color var(--transition-duration) ease;
         }
 
         .nav-links a::after {
@@ -97,7 +100,7 @@
             width: 0%;
             height: 2px;
             background: var(--accent-color);
-            transition: width 0.3s ease;
+            transition: width var(--transition-duration) ease;
             margin-top: 5px;
         }
 
@@ -174,7 +177,7 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            transition: transform var(--transition-duration) ease, background var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
             box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
         }
 
@@ -286,7 +289,7 @@
             margin: 10px 0;
             padding-left: 25px;
             position: relative;
-            transition: transform 0.3s ease, color 0.3s ease;
+            transition: transform var(--transition-duration) ease, color var(--transition-duration) ease;
         }
 
         .soft-skills ul li::before {
@@ -296,7 +299,7 @@
             left: 0;
             top: 0;
             font-size: 1.2rem;
-            transition: transform 0.3s ease;
+            transition: transform var(--transition-duration) ease;
         }
 
         .soft-skills ul li:hover {
@@ -346,7 +349,7 @@
             color: var(--text-color);
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
             position: relative;
         }
 
@@ -378,7 +381,7 @@
             object-fit: cover;
             display: none;
             transition: opacity 0.5s ease;
-            cursor: pointer; /* Change cursor to pointer */
+            cursor: pointer;
         }
 
         .carousel img.active {
@@ -397,7 +400,7 @@
             cursor: pointer;
             font-size: 1rem;
             border-radius: 50%;
-            transition: background 0.3s ease;
+            transition: background var(--transition-duration) ease;
         }
 
         .carousel .prev:hover,
@@ -433,6 +436,13 @@
             line-height: 1.6;
             color: var(--subtext-color);
             flex-grow: 1;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-duration) ease;
+        }
+
+        .project-description.open {
+            max-height: 1000px; /* Arbitrary high value to allow full expansion */
         }
 
         .project-description p {
@@ -442,6 +452,28 @@
         .project-description p strong {
             color: var(--accent-color);
             font-size: 1.1rem;
+        }
+
+        /* Show More Button */
+        .show-more-btn {
+            margin-top: 15px;
+            align-self: center;
+            padding: 10px 20px;
+            background: var(--button-bg);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform var(--transition-duration) ease, background var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
+        }
+
+        .show-more-btn:hover {
+            background: var(--button-hover-bg);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
         }
 
         /* Project Buttons */
@@ -463,7 +495,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            transition: transform var(--transition-duration) ease, background var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
             text-align: center;
             text-decoration: none;
             box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
@@ -522,6 +554,85 @@
 
         .close-btn:hover {
             background: var(--button-hover-bg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 50%;
+            transition: background var(--transition-duration) ease;
+        }
+
+        .lightbox-prev {
+            left: 10px;
+        }
+
+        .lightbox-next {
+            right: 10px;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Contact Form Styles */
+        .contact-form {
+            max-width: 600px;
+            margin: 40px auto;
+            text-align: left;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px var(--card-shadow);
+        }
+
+        .contact-form h2 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--subtext-color);
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 12px;
+            background: var(--button-bg);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition-duration) ease, transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
+        }
+
+        .contact-form button:hover {
+            background: var(--button-hover-bg);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
         }
 
         /* Footer Styles */
@@ -628,7 +739,7 @@
                 top: 60px;
                 left: -100%;
                 width: 100%;
-                transition: left 0.3s ease;
+                transition: left var(--transition-duration) ease;
             }
 
             .nav-links.active {
@@ -762,10 +873,10 @@
             <div class="project-item">
                 <h3 class="project-title">Slimetastic</h3>
                 <div class="carousel">
-                    <img src="assets/slimetastic1.jpg" alt="Slimetastic Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/slimetastic2.jpg" alt="Slimetastic Screenshot 2" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/slimetastic3.jpg" alt="Slimetastic Screenshot 3" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/slimetastic4.jpg" alt="Slimetastic Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/slimetastic1.jpg" alt="Slimetastic Screenshot 1" class="active" data-project="slimetastic" data-index="1" onclick="openLightbox(this)">
+                    <img src="assets/slimetastic2.jpg" alt="Slimetastic Screenshot 2" data-project="slimetastic" data-index="2" onclick="openLightbox(this)">
+                    <img src="assets/slimetastic3.jpg" alt="Slimetastic Screenshot 3" data-project="slimetastic" data-index="3" onclick="openLightbox(this)">
+                    <img src="assets/slimetastic4.jpg" alt="Slimetastic Screenshot 4" data-project="slimetastic" data-index="4" onclick="openLightbox(this)">
                     <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
@@ -776,15 +887,16 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
+                <div class="project-buttons">
+                    <a href="https://github.com/Kelduin/Slimetastic" target="_blank">View on GitHub</a>
+                    <a href="https://game.kacperjaworowski.com/slimetastic" target="_blank">Play Project</a>
+                </div>
+                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
                 <div class="project-description">
                     <p><strong>Context:</strong> Developed a 2D mobile Unity game called Slimetastic, inspired by the Suika Japanese game. The objective is to merge slimes, and touching the top results in a loss. This game was created entirely for my university project.</p>
                     <p><strong>Development Process:</strong> Designed and implemented game mechanics in Unity, created and integrated art assets, and developed collision detection and game-over conditions.</p>
                     <p><strong>Lessons Learned:</strong> Enhanced my skills in Unity game development, including physics interactions, game state management, and user interface design.</p>
                     <p><strong>Skills Utilized:</strong> Unity, C#, 2D Game Development, Collision Detection, UI Design</p>
-                </div>
-                <div class="project-buttons">
-                    <a href="https://github.com/Kelduin/Slimetastic" target="_blank">View on GitHub</a>
-                    <a href="https://game.kacperjaworowski.com/slimetastic" target="_blank">Play Project</a>
                 </div>
             </div>
 
@@ -792,10 +904,10 @@
             <div class="project-item">
                 <h3 class="project-title">Puzzle Keeper</h3>
                 <div class="carousel">
-                    <img src="assets/puzzlekeeper1.jpg" alt="Puzzle Keeper Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/puzzlekeeper2.jpg" alt="Puzzle Keeper Screenshot 2" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/puzzlekeeper3.jpg" alt="Puzzle Keeper Screenshot 3" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/puzzlekeeper4.jpg" alt="Puzzle Keeper Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/puzzlekeeper1.jpg" alt="Puzzle Keeper Screenshot 1" class="active" data-project="puzzlekeeper" data-index="1" onclick="openLightbox(this)">
+                    <img src="assets/puzzlekeeper2.jpg" alt="Puzzle Keeper Screenshot 2" data-project="puzzlekeeper" data-index="2" onclick="openLightbox(this)">
+                    <img src="assets/puzzlekeeper3.jpg" alt="Puzzle Keeper Screenshot 3" data-project="puzzlekeeper" data-index="3" onclick="openLightbox(this)">
+                    <img src="assets/puzzlekeeper4.jpg" alt="Puzzle Keeper Screenshot 4" data-project="puzzlekeeper" data-index="4" onclick="openLightbox(this)">
                     <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
@@ -806,15 +918,16 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
+                <div class="project-buttons">
+                    <!-- No GitHub link for this project -->
+                    <!-- Optionally, you can add links to view videos or more screenshots -->
+                </div>
+                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
                 <div class="project-description">
                     <p><strong>Context:</strong> Developing Puzzle Keeper, a 2D Godot top-down puzzle game aimed at escaping from a dungeon by solving puzzles and riddles. This project is currently a work in progress for my university degree.</p>
                     <p><strong>Development Process:</strong> Building all game mechanics from scratch, including unit control systems, puzzle logic, AI behaviors, and the user interface. Creating assets and integrating them seamlessly into the game environment.</p>
                     <p><strong>Lessons Learned:</strong> Gained comprehensive experience in Godot engine, AI programming, puzzle design, and managing complex game states.</p>
                     <p><strong>Skills Utilized:</strong> Godot, GDScript, AI Programming, Puzzle Design, UI/UX Design</p>
-                </div>
-                <div class="project-buttons">
-                    <!-- No GitHub link for this project -->
-                    <!-- Optionally, you can add links to view videos or more screenshots -->
                 </div>
             </div>
 
@@ -822,10 +935,10 @@
             <div class="project-item">
                 <h3 class="project-title">Castle Cart</h3>
                 <div class="carousel">
-                    <img src="assets/castlecart1.jpg" alt="Castle Cart Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/castlecart2.jpg" alt="Castle Cart Screenshot 2" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/castlecart3.jpg" alt="Castle Cart Screenshot 3" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/castlecart4.jpg" alt="Castle Cart Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/castlecart1.jpg" alt="Castle Cart Screenshot 1" class="active" data-project="castlecart" data-index="1" onclick="openLightbox(this)">
+                    <img src="assets/castlecart2.jpg" alt="Castle Cart Screenshot 2" data-project="castlecart" data-index="2" onclick="openLightbox(this)">
+                    <img src="assets/castlecart3.jpg" alt="Castle Cart Screenshot 3" data-project="castlecart" data-index="3" onclick="openLightbox(this)">
+                    <img src="assets/castlecart4.jpg" alt="Castle Cart Screenshot 4" data-project="castlecart" data-index="4" onclick="openLightbox(this)">
                     <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
@@ -836,15 +949,16 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
+                <div class="project-buttons">
+                    <a href="https://github.com/Kelduin/CastleCart" target="_blank">View on GitHub</a>
+                    <a href="https://kelduin.itch.io/castle-cart" target="_blank">Play on itch.io</a>
+                </div>
+                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
                 <div class="project-description">
                     <p><strong>Context:</strong> "Castle Cart" is a couch LAN racing game set in a fantasy world filled with classes and magic. The project aimed to blend fast-paced racing with class-based mechanics to create a unique multiplayer experience. The development involved a collaborative effort with my university peers over several months.</p>
                     <p><strong>Development Process:</strong> We started by brainstorming game mechanics and settled on combining racing with RPG elements. I took the lead on developing the gameplay mechanics and designing the various classes and their unique spells. We iterated through multiple prototypes to balance the game and ensure each class felt distinct and enjoyable.</p>
                     <p><strong>Lessons Learned:</strong> This project taught me a lot about team collaboration and project management. I enhanced my skills in Unity and C#, especially in synchronizing gameplay for couch co-op modes. I also gained valuable experience in game balance and class design.</p>
                     <p><strong>Skills Utilized:</strong> Unity, C#, 3D Game Development, Gameplay Design, Power-up Systems, Class Design, Teamwork</p>
-                </div>
-                <div class="project-buttons">
-                    <a href="https://github.com/Kelduin/CastleCart" target="_blank">View on GitHub</a>
-                    <a href="https://kelduin.itch.io/castle-cart" target="_blank">Play on itch.io</a>
                 </div>
             </div>
 
@@ -852,24 +966,25 @@
             <div class="project-item">
                 <h3 class="project-title">Mushroom Survivors</h3>
                 <div class="carousel">
-                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="active" data-project="mushroomsurvivors" data-index="1" onclick="openLightbox(this)">
+                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" data-project="mushroomsurvivors" data-index="2" onclick="openLightbox(this)">
+                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" data-project="mushroomsurvivors" data-index="3" onclick="openLightbox(this)">
+                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" data-project="mushroomsurvivors" data-index="4" onclick="openLightbox(this)">
                     <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
                 <!-- Removed the video-container div as per your request -->
+                <div class="project-buttons">
+                    <!-- No GitHub link for this project -->
+                    <!-- Optionally, you can add links to view screenshots or watch the gameplay video -->
+                </div>
+                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
                 <div class="project-description">
                     <p><strong>Context:</strong> "Mushroom Survivors" is a unique take on the 'survivors' genre, where defeated enemies become your allies. The project was developed with a focus on innovative gameplay mechanics that encourage strategic play.</p>
                     <p><strong>Development Process:</strong> In this project, I was responsible for designing and implementing the core gameplay mechanics. This involved programming enemy AI behaviors, the mechanics for converting enemies into allies, and designing challenging boss fights. The development process included extensive testing and balancing to ensure a smooth player experience.</p>
                     <p><strong>Lessons Learned:</strong> This project enhanced my skills in AI programming and gameplay mechanics. I also learned a lot about game balancing and the importance of playtesting. Working under confidentiality agreements taught me the significance of professional conduct in collaborative projects.</p>
                     <p><strong>Skills Utilized:</strong> Unity, C#, AI Programming, Unit Merging Mechanics, Game Balancing, Game Design, Problem-solving.</p>
-                </div>
-                <div class="project-buttons">
-                    <!-- No GitHub link for this project -->
-                    <!-- Optionally, you can add links to view screenshots or watch the gameplay video -->
                 </div>
             </div>
 
@@ -877,10 +992,10 @@
             <div class="project-item">
                 <h3 class="project-title">UE Demo</h3>
                 <div class="carousel">
-                    <img src="assets/pictures/UEDEMO1.png" alt="UE Demo Screenshot 1" class="active" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/pictures/UEDEMO2.png" alt="UE Demo Screenshot 2" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/pictures/UEDEMO3.png" alt="UE Demo Screenshot 3" onclick="openLightbox(this.src, this.alt)">
-                    <img src="assets/pictures/UEDEMO4.png" alt="UE Demo Screenshot 4" onclick="openLightbox(this.src, this.alt)">
+                    <img src="assets/pictures/UEDEMO1.png" alt="UE Demo Screenshot 1" class="active" data-project="uedemo" data-index="1" onclick="openLightbox(this)">
+                    <img src="assets/pictures/UEDEMO2.png" alt="UE Demo Screenshot 2" data-project="uedemo" data-index="2" onclick="openLightbox(this)">
+                    <img src="assets/pictures/UEDEMO3.png" alt="UE Demo Screenshot 3" data-project="uedemo" data-index="3" onclick="openLightbox(this)">
+                    <img src="assets/pictures/UEDEMO4.png" alt="UE Demo Screenshot 4" data-project="uedemo" data-index="4" onclick="openLightbox(this)">
                     <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
@@ -891,20 +1006,35 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
+                <div class="project-buttons">
+                    <a href="https://github.com/Kelduin/UE-Demo" target="_blank">View on GitHub</a>
+                </div>
+                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
                 <div class="project-description">
                     <p><strong>Context:</strong> "UE DEMO" is a solo project where I explored creating a 2.5D game using Unreal Engine 5. The goal was to integrate a 2D character into a 3D environment, experimenting with the blending of dimensions.</p>
                     <p><strong>Development Process:</strong> I started by setting up the project in Unreal Engine 5, utilizing both C++ and Blueprints. I focused on character movement, interaction with the environment, and visual aesthetics. This project allowed me to delve deeper into Unreal's capabilities and improve my understanding of C++ in game development.</p>
                     <p><strong>Lessons Learned:</strong> Working on this demo improved my proficiency with Unreal Engine and C++. I gained valuable experience in level design and learned how to effectively combine 2D and 3D assets. It also taught me about the challenges of solo development and the importance of time management.</p>
                     <p><strong>Skills Utilized:</strong> Blueprints, Unreal Engine 5 (Intermediate), C++ (Intermediate), Level Design, Self-motivation, Performance Optimization</p>
                 </div>
-                <div class="project-buttons">
-                    <a href="https://github.com/Kelduin/UE-Demo" target="_blank">View on GitHub</a>
-                </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact-me">
+    <!-- Contact Form Section -->
+    <section class="contact" id="contact-me">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-form">
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <h2>Get in Touch</h2>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="_replyto" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
         <p>&copy; 2024 Kacper Jaworowski. All rights reserved.</p>
         <a href="mailto:htujer@gmail.com">htujer@gmail.com</a>
         <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a>
@@ -915,7 +1045,9 @@
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <div class="lightbox-content" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeLightbox()">&times;</button>
+            <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">&#10094;</button>
             <img id="lightbox-img" src="" alt="">
+            <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">&#10095;</button>
         </div>
     </div>
 
@@ -967,11 +1099,24 @@
         });
 
         // Lightbox Functionality
-        function openLightbox(src, alt) {
+        let currentProject = '';
+        let currentIndex = 0;
+        let currentProjectImages = [];
+
+        function openLightbox(element) {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.src = src;
-            lightboxImg.alt = alt;
+
+            currentProject = element.getAttribute('data-project');
+            currentIndex = parseInt(element.getAttribute('data-index')) - 1;
+
+            // Collect all images of the current project
+            currentProjectImages = Array.from(document.querySelectorAll(`img[data-project="${currentProject}"]`));
+
+            // Update the lightbox image
+            lightboxImg.src = currentProjectImages[currentIndex].src;
+            lightboxImg.alt = currentProjectImages[currentIndex].alt;
+
             lightbox.style.display = 'flex';
         }
 
@@ -980,11 +1125,32 @@
             lightbox.style.display = 'none';
         }
 
+        function navigateLightbox(n) {
+            currentIndex = (currentIndex + n + currentProjectImages.length) % currentProjectImages.length;
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = currentProjectImages[currentIndex].src;
+            lightboxImg.alt = currentProjectImages[currentIndex].alt;
+        }
+
         // Prevent scrolling when lightbox is open
         const lightbox = document.getElementById('lightbox');
         lightbox.addEventListener('wheel', function (e) {
             e.preventDefault();
         }, { passive: false });
+
+        // Show More / Show Less Functionality
+        function toggleDetails(button) {
+            const projectItem = button.parentElement;
+            const description = projectItem.querySelector('.project-description');
+
+            if (description.classList.contains('open')) {
+                description.classList.remove('open');
+                button.textContent = 'Show More';
+            } else {
+                description.classList.add('open');
+                button.textContent = 'Show Less';
+            }
+        }
     </script>
 </body>
 
