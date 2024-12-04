@@ -250,6 +250,7 @@
             font-weight: 600;
             font-size: 1.1rem;
             margin-bottom: 5px;
+            text-align: left;
         }
 
         .bar {
@@ -264,14 +265,9 @@
         .bar .progress {
             height: 100%;
             background: var(--accent-color);
-            width: 0;
+            width: 0; /* Set initial width to 0 */
             border-radius: 10px;
             transition: width 1s ease-in-out;
-        }
-
-        /* Trigger Progress Bars Animation */
-        .skills.visible .progress {
-            width: var(--progress-width);
         }
 
         .soft-skills ul {
@@ -623,31 +619,31 @@
                 <div class="skill-bar">
                     <span>Unity (Advanced)</span>
                     <div class="bar">
-                        <div class="progress" style="--progress-width: 90%;"></div>
+                        <div class="progress" data-percentage="90%"></div>
                     </div>
                 </div>
                 <div class="skill-bar">
                     <span>C# (Advanced)</span>
                     <div class="bar">
-                        <div class="progress" style="--progress-width: 85%;"></div>
+                        <div class="progress" data-percentage="85%"></div>
                     </div>
                 </div>
                 <div class="skill-bar">
                     <span>Unreal Engine 5 (Intermediate)</span>
                     <div class="bar">
-                        <div class="progress" style="--progress-width: 70%;"></div>
+                        <div class="progress" data-percentage="70%"></div>
                     </div>
                 </div>
                 <div class="skill-bar">
                     <span>C++ (Intermediate)</span>
                     <div class="bar">
-                        <div class="progress" style="--progress-width: 65%;"></div>
+                        <div class="progress" data-percentage="65%"></div>
                     </div>
                 </div>
                 <div class="skill-bar">
                     <span>AI Programming</span>
                     <div class="bar">
-                        <div class="progress" style="--progress-width: 75%;"></div>
+                        <div class="progress" data-percentage="75%"></div>
                     </div>
                 </div>
             </div>
@@ -842,11 +838,14 @@
             const skillsSection = document.querySelector('.skills');
             const rect = skillsSection.getBoundingClientRect();
             if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                skillsSection.classList.add('visible');
-                const progressBars = skillsSection.querySelectorAll('.progress');
-                progressBars.forEach((bar, index) => {
-                    bar.style.width = bar.parentElement.previousElementSibling.textContent.match(/\d+%/) ? bar.parentElement.previousElementSibling.textContent.match(/\d+%/)[0] : '0%';
-                });
+                if (!skillsSection.classList.contains('visible')) {
+                    skillsSection.classList.add('visible');
+                    const progressBars = skillsSection.querySelectorAll('.progress');
+                    progressBars.forEach(bar => {
+                        const percentage = bar.getAttribute('data-percentage');
+                        bar.style.width = percentage;
+                    });
+                }
             }
         });
     </script>
