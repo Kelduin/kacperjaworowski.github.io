@@ -16,12 +16,10 @@
             color: #eaeaea;
         }
 
-        /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Navigation */
         nav {
             position: sticky;
             top: 0;
@@ -78,24 +76,20 @@
         }
 
         .bio,
-        .skills,
-        .projects {
+        .skills {
             max-width: 1200px;
             margin: auto;
             text-align: center;
         }
 
         .bio h2,
-        .skills h2,
-        .projects h2 {
+        .skills h2 {
             font-size: 2.5rem;
             color: #00AEEF;
             margin-bottom: 20px;
         }
 
-        .bio p,
-        .skills ul,
-        .projects p {
+        .bio p {
             font-size: 1.2rem;
             line-height: 1.6;
             color: #ddd;
@@ -119,54 +113,77 @@
             transform: scale(1.05);
         }
 
-        /* Projects Section */
-        .project-item {
-            background: #222;
-            margin: 30px 0;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease;
+        /* Skills Section */
+        .skills .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
 
-        .project-item:hover {
-            transform: translateY(-10px);
+        .skills .hard-skills,
+        .skills .soft-skills {
+            flex: 1 1 45%;
+            margin: 20px;
         }
 
-        .project-item h3 {
+        .hard-skills h3,
+        .soft-skills h3 {
             font-size: 2rem;
             color: #00AEEF;
+            margin-bottom: 15px;
+            text-align: left;
         }
 
-        .project-description {
-            margin-top: 20px;
-            font-size: 1rem;
-            color: #ddd;
-            line-height: 1.5;
+        /* Hard Skills */
+        .skill-bar {
+            margin-bottom: 20px;
         }
 
-        .carousel img {
+        .skill-bar span {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .bar {
             width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
         }
 
-        .btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
+        .bar .progress {
+            height: 100%;
             background: #00AEEF;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: transform 0.3s ease, background 0.3s ease;
+            width: 0;
+            border-radius: 10px;
+            transition: width 0.8s ease-in-out;
         }
 
-        .btn:hover {
-            background: #008bbd;
-            transform: scale(1.05);
+        .soft-skills ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            font-size: 1.2rem;
+            color: #ddd;
+        }
+
+        .soft-skills ul li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .soft-skills ul li::before {
+            content: "✔";
+            color: #00AEEF;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2rem;
         }
 
         footer {
@@ -213,21 +230,52 @@
 
     <section class="skills" id="skills-summary">
         <h2>Skills Summary</h2>
-        <ul>
-            <li><strong>Game Engines:</strong> Unity, Unreal Engine 5</li>
-            <li><strong>Languages:</strong> C#, C++</li>
-            <li><strong>Game Design:</strong> AI Programming, Gameplay Mechanics</li>
-        </ul>
-    </section>
+        <div class="container">
+            <div class="hard-skills">
+                <h3>Hard Skills</h3>
+                <div class="skill-bar">
+                    <span>Unity (Advanced)</span>
+                    <div class="bar">
+                        <div class="progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <span>C# (Advanced)</span>
+                    <div class="bar">
+                        <div class="progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <span>Unreal Engine 5 (Intermediate)</span>
+                    <div class="bar">
+                        <div class="progress" style="width: 70%;"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <span>C++ (Intermediate)</span>
+                    <div class="bar">
+                        <div class="progress" style="width: 65%;"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <span>AI Programming</span>
+                    <div class="bar">
+                        <div class="progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+            </div>
 
-    <section class="projects" id="projects">
-        <h2>Projects</h2>
-        <div class="project-item">
-            <h3>The Castle Cart</h3>
-            <img src="assets/pictures/CASTLECART1.png" alt="Castle Cart">
-            <p class="project-description">"The Castle Cart" is a LAN racing game...</p>
-            <a href="#" class="btn">GitHub</a>
-            <a href="#" class="btn">itch.io</a>
+            <div class="soft-skills">
+                <h3>Soft Skills</h3>
+                <ul>
+                    <li>Teamwork</li>
+                    <li>Problem-solving</li>
+                    <li>Communication</li>
+                    <li>Time Management</li>
+                    <li>Adaptability</li>
+                    <li>Leadership</li>
+                </ul>
+            </div>
         </div>
     </section>
 
