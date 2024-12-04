@@ -156,6 +156,7 @@
             font-size: 1.2rem;
             color: var(--subtext-color);
             margin-bottom: 30px;
+            text-align: center; /* Center the bio text */
         }
 
         .interactive-btn {
@@ -177,6 +178,7 @@
             background: var(--button-hover-bg);
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
+            color: #fff; /* Ensure text color remains white on hover */
         }
 
         /* Skills Section */
@@ -184,6 +186,7 @@
             background: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
             padding: 40px 20px;
+            text-align: center; /* Center the entire skills section */
         }
 
         .skills h2 {
@@ -206,7 +209,7 @@
         .skills .container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center; /* Center the container content */
             max-width: 1000px;
             margin: auto;
         }
@@ -214,7 +217,8 @@
         .hard-skills,
         .soft-skills {
             flex: 1 1 45%;
-            margin: 20px 0;
+            margin: 20px;
+            min-width: 280px; /* Ensure minimum width to prevent overlap */
         }
 
         .hard-skills h3,
@@ -555,12 +559,6 @@
 
             .menu-toggle {
                 display: block;
-                position: absolute;
-                top: 15px;
-                right: 20px;
-                cursor: pointer;
-                font-size: 1.5rem;
-                color: var(--text-color);
             }
 
             .carousel {
@@ -845,6 +843,10 @@
             const rect = skillsSection.getBoundingClientRect();
             if (rect.top <= window.innerHeight && rect.bottom >= 0) {
                 skillsSection.classList.add('visible');
+                const progressBars = skillsSection.querySelectorAll('.progress');
+                progressBars.forEach((bar, index) => {
+                    bar.style.width = bar.parentElement.previousElementSibling.textContent.match(/\d+%/) ? bar.parentElement.previousElementSibling.textContent.match(/\d+%/)[0] : '0%';
+                });
             }
         });
     </script>
