@@ -107,6 +107,25 @@
         .nav-links a:hover::after {
             width: 100%;
         }
+/* Confidential Notice Styles */
+.confidential-notice {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease;
+}
+
+.confidential-notice h2 {
+    color: red;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.confidential-notice p {
+    color: red;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
 
         /* Header Styles */
         header {
@@ -924,28 +943,32 @@
                 </div>
             </div>
 
-            <!-- Project 4: Mushroom Survivors -->
-            <div class="project-item">
-                <h3 class="project-title">Mushroom Survivors</h3>
-                <div class="carousel">
-                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="active" data-project="mushroomsurvivors" data-index="1" onclick="openLightbox(this)">
-                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" data-project="mushroomsurvivors" data-index="2" onclick="openLightbox(this)">
-                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" data-project="mushroomsurvivors" data-index="3" onclick="openLightbox(this)">
-                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" data-project="mushroomsurvivors" data-index="4" onclick="openLightbox(this)">
-                    <!-- Removed the 5th image to have only 4 images -->
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
-                </div>
-                <!-- Removed the video-container div as per your request -->
-                <!-- Removed the empty project-buttons div to eliminate unnecessary spacing -->
-                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
-                <div class="project-description">
-                    <p><strong>Context:</strong> "Mushroom Survivors" is a unique take on the 'survivors' genre, where defeated enemies become your allies. The project was developed with a focus on innovative gameplay mechanics that encourage strategic play.</p>
-                    <p><strong>Development Process:</strong> In this project, I was responsible for designing and implementing the core gameplay mechanics. This involved programming enemy AI behaviors, the mechanics for converting enemies into allies, and designing challenging boss fights. The development process included extensive testing and balancing to ensure a smooth player experience.</p>
-                    <p><strong>Lessons Learned:</strong> This project enhanced my skills in AI programming and gameplay mechanics. I also learned a lot about game balancing and the importance of playtesting. Working under confidentiality agreements taught me the significance of professional conduct in collaborative projects.</p>
-                    <p><strong>Skills Utilized:</strong> Unity, C#, AI Programming, Unit Merging Mechanics, Game Balancing, Game Design, Problem-solving.</p>
-                </div>
-            </div>
+          <!-- Project 4: Mushroom Survivors -->
+<div class="project-item">
+    <h3 class="project-title">Mushroom Survivors</h3>
+    <div class="carousel">
+        <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="active" data-project="mushroomsurvivors" data-index="1" onclick="openLightbox(this)">
+        <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" data-project="mushroomsurvivors" data-index="2" onclick="openLightbox(this)">
+        <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" data-project="mushroomsurvivors" data-index="3" onclick="openLightbox(this)">
+        <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" data-project="mushroomsurvivors" data-index="4" onclick="openLightbox(this)">
+        <!-- Removed the 5th image to have only 4 images -->
+        <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
+    </div>
+    <!-- Confidential Notice -->
+    <div class="confidential-notice">
+        <h2>Confidential</h2>
+        <p>Can't show everything</p>
+    </div>
+    <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
+    <div class="project-description">
+        <p><strong>Context:</strong> "Mushroom Survivors" is a unique take on the 'survivors' genre, where defeated enemies become your allies. The project was developed with a focus on innovative gameplay mechanics that encourage strategic play.</p>
+        <p><strong>Development Process:</strong> In this project, I was responsible for designing and implementing the core gameplay mechanics. This involved programming enemy AI behaviors, the mechanics for converting enemies into allies, and designing challenging boss fights. The development process included extensive testing and balancing to ensure a smooth player experience.</p>
+        <p><strong>Lessons Learned:</strong> This project enhanced my skills in AI programming and gameplay mechanics. I also learned a lot about game balancing and the importance of playtesting. Working under confidentiality agreements taught me the significance of professional conduct in collaborative projects.</p>
+        <p><strong>Skills Utilized:</strong> Unity, C#, AI Programming, Unit Merging Mechanics, Game Balancing, Game Design, Problem-solving.</p>
+    </div>
+</div>
+
 
             <!-- Project 5: UE Demo -->
             <div class="project-item">
