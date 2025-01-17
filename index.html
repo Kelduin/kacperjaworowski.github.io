@@ -107,25 +107,26 @@
         .nav-links a:hover::after {
             width: 100%;
         }
-/* Confidential Notice Styles */
-.confidential-notice {
-    text-align: center;
-    margin-bottom: 20px;
-    animation: fadeIn 1s ease;
-}
 
-.confidential-notice h2 {
-    color: red;
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+        /* Confidential Notice Styles */
+        .confidential-notice {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease;
+        }
 
-.confidential-notice p {
-    color: red;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
+        .confidential-notice h2 {
+            color: red;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .confidential-notice p {
+            color: red;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
 
         /* Header Styles */
         header {
@@ -816,7 +817,7 @@
                     <div class="bar">
                         <div class="progress" data-percentage="65%"></div>
                     </div>
-                     </div>
+                </div>
                 <div class="skill-bar">
                     <span>Git Control (Intermediate)</span>
                     <div class="bar">
@@ -858,7 +859,6 @@
                     <img src="assets/pictures/SLIMETASTIC2.jpg" alt="Slimetastic Screenshot 2" data-project="slimetastic" data-index="2" onclick="openLightbox(this)">
                     <img src="assets/pictures/SLIMETASTIC3.jpg" alt="Slimetastic Screenshot 3" data-project="slimetastic" data-index="3" onclick="openLightbox(this)">
                     <img src="assets/pictures/SLIMETASTIC4.jpg" alt="Slimetastic Screenshot 4" data-project="slimetastic" data-index="4" onclick="openLightbox(this)">
-                    <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
@@ -877,6 +877,10 @@
                     <p><strong>Context:</strong> Developed a 2D mobile Unity game called Slimetastic, inspired by the Suika Japanese game. The objective is to merge slimes, and touching the top results in a loss. This game was created entirely for my university project.</p>
                     <p><strong>Development Process:</strong> Designed and implemented game mechanics in Unity, created and integrated art assets, and developed collision detection and game-over conditions.</p>
                     <p><strong>Lessons Learned:</strong> Enhanced my skills in Unity game development, including physics interactions, game state management, and user interface design.</p>
+                    <p><strong>My Responsibilities:</strong></p>
+                    <ul>
+                        <li>I did everything for the project (code, design, mechanics), except for the art assets which were taken from itch.io.</li>
+                    </ul>
                     <p><strong>Skills Utilized:</strong> Unity, C#, 2D Game Development, Collision Detection, UI Design</p>
                 </div>
             </div>
@@ -889,7 +893,6 @@
                     <img src="assets/pictures/puzzlekeeper2.jpg" alt="Puzzle Keeper Screenshot 2" data-project="puzzlekeeper" data-index="2" onclick="openLightbox(this)">
                     <img src="assets/pictures/puzzlekeeper3.jpg" alt="Puzzle Keeper Screenshot 3" data-project="puzzlekeeper" data-index="3" onclick="openLightbox(this)">
                     <img src="assets/pictures/puzzlekeeper4.jpg" alt="Puzzle Keeper Screenshot 4" data-project="puzzlekeeper" data-index="4" onclick="openLightbox(this)">
-                    <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
@@ -901,18 +904,21 @@
                 </div>
                 <div class="project-buttons">
                     <!-- No GitHub link for this project -->
-                    <!-- Optionally, you can add links to view videos or more screenshots -->
                 </div>
                 <!-- WIP Notice -->
-    <div class="confidential-notice">
-        <h2>WIP</h2>
-        <p>Work in Progress</p>
-    </div>
+                <div class="confidential-notice">
+                    <h2>WIP</h2>
+                    <p>Work in Progress</p>
+                </div>
                 <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
                 <div class="project-description">
                     <p><strong>Context:</strong> Developing Puzzle Keeper, a 2D Godot top-down puzzle game aimed at escaping from a dungeon by solving puzzles and riddles. This project is currently a work in progress for my university degree.</p>
                     <p><strong>Development Process:</strong> Building all game mechanics from scratch, including unit control systems, puzzle logic, AI behaviors, and the user interface. Creating assets and integrating them seamlessly into the game environment.</p>
                     <p><strong>Lessons Learned:</strong> Gained comprehensive experience in Godot engine, AI programming, puzzle design, and managing complex game states.</p>
+                    <p><strong>My Responsibilities:</strong></p>
+                    <ul>
+                        <li>Responsible for the main code of the game, including puzzle mechanics and AI movement.</li>
+                    </ul>
                     <p><strong>Skills Utilized:</strong> Godot, GDScript, AI Programming, Puzzle Design, UI/UX Design</p>
                 </div>
             </div>
@@ -925,7 +931,6 @@
                     <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2" data-project="castlecart" data-index="2" onclick="openLightbox(this)">
                     <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3" data-project="castlecart" data-index="3" onclick="openLightbox(this)">
                     <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4" data-project="castlecart" data-index="4" onclick="openLightbox(this)">
-                    <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
@@ -944,36 +949,42 @@
                     <p><strong>Context:</strong> "Castle Cart" is a couch LAN racing game set in a fantasy world filled with classes and magic. The project aimed to blend fast-paced racing with class-based mechanics to create a unique multiplayer experience. The development involved a collaborative effort with my university peers over several months.</p>
                     <p><strong>Development Process:</strong> We started by brainstorming game mechanics and settled on combining racing with RPG elements. I took the lead on developing the gameplay mechanics and designing the various classes and their unique spells. We iterated through multiple prototypes to balance the game and ensure each class felt distinct and enjoyable.</p>
                     <p><strong>Lessons Learned:</strong> This project taught me a lot about team collaboration and project management. I enhanced my skills in Unity and C#, especially in synchronizing gameplay for couch co-op modes. I also gained valuable experience in game balance and class design.</p>
+                    <p><strong>My Responsibilities:</strong></p>
+                    <ul>
+                        <li>Responsible for designing the classes, creating the main game mechanics, implementing the racing system, power-ups, and various smaller features.</li>
+                    </ul>
                     <p><strong>Skills Utilized:</strong> Unity, C#, 3D Game Development, Gameplay Design, Power-up Systems, Class Design, Teamwork</p>
                 </div>
             </div>
 
-          <!-- Project 4: Mushroom Survivors -->
-<div class="project-item">
-    <h3 class="project-title">Mushroom Survivors</h3>
-    <div class="carousel">
-        <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="active" data-project="mushroomsurvivors" data-index="1" onclick="openLightbox(this)">
-        <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" data-project="mushroomsurvivors" data-index="2" onclick="openLightbox(this)">
-        <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" data-project="mushroomsurvivors" data-index="3" onclick="openLightbox(this)">
-        <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" data-project="mushroomsurvivors" data-index="4" onclick="openLightbox(this)">
-        <!-- Removed the 5th image to have only 4 images -->
-        <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
-        <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
-    </div>
-    <!-- Confidential Notice -->
-    <div class="confidential-notice">
-        <h2>Confidential</h2>
-        <p>Can't show everything</p>
-    </div>
-    <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
-    <div class="project-description">
-        <p><strong>Context:</strong> "Mushroom Survivors" is a unique take on the 'survivors' genre, where defeated enemies become your allies. The project was developed with a focus on innovative gameplay mechanics that encourage strategic play.</p>
-        <p><strong>Development Process:</strong> In this project, I was responsible for designing and implementing the core gameplay mechanics. This involved programming enemy AI behaviors, the mechanics for converting enemies into allies, and designing challenging boss fights. The development process included extensive testing and balancing to ensure a smooth player experience.</p>
-        <p><strong>Lessons Learned:</strong> This project enhanced my skills in AI programming and gameplay mechanics. I also learned a lot about game balancing and the importance of playtesting. Working under confidentiality agreements taught me the significance of professional conduct in collaborative projects.</p>
-        <p><strong>Skills Utilized:</strong> Unity, C#, AI Programming, Unit Merging Mechanics, Game Balancing, Game Design, Problem-solving.</p>
-    </div>
-</div>
-
+            <!-- Project 4: Mushroom Survivors -->
+            <div class="project-item">
+                <h3 class="project-title">Mushroom Survivors</h3>
+                <div class="carousel">
+                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="active" data-project="mushroomsurvivors" data-index="1" onclick="openLightbox(this)">
+                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" data-project="mushroomsurvivors" data-index="2" onclick="openLightbox(this)">
+                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" data-project="mushroomsurvivors" data-index="3" onclick="openLightbox(this)">
+                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" data-project="mushroomsurvivors" data-index="4" onclick="openLightbox(this)">
+                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
+                </div>
+                <!-- Confidential Notice -->
+                <div class="confidential-notice">
+                    <h2>Confidential</h2>
+                    <p>Can't show everything</p>
+                </div>
+                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
+                <div class="project-description">
+                    <p><strong>Context:</strong> "Mushroom Survivors" is a unique take on the 'survivors' genre, where defeated enemies become your allies. The project was developed with a focus on innovative gameplay mechanics that encourage strategic play.</p>
+                    <p><strong>Development Process:</strong> In this project, I was responsible for designing and implementing the core gameplay mechanics. This involved programming enemy AI behaviors, the mechanics for converting enemies into allies, and designing challenging boss fights. The development process included extensive testing and balancing to ensure a smooth player experience.</p>
+                    <p><strong>Lessons Learned:</strong> This project enhanced my skills in AI programming and gameplay mechanics. I also learned a lot about game balancing and the importance of playtesting. Working under confidentiality agreements taught me the significance of professional conduct in collaborative projects.</p>
+                    <p><strong>My Responsibilities:</strong></p>
+                    <ul>
+                        <li>Created the core gameplay systems, including AI behaviors, “enemy-becomes-ally” mechanics, and overall game balancing.</li>
+                    </ul>
+                    <p><strong>Skills Utilized:</strong> Unity, C#, AI Programming, Unit Merging Mechanics, Game Balancing, Game Design, Problem-solving.</p>
+                </div>
+            </div>
 
             <!-- Project 5: UE Demo -->
             <div class="project-item">
@@ -983,7 +994,6 @@
                     <img src="assets/pictures/UEDEMO2.png" alt="UE Demo Screenshot 2" data-project="uedemo" data-index="2" onclick="openLightbox(this)">
                     <img src="assets/pictures/UEDEMO3.png" alt="UE Demo Screenshot 3" data-project="uedemo" data-index="3" onclick="openLightbox(this)">
                     <img src="assets/pictures/UEDEMO4.png" alt="UE Demo Screenshot 4" data-project="uedemo" data-index="4" onclick="openLightbox(this)">
-                    <!-- Removed the 5th image to have only 4 images -->
                     <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
                     <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
                 </div>
@@ -1001,6 +1011,10 @@
                     <p><strong>Context:</strong> "UE DEMO" is a solo project where I explored creating a 2.5D game using Unreal Engine 5. The goal was to integrate a 2D character into a 3D environment, experimenting with the blending of dimensions.</p>
                     <p><strong>Development Process:</strong> I started by setting up the project in Unreal Engine 5, utilizing both C++ and Blueprints. I focused on character movement, interaction with the environment, and visual aesthetics. This project allowed me to delve deeper into Unreal's capabilities and improve my understanding of C++ in game development.</p>
                     <p><strong>Lessons Learned:</strong> Working on this demo improved my proficiency with Unreal Engine and C++. I gained valuable experience in level design and learned how to effectively combine 2D and 3D assets. It also taught me about the challenges of solo development and the importance of time management.</p>
+                    <p><strong>My Responsibilities:</strong></p>
+                    <ul>
+                        <li>I handled every aspect of the game’s development (design, code, mechanics), using 3D models sourced from itch.io.</li>
+                    </ul>
                     <p><strong>Skills Utilized:</strong> Blueprints, Unreal Engine 5 (Intermediate), C++ (Intermediate), Level Design, Self-motivation, Performance Optimization</p>
                 </div>
             </div>
@@ -1111,7 +1125,7 @@
             e.preventDefault();
         }, { passive: false });
 
-        // Show More / Show Less Functionality with Smooth Scroll
+        // Show More / Show Less Functionality
         function toggleDetails(button) {
             const projectItem = button.parentElement;
             const description = projectItem.querySelector('.project-description');
@@ -1124,8 +1138,6 @@
             } else {
                 description.classList.add('open');
                 button.textContent = 'Show Less';
-                // Optionally, scroll to the description
-                // description.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     </script>
