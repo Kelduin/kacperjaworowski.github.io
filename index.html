@@ -3,142 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
+    
+    <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio. Unity, Godot, and Unreal Engine expert.">
+    <meta property="og:title" content="Kacper Jaworowski — Game Architect">
+    <meta property="og:description" content="Building immersive digital worlds with Unity, Godot, and UE5.">
+    <meta property="og:image" content="assets/pictures/SLIMETASTIC1.jpg"> <meta property="og:type" content="website">
+    
     <title>Kacper Jaworowski — Game Architect</title>
     
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- VARIABLES & RESET --- */
+        /* --- VARIABLES --- */
         :root {
-            --bg: #0a0a0a;
-            --card-bg: #111111;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-            --accent: #3b82f6; /* Subtle Professional Blue */
+            --bg: #050505;
+            --card-bg: #111;
+            --text-main: #fff;
+            --text-muted: #888;
+            --accent: #3b82f6;
             --border: rgba(255, 255, 255, 0.08);
-            --radius: 24px;
+            --radius: 20px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             background-color: var(--bg);
             color: var(--text-main);
             font-family: 'Satoshi', sans-serif;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            padding-bottom: 100px; /* Space for floating dock */
         }
 
-        /* --- NOISE OVERLAY (Texture) --- */
+        /* --- NOISE TEXTURE --- */
         .noise {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9000;
-            opacity: 0.03;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9000; opacity: 0.04;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* --- TYPOGRAPHY --- */
-        h1, h2, h3 {
-            font-family: 'Clash Display', sans-serif;
-            font-weight: 600;
-        }
+        h1, h2, h3 { font-family: 'Clash Display', sans-serif; font-weight: 600; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-        }
-
-        /* --- LAYOUT UTILS --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-padding {
-            padding: 120px 0;
-        }
-
-        /* --- HEADER / HERO --- */
+        /* --- HERO SECTION --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
         header {
-            min-height: 80vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            position: relative;
+            align-items: flex-start;
         }
 
-        .hero-label {
-            display: inline-block;
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 8px 16px;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            background: rgba(0, 255, 136, 0.05);
             border-radius: 50px;
+            color: #00ff88;
             font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 30px;
-            color: var(--text-muted);
-            backdrop-filter: blur(10px);
+        }
+
+        .status-dot {
+            width: 8px; height: 8px; background: #00ff88; border-radius: 50%;
+            box-shadow: 0 0 10px #00ff88;
+            animation: pulse 2s infinite;
         }
 
         .hero-title {
-            font-size: clamp(3rem, 6vw, 5.5rem);
-            line-height: 1.1;
+            font-size: clamp(3rem, 7vw, 6rem);
+            line-height: 1;
             margin-bottom: 30px;
-            background: linear-gradient(to bottom, #fff, #888);
+            background: linear-gradient(to right, #fff, #999);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero-bio {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--text-muted);
             max-width: 600px;
             line-height: 1.6;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
-        .social-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .social-btn {
-            padding: 12px 24px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            font-weight: 500;
+        /* --- BENTO GRID --- */
+        .section-title {
+            font-size: 2rem;
+            margin: 80px 0 40px 0;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 15px;
+        }
+        .section-title::after {
+            content: ''; height: 1px; flex: 1; background: var(--border);
         }
 
-        .social-btn:hover {
-            background: #fff;
-            color: #000;
-        }
-
-        /* --- BENTO GRID (PROJECTS) --- */
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: minmax(300px, auto);
             gap: 24px;
+            grid-auto-rows: minmax(320px, auto);
         }
 
-        /* Card Styles */
+        /* CARD STYLES */
         .card {
             background-color: var(--card-bg);
             border-radius: var(--radius);
@@ -147,335 +123,310 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            group: cursor-pointer;
+            /* 3D Transform setup */
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: border-color 0.3s;
         }
 
-        /* Spotlight Effect */
+        /* Mouse Spotlight */
         .card::before {
             content: "";
             position: absolute;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            left: 0;
+            height: 100%; width: 100%; top: 0; left: 0;
             background: radial-gradient(
-                800px circle at var(--mouse-x) var(--mouse-y),
-                rgba(255, 255, 255, 0.04),
+                600px circle at var(--mouse-x) var(--mouse-y),
+                rgba(255, 255, 255, 0.06),
                 transparent 40%
             );
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s;
+            z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.5s;
         }
         .card:hover::before { opacity: 1; }
-        .card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
+        .card:hover { border-color: rgba(255,255,255,0.3); }
 
-        /* Card Content */
         .card-media {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            background: #000;
+            flex: 1; position: relative; overflow: hidden; background: #000;
         }
 
         .card-media img, .card-media video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s ease;
-            opacity: 0.7;
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0.6; transition: transform 0.6s, opacity 0.6s;
         }
 
-        .card:hover .card-media img,
-        .card:hover .card-media video {
-            transform: scale(1.05);
-            opacity: 1;
+        /* Video active state (controlled by JS) */
+        .card.playing .card-media video,
+        .card:hover .card-media img {
+            opacity: 1; transform: scale(1.03);
         }
 
-        .card-info {
-            padding: 30px;
-            z-index: 2;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            position: absolute;
-            bottom: 0;
-            width: 100%;
+        .card-content {
+            padding: 24px;
+            position: absolute; bottom: 0; width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+            z-index: 3;
+            transform: translateZ(20px); /* Parallax text pop */
         }
 
-        .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            color: white;
-        }
-
-        .card-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
+        .card-title { font-size: 1.5rem; color: #fff; margin-bottom: 8px; }
+        
+        .tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .tag {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            color: #ddd;
+            font-size: 0.75rem; padding: 4px 10px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px; color: #ddd; backdrop-filter: blur(4px);
         }
 
-        /* --- GRID SPANS (Responsive Bento) --- */
-        .span-12 { grid-column: span 12; } /* Full width */
-        .span-8  { grid-column: span 8; }  /* 2/3 width */
-        .span-6  { grid-column: span 6; }  /* 1/2 width */
-        .span-4  { grid-column: span 4; }  /* 1/3 width */
+        /* Grid Spans */
+        .span-12 { grid-column: span 12; }
+        .span-8 { grid-column: span 8; }
+        .span-6 { grid-column: span 6; }
+        .span-4 { grid-column: span 4; }
+        .row-2 { grid-row: span 2; }
+
+        /* --- FLOATING DOCK NAV --- */
+        .dock-container {
+            position: fixed; bottom: 30px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .dock {
+            display: flex; gap: 10px; padding: 10px;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .dock-btn {
+            padding: 12px 24px;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .dock-btn:hover { background: rgba(255,255,255,0.1); }
+        .dock-btn.active { background: #fff; color: #000; }
+
+        /* --- COPY EMAIL TOAST --- */
+        .toast {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
+            background: #00ff88; color: #000; padding: 12px 24px; border-radius: 50px;
+            font-weight: 600; z-index: 2000; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* --- MARQUEE --- */
+        .marquee {
+            overflow: hidden; padding: 60px 0;
+            background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+        }
+        .marquee-inner { display: flex; gap: 60px; min-width: 100%; animation: scroll 25s linear infinite; }
+        .skill { font-family: 'Clash Display', sans-serif; font-size: 2.5rem; color: #333; white-space: nowrap; }
         
-        .row-2 { grid-row: span 2; } /* Tall */
-
-        /* --- SKILLS MARQUEE --- */
-        .marquee-container {
-            padding: 60px 0;
-            background: var(--bg);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            overflow: hidden;
-            display: flex;
-            margin: 80px 0;
-        }
-
-        .marquee-content {
-            display: flex;
-            gap: 60px;
-            animation: scroll 20s linear infinite;
-            min-width: 100%;
-        }
-
-        .skill-item {
-            font-family: 'Clash Display', sans-serif;
-            font-size: 2rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-        
-        @keyframes scroll { 
-            from { transform: translateX(0); } 
-            to { transform: translateX(-100%); } 
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            padding: 80px 20px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-link {
-            font-size: 4rem;
-            font-family: 'Clash Display', sans-serif;
-            text-decoration: underline;
-            text-decoration-color: #333;
-            transition: 0.3s;
-        }
-        
-        .footer-link:hover { text-decoration-color: white; }
+        @keyframes scroll { to { transform: translateX(-100%); } }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .span-8, .span-4, .span-6 { grid-column: span 6; }
+            .span-8, .span-6, .span-4 { grid-column: span 6; }
         }
-
         @media (max-width: 768px) {
             .bento-grid { display: flex; flex-direction: column; }
-            .card { min-height: 350px; }
-            .hero-title { font-size: 3rem; }
-            .footer-link { font-size: 2rem; }
+            .hero-title { font-size: 3.5rem; }
+            .dock { padding: 8px; gap: 5px; width: 90vw; justify-content: space-around; }
+            .dock-btn { padding: 10px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
-
+    
     <div class="noise"></div>
+    <div class="toast" id="toast">Email copied to clipboard! ✅</div>
 
-    <div class="container" style="padding-top: 30px; display: flex; justify-content: space-between; align-items: center;">
-        <div style="font-weight: 700; font-family: 'Clash Display', sans-serif;">KACPER J.</div>
-        <a href="mailto:htujer@gmail.com" style="font-size: 0.9rem; color: var(--text-muted);">Available for work ●</a>
+    <div class="dock-container">
+        <nav class="dock">
+            <a href="#home" class="dock-btn active">Home</a>
+            <a href="#work" class="dock-btn">Work</a>
+            <a href="assets/files/MyResume.pdf" class="dock-btn" download>Resume</a>
+            <button class="dock-btn" onclick="copyEmail()">Contact</button>
+        </nav>
     </div>
 
-    <header class="container">
-        <div>
-            <span class="hero-label">Game Developer & Creative Coder</span>
-            <h1 class="hero-title">Architecting Immersive<br>Digital Worlds.</h1>
-            <p class="hero-bio">
-                I'm Kacper Jaworowski. I build robust game systems and engaging player experiences using Unity, Godot, and Unreal Engine. I turn complex logic into magic.
-            </p>
-            <div class="social-links">
-                <a href="assets/files/MyResume.pdf" class="social-btn" download>
-                    Download Resume ↓
-                </a>
-                <a href="https://github.com/Kelduin" target="_blank" class="social-btn">
-                    GitHub ↗
-                </a>
-                <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank" class="social-btn">
-                    LinkedIn ↗
-                </a>
-            </div>
+    <header class="container" id="home">
+        <div class="status-pill">
+            <div class="status-dot"></div>
+            Available for New Projects
         </div>
+        <h1 class="hero-title">Architecting Digital<br>Experiences.</h1>
+        <p class="hero-bio">
+            I'm Kacper Jaworowski. A Game Developer specializing in <strong>Unity, Godot, and C#</strong>. 
+            I bridge the gap between complex backend logic and satisfying player feedback.
+        </p>
     </header>
 
-    <div class="marquee-container">
-        <div class="marquee-content">
-            <span class="skill-item">Unity 3D</span>
-            <span class="skill-item">Godot Engine</span>
-            <span class="skill-item">C# Programming</span>
-            <span class="skill-item">Unreal Engine 5</span>
-            <span class="skill-item">Game Physics</span>
-            <span class="skill-item">AI Systems</span>
-            <span class="skill-item">Level Design</span>
-            <span class="skill-item">Unity 3D</span>
-            <span class="skill-item">Godot Engine</span>
-            <span class="skill-item">C# Programming</span>
-            <span class="skill-item">Unreal Engine 5</span>
-            <span class="skill-item">Game Physics</span>
-            <span class="skill-item">AI Systems</span>
-            <span class="skill-item">Level Design</span>
+    <div class="marquee">
+        <div class="marquee-inner">
+            <span class="skill">Unity 3D</span><span class="skill">Godot Engine</span>
+            <span class="skill">C#</span><span class="skill">Unreal Engine 5</span>
+            <span class="skill">Gameplay Programming</span><span class="skill">AI Systems</span>
+            <span class="skill">Unity 3D</span><span class="skill">Godot Engine</span>
+            <span class="skill">C#</span><span class="skill">Unreal Engine 5</span>
         </div>
     </div>
 
-    <section class="container section-padding" id="work">
-        <h2 style="font-size: 2rem; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">Selected Works</h2>
+    <section class="container" id="work">
+        <h2 class="section-title">Selected Works</h2>
         
         <div class="bento-grid" id="cards-container">
             
             <a href="https://kelduin.github.io/game.kacperjaworowski.github.io" target="_blank" class="card span-8 row-2">
                 <div class="card-media">
-                    <video autoplay muted loop playsinline poster="assets/pictures/SLIMETASTIC1.jpg">
+                    <video loop muted playsinline poster="assets/pictures/SLIMETASTIC1.jpg">
                         <source src="assets/videos/SLIMETASTICVIDEO.mp4" type="video/mp4">
                     </video>
                 </div>
-                <div class="card-info">
+                <div class="card-content">
                     <h3 class="card-title">Slimetastic</h3>
-                    <div class="card-tags">
-                        <span class="tag">Unity 2D</span>
-                        <span class="tag">Physics</span>
-                        <span class="tag">Mobile</span>
-                    </div>
+                    <div class="tags"><span class="tag">Unity</span><span class="tag">Physics</span><span class="tag">Released</span></div>
                 </div>
             </a>
 
             <div class="card span-4 row-2">
                 <div class="card-media">
-                    <video autoplay muted loop playsinline poster="assets/pictures/puzzlekeeper1.jpg">
+                    <video loop muted playsinline poster="assets/pictures/puzzlekeeper1.jpg">
                         <source src="assets/videos/puzzlekeeper-video.mp4" type="video/mp4">
                     </video>
                 </div>
-                <div class="card-info">
+                <div class="card-content">
                     <h3 class="card-title">Puzzle Keeper</h3>
-                    <div class="card-tags">
-                        <span class="tag">Godot</span>
-                        <span class="tag">AI Systems</span>
-                        <span class="tag">WIP</span>
-                    </div>
+                    <div class="tags"><span class="tag">Godot</span><span class="tag">AI</span><span class="tag">WIP</span></div>
                 </div>
             </div>
 
             <a href="https://gambik.itch.io/the-castle-cart" target="_blank" class="card span-6">
                 <div class="card-media">
-                    <video autoplay muted loop playsinline poster="assets/pictures/CASTLECART1.png">
+                    <video loop muted playsinline poster="assets/pictures/CASTLECART1.png">
                         <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
                     </video>
                 </div>
-                <div class="card-info">
+                <div class="card-content">
                     <h3 class="card-title">Castle Cart</h3>
-                    <div class="card-tags">
-                        <span class="tag">Unity</span>
-                        <span class="tag">Multiplayer LAN</span>
-                        <span class="tag">Racing</span>
-                    </div>
+                    <div class="tags"><span class="tag">Unity</span><span class="tag">Multiplayer</span></div>
                 </div>
             </a>
 
             <div class="card span-6">
                 <div class="card-media">
-                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors">
+                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom">
                 </div>
-                <div class="card-info">
+                <div class="card-content">
                     <h3 class="card-title">Mushroom Survivors</h3>
-                    <div class="card-tags">
-                        <span class="tag">Unity</span>
-                        <span class="tag">Swarm AI</span>
-                        <span class="tag">NDA</span>
-                    </div>
+                    <div class="tags"><span class="tag">Unity</span><span class="tag">Swarm AI</span><span class="tag">NDA</span></div>
                 </div>
             </div>
 
             <a href="https://github.com/Kelduin/UE-DEMO" target="_blank" class="card span-12">
-                <div class="card-media" style="height: 400px;">
-                    <video autoplay muted loop playsinline poster="assets/pictures/UEDEMO1.png">
+                <div class="card-media" style="max-height: 400px;">
+                    <video loop muted playsinline poster="assets/pictures/UEDEMO1.png">
                         <source src="assets/videos/UEVID.webm" type="video/webm">
                     </video>
                 </div>
-                <div class="card-info">
-                    <h3 class="card-title">Unreal Engine 5 - 2.5D Tech Demo</h3>
-                    <div class="card-tags">
-                        <span class="tag">UE5</span>
-                        <span class="tag">C++</span>
-                        <span class="tag">Blueprints</span>
-                        <span class="tag">Lumen</span>
-                    </div>
+                <div class="card-content">
+                    <h3 class="card-title">UE5 2.5D Tech Demo</h3>
+                    <div class="tags"><span class="tag">C++</span><span class="tag">Blueprints</span><span class="tag">Lumen</span></div>
                 </div>
             </a>
-
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p style="color: var(--text-muted); margin-bottom: 20px;">Interested in working together?</p>
-            <a href="mailto:htujer@gmail.com" class="footer-link">htujer@gmail.com</a>
-            <div style="margin-top: 60px; color: #444; font-size: 0.8rem;">
-                &copy; 2024 Kacper Jaworowski. All rights reserved.
-            </div>
-        </div>
+    <footer class="container" style="padding: 100px 0 150px 0; text-align: center;">
+        <p style="color: #444;">&copy; 2024 Kacper Jaworowski</p>
     </footer>
 
     <script>
-        // --- SPOTLIGHT EFFECT FOR CARDS ---
-        // This adds that subtle "Apple" glow that follows your mouse on the cards
-        const cardsContainer = document.getElementById("cards-container");
-        const cards = document.getElementsByClassName("card");
+        // --- 1. SPOTLIGHT & 3D TILT EFFECT ---
+        const cards = document.querySelectorAll('.card');
 
-        cardsContainer.onmousemove = e => {
-            for(const card of cards) {
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
+                
+                // Spotlight Position
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
 
-                card.style.setProperty("--mouse-x", `${x}px`);
-                card.style.setProperty("--mouse-y", `${y}px`);
-            }
-        };
+                // 3D Tilt Calculation
+                // Map x/y to -1 to 1 range
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
+                const rotateY = ((x - centerX) / centerX) * 5;
 
-        // --- SCROLL REVEAL ANIMATION ---
-        // Simple Intersection Observer to fade things in
-        const observerOptions = {
-            threshold: 0.1
-        };
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
 
+            // Reset transform on leave
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        // --- 2. SMART VIDEO LAZY LOADING ---
+        // Only plays video when 50% of the card is visible on screen
+        const videos = document.querySelectorAll('video');
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const video = entry.target;
+                const card = video.closest('.card');
+                
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
+                    video.play();
+                    card.classList.add('playing');
+                } else {
+                    video.pause();
+                    card.classList.remove('playing');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.5 }); // 50% visibility required
 
-        // Apply initial styles for animation
-        Array.from(cards).forEach(card => {
-            card.style.opacity = "0";
-            card.style.transform = "translateY(20px)";
-            card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-            observer.observe(card);
+        videos.forEach(video => observer.observe(video));
+
+        // --- 3. CLIPBOARD COPY ---
+        function copyEmail() {
+            navigator.clipboard.writeText('htujer@gmail.com');
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // --- 4. FLOATING DOCK ACTIVE STATE ---
+        // Highlights the nav button based on scroll position
+        const sections = document.querySelectorAll('header, section');
+        const navLinks = document.querySelectorAll('.dock-btn');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
         });
     </script>
 </body>
