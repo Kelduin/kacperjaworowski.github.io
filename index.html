@@ -7,46 +7,36 @@
     <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
     <meta name="keywords" content="Game Developer, Unity, Unreal Engine, Portfolio, Kacper Jaworowski">
     <meta name="author" content="Kacper Jaworowski">
-    <title>Kacper Jaworowski - Game Developer Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap"
-        rel="stylesheet">
+    <title>Kacper Jaworowski - Game Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for Easy Theme Management */
+        /* --- CSS VARIABLES & THEME --- */
         :root {
-            --primary-color: #00AEEF;
-            --secondary-color: #121212;
-            --background-gradient: linear-gradient(to bottom, #1a1a1a, #121212);
-            --header-gradient: radial-gradient(circle at top, #222, #111);
-            --text-color: #eaeaea;
-            --subtext-color: #ccc;
-            --accent-color: #00AEEF;
-            --card-bg: #2c2c2c;
-            --card-shadow: rgba(0, 0, 0, 0.5);
-            --button-bg: #00AEEF;
-            --button-hover-bg: #008bbd;
-            --nav-bg: rgba(0, 0, 0, 0.9);
-            --nav-shadow: rgba(0, 0, 0, 0.6);
-            --footer-bg: #111;
-            --footer-text: #ccc;
-            --lightbox-bg: rgba(0, 0, 0, 0.8);
-            --lightbox-content-bg: #2c2c2c;
-            --close-btn-color: #fff;
-            --transition-duration: 0.3s;
+            --primary: #00f3ff; /* Neon Cyan */
+            --primary-dim: rgba(0, 243, 255, 0.1);
+            --secondary: #7000ff; /* Neon Purple */
+            --bg-dark: #050505;
+            --bg-card: rgba(20, 20, 20, 0.6);
+            --text-main: #ffffff;
+            --text-sub: #a0a0a0;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        /* Reset and Base Styles */
+        /* --- RESET & BASE --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none; /* Hide default cursor for custom one */
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--background-gradient);
-            color: var(--text-color);
-            line-height: 1.6;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         html {
@@ -54,1093 +44,966 @@
         }
 
         a {
-            color: var(--accent-color);
             text-decoration: none;
-            transition: color var(--transition-duration) ease;
+            color: var(--primary);
+            position: relative;
+            transition: 0.3s;
         }
 
-        a:hover {
-            color: var(--button-hover-bg);
-        }
-
-        /* Navigation Styles */
-        nav {
-            position: sticky;
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
             top: 0;
-            background: var(--nav-bg);
-            backdrop-filter: blur(10px);
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--primary);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        
+        body:hover .cursor-outline {
+            background-color: rgba(0, 243, 255, 0.05);
+        }
+
+        /* --- BACKGROUND CANVAS --- */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 100;
-            box-shadow: 0 2px 4px var(--nav-shadow);
-            padding: 10px 0;
-            animation: fadeInDown 1s ease;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            background: rgba(5, 5, 5, 0.7);
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: white;
+            text-transform: uppercase;
         }
 
         .nav-links {
             display: flex;
-            justify-content: center;
             list-style: none;
-        }
-
-        .nav-links li {
-            margin: 0 20px;
-            position: relative;
+            gap: 40px;
         }
 
         .nav-links a {
-            font-size: 1.1rem;
+            color: var(--text-sub);
             font-weight: 500;
-            padding: 5px 0;
-            display: inline-block;
-            transition: color var(--transition-duration) ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .nav-links a::after {
-            content: '';
-            display: block;
-            width: 0%;
-            height: 2px;
-            background: var(--accent-color);
-            transition: width var(--transition-duration) ease;
-            margin-top: 5px;
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Confidential Notice Styles */
-        .confidential-notice {
-            text-align: center;
-            margin-bottom: 20px;
-            animation: fadeIn 1s ease;
-        }
-
-        .confidential-notice h2 {
-            color: red;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .confidential-notice p {
-            color: red;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        /* Header Styles */
-        header {
-            text-align: center;
-            padding: 100px 20px;
-            background: var(--header-gradient);
-            animation: fadeIn 2s ease;
-        }
-
-        header h1 {
-            font-size: 4rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            animation: slideInLeft 1s ease;
-        }
-
-        header p {
+        .menu-toggle {
+            display: none;
             font-size: 1.5rem;
-            color: var(--subtext-color);
-            animation: slideInRight 1s ease;
+            color: white;
         }
 
-        /* Section Styles */
-        section {
-            padding: 60px 20px;
-            animation: fadeInUp 1s ease;
-        }
-
-        /* About Me Section */
-        .bio {
-            max-width: 1000px;
-            margin: auto;
+        /* --- HEADER (HERO) --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-        }
-
-        .bio h2 {
-            font-size: 2.8rem;
-            color: var(--accent-color);
-            margin-bottom: 30px;
+            padding: 0 20px;
             position: relative;
         }
 
-        .bio h2::after {
-            content: '';
-            width: 80px;
-            height: 4px;
-            background: var(--accent-color);
-            display: block;
-            margin: 10px auto 0;
-            border-radius: 2px;
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            white-space: nowrap;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-sub);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            animation: bounce 2s infinite;
+            opacity: 0.7;
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section {
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 80px;
+            background: linear-gradient(to right, #fff, var(--text-sub));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        /* --- ABOUT ME --- */
+        .bio {
+            text-align: center;
+            max-width: 800px;
         }
 
         .bio p {
             font-size: 1.2rem;
-            color: var(--subtext-color);
-            margin-bottom: 30px;
-            text-align: center;
+            color: var(--text-sub);
+            margin-bottom: 40px;
         }
 
-        .interactive-btn {
+        .btn-neon {
             display: inline-block;
-            margin: 10px;
-            padding: 15px 35px;
-            background: var(--button-bg);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform var(--transition-duration) ease, background var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
-            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
-        }
-
-        .interactive-btn:hover {
-            background: var(--button-hover-bg);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
-            color: #fff;
-        }
-
-        /* Skills Section */
-        .skills {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .skills h2 {
-            font-size: 2.8rem;
-            color: var(--accent-color);
-            margin-bottom: 30px;
+            padding: 15px 40px;
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
             position: relative;
-        }
-
-        .skills h2::after {
-            content: '';
-            width: 80px;
-            height: 4px;
-            background: var(--accent-color);
-            display: block;
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        .skills .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .hard-skills,
-        .soft-skills {
-            flex: 1 1 45%;
-            margin: 20px;
-            min-width: 280px;
-        }
-
-        .hard-skills h3,
-        .soft-skills h3 {
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            text-align: left;
-            position: relative;
-        }
-
-        .hard-skills h3::after,
-        .soft-skills h3::after {
-            content: '';
-            width: 50px;
-            height: 3px;
-            background: var(--accent-color);
-            display: block;
-            margin: 8px 0 0;
-            border-radius: 2px;
-        }
-
-        .skill-bar {
-            margin-bottom: 20px;
-        }
-
-        .skill-bar span {
-            display: block;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            text-align: left;
-        }
-
-        .bar {
-            width: 100%;
-            height: 20px;
-            background: #333;
-            border-radius: 10px;
             overflow: hidden;
-            position: relative;
+            transition: 0.4s;
+            z-index: 1;
         }
 
-        .bar .progress {
-            height: 100%;
-            background: var(--accent-color);
-            width: 0;
-            border-radius: 10px;
-            transition: width 1s ease-in-out;
-        }
-
-        .soft-skills ul {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            font-size: 1.2rem;
-            color: var(--subtext-color);
-        }
-
-        .soft-skills ul li {
-            margin: 10px 0;
-            padding-left: 25px;
-            position: relative;
-            transition: transform var(--transition-duration) ease, color var(--transition-duration) ease;
-        }
-
-        .soft-skills ul li::before {
-            content: "✔";
-            color: var(--accent-color);
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 1.2rem;
-            transition: transform var(--transition-duration) ease;
-        }
-
-        .soft-skills ul li:hover {
-            color: var(--accent-color);
-            transform: translateX(5px);
-        }
-
-        /* Projects Section */
-        .projects {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 15px;
-            padding: 60px 20px;
-            margin-top: 40px;
-        }
-
-        .projects .section-title {
-            font-size: 2.8rem;
-            color: var(--accent-color);
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .projects .section-title::after {
+        .btn-neon::before {
             content: '';
-            width: 100px;
-            height: 4px;
-            background: var(--accent-color);
-            display: block;
-            margin: 10px auto 0;
-            border-radius: 2px;
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            z-index: -1;
+            transition: 0.4s;
         }
 
-        .projects-container {
+        .btn-neon:hover::before {
+            left: 0;
+        }
+
+        .btn-neon:hover {
+            color: #000;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* --- SKILLS --- */
+        .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
-            max-width: 1200px;
-            margin: auto;
         }
 
-        .project-item {
-            background: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 6px 20px var(--card-shadow);
-            padding: 25px;
-            color: var(--text-color);
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0;
+            box-shadow: 0 0 10px var(--primary);
+            transition: width 1.5s cubic-bezier(0.1, 0.6, 0.1, 1);
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .tag:hover {
+            background: var(--primary-dim);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* --- PROJECTS (SPOTLIGHT EFFECT) --- */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        /* The Card */
+        .project-card {
+            background-color: rgba(25, 25, 25, 0.6);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.1s;
             display: flex;
             flex-direction: column;
-            transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+        }
+
+        /* Mouse Spotlight Effect */
+        .project-card::before {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: inherit;
+            background: radial-gradient(
+                800px circle at var(--mouse-x) var(--mouse-y),
+                rgba(255, 255, 255, 0.06),
+                transparent 40%
+            );
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Glow Border */
+        .project-card::after {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: inherit;
+            background: radial-gradient(
+                600px circle at var(--mouse-x) var(--mouse-y),
+                rgba(0, 243, 255, 0.4),
+                transparent 40%
+            );
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .project-card:hover::after {
+            opacity: 1;
+        }
+
+        .card-content {
+            background-color: #111;
+            border-radius: inherit;
+            flex-grow: 1;
+            margin: 1px; /* Creates the border space */
             position: relative;
-            /* Removed the gray outline */
+            z-index: 2;
+            padding: 25px;
+            height: calc(100% - 2px);
+            width: calc(100% - 2px);
+            display: flex;
+            flex-direction: column;
         }
 
-        .project-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 25px var(--card-shadow);
-        }
-
-        .project-title {
-            font-size: 1.8rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* Carousel Styles */
-        .carousel {
-            position: relative;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border-radius: 10px;
+        /* Carousel inside Card */
+        .carousel-container {
+            width: 100%;
             height: 200px;
-            background: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+            background: #000;
         }
 
-        .carousel img {
+        .carousel-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: none;
-            transition: opacity 0.5s ease;
-            cursor: pointer;
+            transition: opacity 0.5s;
         }
 
-        .carousel img.active {
+        .carousel-img.active {
             display: block;
+            animation: fadeIn 0.5s;
         }
 
-        .carousel .prev,
-        .carousel .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-size: 1rem;
-            border-radius: 50%;
-            transition: background var(--transition-duration) ease;
+        .project-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-family: 'Outfit', sans-serif;
         }
 
-        .carousel .prev:hover,
-        .carousel .next:hover {
-            background: rgba(0, 0, 0, 0.9);
-        }
-
-        .carousel .prev {
-            left: 10px;
-        }
-
-        .carousel .next {
-            right: 10px;
-        }
-
-        /* Video Container */
-        .video-container {
+        .project-desc-short {
+            color: var(--text-sub);
+            font-size: 0.95rem;
             margin-bottom: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #333;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .video-container video {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        /* Project Description */
-        .project-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--subtext-color);
             flex-grow: 1;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        .btn-small {
+            font-size: 0.8rem;
+            padding: 8px 16px;
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .btn-small:hover {
+            background: var(--primary);
+            color: black;
+            border-color: var(--primary);
+        }
+
+        .expand-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+            width: 100%;
+            text-align: right;
+            transition: 0.3s;
+        }
+        
+        .expand-btn:hover {
+            text-shadow: 0 0 8px var(--primary);
+        }
+
+        /* Expanded Details */
+        .details-panel {
             max-height: 0;
             overflow: hidden;
-            transition: max-height var(--transition-duration) ease;
+            transition: max-height 0.5s ease-out;
+            border-top: 1px solid transparent;
+            margin-top: 10px;
         }
 
-        .project-description.open {
-            max-height: 1000px; /* Arbitrary high value to allow full expansion */
+        .details-panel.open {
+            max-height: 1000px;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 15px;
         }
 
-        .project-description p {
+        .details-panel p {
+            font-size: 0.9rem;
+            color: #ccc;
             margin-bottom: 10px;
         }
-
-        .project-description p strong {
-            color: var(--accent-color);
-            font-size: 1.1rem;
+        
+        .details-panel strong {
+            color: white;
         }
 
-        /* Show More Button */
-        .show-more-btn {
-            margin-top: 15px;
-            align-self: center;
-            padding: 10px 20px;
-            background: var(--button-bg);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform var(--transition-duration) ease, background var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
-            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
+        .badge-wip {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d;
+            padding: 4px 8px;
+            font-size: 0.7rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: bold;
+            backdrop-filter: blur(4px);
         }
 
-        .show-more-btn:hover {
-            background: var(--button-hover-bg);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
-        }
-
-        /* Project Buttons */
-        .project-buttons {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .project-buttons a {
-            display: inline-block;
-            padding: 10px 20px;
-            background: var(--button-bg);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform var(--transition-duration) ease, background var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
-            text-align: center;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
-        }
-
-        .project-buttons a:hover {
-            background: var(--button-hover-bg);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.6);
-        }
-
-        /* Lightbox Styles */
+        /* --- LIGHTBOX --- */
         .lightbox {
             display: none;
             position: fixed;
-            z-index: 200;
+            z-index: 10000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background: var(--lightbox-bg);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
             justify-content: center;
             align-items: center;
-            padding: 20px;
         }
 
-        .lightbox-content {
-            position: relative;
+        .lightbox img {
             max-width: 90%;
-            max-height: 90%;
+            max-height: 80vh;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.2);
         }
 
-        .lightbox-content img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .close-btn {
+        .close-lb {
             position: absolute;
-            top: -10px;
-            right: -10px;
-            background: var(--lightbox-content-bg);
-            color: var(--close-btn-color);
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .close-btn:hover {
-            background: var(--button-hover-bg);
-        }
-
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.6);
+            top: 30px;
+            right: 30px;
             color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-size: 1rem;
-            border-radius: 50%;
-            transition: background var(--transition-duration) ease;
+            font-size: 3rem;
+            cursor: none;
         }
 
-        .lightbox-prev {
-            left: 10px;
-        }
-
-        .lightbox-next {
-            right: 10px;
-        }
-
-        .lightbox-nav:hover {
-            background: rgba(0, 0, 0, 0.9);
-        }
-
-        /* Footer Styles */
+        /* --- FOOTER --- */
         footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 40px;
             text-align: center;
-            padding: 30px 20px;
-            background: var(--footer-bg);
-            color: var(--footer-text);
-            margin-top: 60px;
-            animation: fadeInUp 1s ease;
+            background: #000;
         }
 
-        footer a {
-            color: var(--accent-color);
-            font-weight: 600;
-            margin: 0 10px;
+        footer p {
+            color: var(--text-sub);
+            margin-bottom: 15px;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .socials a {
+            margin: 0 15px;
+            font-size: 1.1rem;
         }
 
-        /* Animations */
+        /* --- ANIMATIONS --- */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 1024px) {
-            .projects-container {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-        }
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            header {
-                padding: 80px 20px;
-            }
-
-            header h1 {
-                font-size: 3rem;
-            }
-
+            header h1 { font-size: 3rem; white-space: normal; }
             .nav-links {
-                flex-direction: column;
-                background: var(--nav-bg);
-                position: absolute;
-                top: 60px;
+                position: fixed;
+                background: black;
+                top: 70px;
                 left: -100%;
+                flex-direction: column;
                 width: 100%;
-                transition: left var(--transition-duration) ease;
+                height: 100vh;
+                padding-top: 50px;
+                transition: 0.3s;
+                align-items: center;
             }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .nav-links li {
-                margin: 15px 0;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .carousel {
-                height: 150px;
-            }
-
-            .project-item {
-                padding: 20px;
-            }
-
-            .project-title {
-                font-size: 1.5rem;
-            }
-
-            .project-description p strong {
-                font-size: 1rem;
-            }
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            padding: 0 20px;
-            color: var(--text-color);
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-                position: absolute;
-                top: 15px;
-                right: 20px;
-            }
+            .nav-links.active { left: 0; }
+            .menu-toggle { display: block; }
+            .cursor-dot, .cursor-outline { display: none; }
+            * { cursor: auto; }
         }
     </style>
 </head>
 
 <body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <nav>
+        <div class="logo">KJ<span style="color:var(--primary)">.DEV</span></div>
         <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
         <ul class="nav-links">
-            <li><a href="#about-me">About Me</a></li>
-            <li><a href="#skills-summary">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact-me">Contact</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Works</a></li>
+            <li><a href="#contact">Contact</a></li>
             <li><a href="https://github.com/Kelduin" target="_blank">GitHub</a></li>
         </ul>
     </nav>
 
     <header>
-        <h1>Kacper Jaworowski</h1>
-        <p>Game Developer | Indie Game Enthusiast & Hardcore Gamer</p>
+        <p>System Online // Welcome User</p>
+        <h1 data-value="KACPER JAWOROWSKI">KACPER JAWOROWSKI</h1>
+        <p style="color: var(--primary);">Game Developer | Unity | Godot | Indie Enthusiast</p>
+        <div class="scroll-down">
+            <span style="color: var(--text-sub)">SCROLL DOWN</span>
+            <br>↓
+        </div>
     </header>
 
-    <section class="bio" id="about-me">
-        <h2>About Me</h2>
-        <p>Hi, my name is Kacper, and I'm a passionate gamer and game developer with a strong background in creating engaging and immersive experiences. I specialize in Unity and Godot, and I thrive in collaborative environments where creativity and innovation are encouraged.</p>
-        <a href="assets/files/MyResume.pdf" class="interactive-btn" download>Download My Resume</a>
-        <!-- Removed the "Play My Interactive Portfolio" button as per your request -->
+    <section id="about" class="bio">
+        <h2 class="section-title">Initialize Profile</h2>
+        <p>Hi, I'm Kacper. I architect immersive digital experiences using Unity and Godot. I thrive in the chaotic creative process of game development, turning logic into magic.</p>
+        <a href="assets/files/MyResume.pdf" class="btn-neon" download>Download Data Log (Resume)</a>
     </section>
 
-    <section class="skills" id="skills-summary">
-        <h2>Skills Summary</h2>
-        <div class="container">
-            <div class="hard-skills">
-                <h3>Hard Skills</h3>
-                <div class="skill-bar">
-                    <span>Unity (Intermediate)</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="70%"></div>
+    <section id="skills">
+        <h2 class="section-title">Skill Matrix</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Core Systems</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Unity Engine</span>
+                        <span>70%</span>
                     </div>
+                    <div class="progress-bg"><div class="progress-bar" data-width="70%"></div></div>
                 </div>
-                <div class="skill-bar">
-                    <span>C# (Intermediate)</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="55%"></div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Godot Engine</span>
+                        <span>65%</span>
                     </div>
+                    <div class="progress-bg"><div class="progress-bar" data-width="65%"></div></div>
                 </div>
-                <div class="skill-bar">
-                    <span>Godot (Intermediate)</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="65%"></div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>C# Scripting</span>
+                        <span>55%</span>
                     </div>
+                    <div class="progress-bg"><div class="progress-bar" data-width="55%"></div></div>
                 </div>
-                <div class="skill-bar">
-                    <span>C++ (learning)</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="40%"></div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>GDScript</span>
+                        <span>65%</span>
                     </div>
-                </div>
-                <div class="skill-bar">
-                    <span>Gscript (Intermediate)</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="65%"></div>
-                    </div>
-                </div>
-                <div class="skill-bar">
-                    <span>Git Control (Intermediate)</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="65%"></div>
-                    </div>
-                </div>
-                <div class="skill-bar">
-                    <span>AI Programming</span>
-                    <div class="bar">
-                        <div class="progress" data-percentage="65%"></div>
-                    </div>
+                    <div class="progress-bg"><div class="progress-bar" data-width="65%"></div></div>
                 </div>
             </div>
 
-            <div class="soft-skills">
-                <h3>Soft Skills</h3>
-                <ul>
-                    <li>Teamwork</li>
-                    <li>Problem-solving</li>
-                    <li>Communication</li>
-                    <li>Creativity</li>
-                    <li>Time Management</li>
-                    <li>Adaptability</li>
-                    <li>Leadership</li>
-                    <li>Attention to Detail</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="projects" id="projects">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-container">
-            <!-- Project 1: Slimetastic -->
-            <div class="project-item">
-                <h3 class="project-title">Slimetastic</h3>
-                <div class="carousel">
-                    <img src="assets/pictures/SLIMETASTIC1.jpg" alt="Slimetastic Screenshot 1" class="active" data-project="slimetastic" data-index="1" onclick="openLightbox(this)">
-                    <img src="assets/pictures/SLIMETASTIC2.jpg" alt="Slimetastic Screenshot 2" data-project="slimetastic" data-index="2" onclick="openLightbox(this)">
-                    <img src="assets/pictures/SLIMETASTIC3.jpg" alt="Slimetastic Screenshot 3" data-project="slimetastic" data-index="3" onclick="openLightbox(this)">
-                    <img src="assets/pictures/SLIMETASTIC4.jpg" alt="Slimetastic Screenshot 4" data-project="slimetastic" data-index="4" onclick="openLightbox(this)">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
-                </div>
-                <div class="video-container">
-                    <video controls>
-                        <source src="assets/videos/SLIMETASTICVIDEO.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="project-buttons">
-                    <a href="https://github.com/Kelduin/Slimetastic" target="_blank">View on GitHub</a>
-                    <a href="https://kelduin.github.io/game.kacperjaworowski.github.io "target="_blank">Play Project</a>
-                </div>
-                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
-                <div class="project-description">
-                    <p><strong>Context:</strong> Developed a 2D mobile Unity game called Slimetastic, inspired by the Suika Japanese game. The objective is to merge slimes, and touching the top results in a loss. This game was created entirely for my university project.</p>
-                    <p><strong>Development Process:</strong> Designed and implemented game mechanics in Unity, created and integrated art assets, and developed collision detection and game-over conditions.</p>
-                    <p><strong>Lessons Learned:</strong> Enhanced my skills in Unity game development, including physics interactions, game state management, and user interface design.</p>
-                    <p><strong>My Responsibilities:</strong></p>
-                    <ul>
-                        <li>I did everything for the project (code, design, mechanics), except for the art assets which were taken from itch.io.</li>
-                    </ul>
-                    <p><strong>Skills Utilized:</strong> Unity, C#, 2D Game Development, Collision Detection, UI Design</p>
-                </div>
-            </div>
-
-            <!-- Project 2: Puzzle Keeper -->
-            <div class="project-item">
-                <h3 class="project-title">Puzzle Keeper</h3>
-                <div class="carousel">
-                    <img src="assets/pictures/puzzlekeeper1.jpg" alt="Puzzle Keeper Screenshot 1" class="active" data-project="puzzlekeeper" data-index="1" onclick="openLightbox(this)">
-                    <img src="assets/pictures/puzzlekeeper2.jpg" alt="Puzzle Keeper Screenshot 2" data-project="puzzlekeeper" data-index="2" onclick="openLightbox(this)">
-                    <img src="assets/pictures/puzzlekeeper3.jpg" alt="Puzzle Keeper Screenshot 3" data-project="puzzlekeeper" data-index="3" onclick="openLightbox(this)">
-                    <img src="assets/pictures/puzzlekeeper4.jpg" alt="Puzzle Keeper Screenshot 4" data-project="puzzlekeeper" data-index="4" onclick="openLightbox(this)">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
-                </div>
-                <div class="video-container">
-                    <video controls>
-                        <source src="assets/videos/puzzlekeeper-video.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="project-buttons">
-                    <!-- No GitHub link for this project -->
-                </div>
-                <!-- WIP Notice -->
-                <div class="confidential-notice">
-                    <h2>WIP</h2>
-                    <p>Work in Progress</p>
-                </div>
-                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
-                <div class="project-description">
-                    <p><strong>Context:</strong> Developing Puzzle Keeper, a 2D Godot top-down puzzle game aimed at escaping from a dungeon by solving puzzles and riddles. This project is currently a work in progress for my university degree.</p>
-                    <p><strong>Development Process:</strong> Building all game mechanics from scratch, including unit control systems, puzzle logic, AI behaviors, and the user interface. Creating assets and integrating them seamlessly into the game environment.</p>
-                    <p><strong>Lessons Learned:</strong> Gained comprehensive experience in Godot engine, AI programming, puzzle design, and managing complex game states.</p>
-                    <p><strong>My Responsibilities:</strong></p>
-                    <ul>
-                        <li>Responsible for the main code of the game, including puzzle mechanics and AI movement.</li>
-                    </ul>
-                    <p><strong>Skills Utilized:</strong> Godot, GDScript, AI Programming, Puzzle Design, UI/UX Design</p>
-                </div>
-            </div>
-
-            <!-- Project 3: Castle Cart -->
-            <div class="project-item">
-                <h3 class="project-title">Castle Cart</h3>
-                <div class="carousel">
-                    <img src="assets/pictures/CASTLECART1.png" alt="Castle Cart Screenshot 1" class="active" data-project="castlecart" data-index="1" onclick="openLightbox(this)">
-                    <img src="assets/pictures/CASTLECART2.png" alt="Castle Cart Screenshot 2" data-project="castlecart" data-index="2" onclick="openLightbox(this)">
-                    <img src="assets/pictures/CASTLECART3.png" alt="Castle Cart Screenshot 3" data-project="castlecart" data-index="3" onclick="openLightbox(this)">
-                    <img src="assets/pictures/CASTLECART4.png" alt="Castle Cart Screenshot 4" data-project="castlecart" data-index="4" onclick="openLightbox(this)">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
-                </div>
-                <div class="video-container">
-                    <video controls>
-                        <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="project-buttons">
-                    <a href="https://gitlab.com/aaa5460844/gierka" target="_blank">View on GitHub</a>
-                    <a href="https://gambik.itch.io/the-castle-cart" target="_blank">Play on itch.io</a>
-                </div>
-                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
-                <div class="project-description">
-                    <p><strong>Context:</strong> "Castle Cart" is a couch LAN racing game set in a fantasy world filled with classes and magic. The project aimed to blend fast-paced racing with class-based mechanics to create a unique multiplayer experience. The development involved a collaborative effort with my university peers over several months.</p>
-                    <p><strong>Development Process:</strong> We started by brainstorming game mechanics and settled on combining racing with RPG elements. I took the lead on developing the gameplay mechanics and designing the various classes and their unique spells. We iterated through multiple prototypes to balance the game and ensure each class felt distinct and enjoyable.</p>
-                    <p><strong>Lessons Learned:</strong> This project taught me a lot about team collaboration and project management. I enhanced my skills in Unity and C#, especially in synchronizing gameplay for couch co-op modes. I also gained valuable experience in game balance and class design.</p>
-                    <p><strong>My Responsibilities:</strong></p>
-                    <ul>
-                        <li>Responsible for designing the classes, creating the main game mechanics, implementing the racing system, power-ups, and various smaller features.</li>
-                    </ul>
-                    <p><strong>Skills Utilized:</strong> Unity, C#, 3D Game Development, Gameplay Design, Power-up Systems, Class Design, Teamwork</p>
-                </div>
-            </div>
-
-            <!-- Project 4: Mushroom Survivors -->
-            <div class="project-item">
-                <h3 class="project-title">Mushroom Survivors</h3>
-                <div class="carousel">
-                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors Screenshot 1" class="active" data-project="mushroomsurvivors" data-index="1" onclick="openLightbox(this)">
-                    <img src="assets/pictures/MUSHROOM2.png" alt="Mushroom Survivors Screenshot 2" data-project="mushroomsurvivors" data-index="2" onclick="openLightbox(this)">
-                    <img src="assets/pictures/MUSHROOM3.png" alt="Mushroom Survivors Screenshot 3" data-project="mushroomsurvivors" data-index="3" onclick="openLightbox(this)">
-                    <img src="assets/pictures/MUSHROOM4.png" alt="Mushroom Survivors Screenshot 4" data-project="mushroomsurvivors" data-index="4" onclick="openLightbox(this)">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
-                </div>
-                <!-- Confidential Notice -->
-                <div class="confidential-notice">
-                    <h2>Confidential</h2>
-                    <p>Can't show everything</p>
-                </div>
-                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
-                <div class="project-description">
-                    <p><strong>Context:</strong> "Mushroom Survivors" is a unique take on the 'survivors' genre, where defeated enemies become your allies. The project was developed with a focus on innovative gameplay mechanics that encourage strategic play.</p>
-                    <p><strong>Development Process:</strong> In this project, I was responsible for designing and implementing the core gameplay mechanics. This involved programming enemy AI behaviors, the mechanics for converting enemies into allies, and designing challenging boss fights. The development process included extensive testing and balancing to ensure a smooth player experience.</p>
-                    <p><strong>Lessons Learned:</strong> This project enhanced my skills in AI programming and gameplay mechanics. I also learned a lot about game balancing and the importance of playtesting. Working under confidentiality agreements taught me the significance of professional conduct in collaborative projects.</p>
-                    <p><strong>My Responsibilities:</strong></p>
-                    <ul>
-                        <li>Created the core gameplay systems, including AI behaviors, “enemy-becomes-ally” mechanics, and overall game balancing.</li>
-                    </ul>
-                    <p><strong>Skills Utilized:</strong> Unity, C#, AI Programming, Unit Merging Mechanics, Game Balancing, Game Design, Problem-solving.</p>
-                </div>
-            </div>
-
-            <!-- Project 5: UE Demo -->
-            <div class="project-item">
-                <h3 class="project-title">UE Demo</h3>
-                <div class="carousel">
-                    <img src="assets/pictures/UEDEMO1.png" alt="UE Demo Screenshot 1" class="active" data-project="uedemo" data-index="1" onclick="openLightbox(this)">
-                    <img src="assets/pictures/UEDEMO2.png" alt="UE Demo Screenshot 2" data-project="uedemo" data-index="2" onclick="openLightbox(this)">
-                    <img src="assets/pictures/UEDEMO3.png" alt="UE Demo Screenshot 3" data-project="uedemo" data-index="3" onclick="openLightbox(this)">
-                    <img src="assets/pictures/UEDEMO4.png" alt="UE Demo Screenshot 4" data-project="uedemo" data-index="4" onclick="openLightbox(this)">
-                    <button class="prev" onclick="changeSlide(-1, this.parentNode)">&#10094;</button>
-                    <button class="next" onclick="changeSlide(1, this.parentNode)">&#10095;</button>
-                </div>
-                <div class="video-container">
-                    <video controls>
-                        <source src="assets/videos/UEVID.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="project-buttons">
-                    <a href="https://github.com/Kelduin/UE-DEMO" target="_blank">View on GitHub</a>
-                </div>
-                <button class="show-more-btn" onclick="toggleDetails(this)">Show More</button>
-                <div class="project-description">
-                    <p><strong>Context:</strong> "UE DEMO" is a solo project where I explored creating a 2.5D game using Unreal Engine 5. The goal was to integrate a 2D character into a 3D environment, experimenting with the blending of dimensions.</p>
-                    <p><strong>Development Process:</strong> I started by setting up the project in Unreal Engine 5, utilizing both C++ and Blueprints. I focused on character movement, interaction with the environment, and visual aesthetics. This project allowed me to delve deeper into Unreal's capabilities and improve my understanding of C++ in game development.</p>
-                    <p><strong>Lessons Learned:</strong> Working on this demo improved my proficiency with Unreal Engine and C++. I gained valuable experience in level design and learned how to effectively combine 2D and 3D assets. It also taught me about the challenges of solo development and the importance of time management.</p>
-                    <p><strong>My Responsibilities:</strong></p>
-                    <ul>
-                        <li>I handled every aspect of the game’s development (design, code, mechanics), using 3D models sourced from itch.io.</li>
-                    </ul>
-                    <p><strong>Skills Utilized:</strong> Blueprints, Unreal Engine 5 (Intermediate), C++ (Intermediate), Level Design, Self-motivation, Performance Optimization</p>
+            <div class="skill-category">
+                <h3>Augmentations (Soft Skills)</h3>
+                <div class="tag-cloud">
+                    <span class="tag">Teamwork</span>
+                    <span class="tag">Problem Solving</span>
+                    <span class="tag">Adaptive AI Logic</span>
+                    <span class="tag">Time Management</span>
+                    <span class="tag">Creative Direction</span>
+                    <span class="tag">Git Version Control</span>
+                    <span class="tag">Leadership</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact-me">
-        <p>&copy; 2024 Kacper Jaworowski. All rights reserved.</p>
-        <a href="mailto:htujer@gmail.com">htujer@gmail.com</a>
-        <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a>
-        <a href="https://github.com/Kelduin" target="_blank">GitHub</a>
+    <section id="projects">
+        <h2 class="section-title">Project Database</h2>
+        <div class="projects-container" id="cards-container">
+            
+            <div class="project-card">
+                <div class="card-content">
+                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
+                        <img src="assets/pictures/SLIMETASTIC1.jpg" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
+                        <img src="assets/pictures/SLIMETASTIC2.jpg" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
+                        <img src="assets/pictures/SLIMETASTIC3.jpg" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
+                    </div>
+                    <h3 class="project-title">Slimetastic</h3>
+                    <p class="project-desc-short">A Suika-inspired merging game. Merge slimes, manage physics, don't breach the containment line.</p>
+                    <div class="project-actions">
+                        <a href="https://github.com/Kelduin/Slimetastic" target="_blank" class="btn-small">GitHub</a>
+                        <a href="https://kelduin.github.io/game.kacperjaworowski.github.io" target="_blank" class="btn-small">Play Now</a>
+                    </div>
+                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
+                    <div class="details-panel">
+                        <p><strong>Stack:</strong> Unity, C#, 2D Physics</p>
+                        <p>Designed physics interactions and game state logic. handled UI/UX and game loop implementation independently.</p>
+                        <div style="margin-top:10px; width:100%; border-radius:8px; overflow:hidden;">
+                            <video controls style="width:100%"><source src="assets/videos/SLIMETASTICVIDEO.mp4" type="video/mp4"></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="badge-wip">In Development</div>
+                <div class="card-content">
+                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
+                        <img src="assets/pictures/puzzlekeeper1.jpg" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
+                        <img src="assets/pictures/puzzlekeeper2.jpg" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
+                    </div>
+                    <h3 class="project-title">Puzzle Keeper</h3>
+                    <p class="project-desc-short">Top-down dungeon escaper using Godot. Solve riddles, evade capture.</p>
+                    <div class="project-actions">
+                        </div>
+                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
+                    <div class="details-panel">
+                        <p><strong>Stack:</strong> Godot, GDScript, AI</p>
+                        <p>Responsible for Unit Control Systems, Puzzle Logic, and AI Pathfinding behaviors.</p>
+                        <div style="margin-top:10px; width:100%; border-radius:8px; overflow:hidden;">
+                            <video controls style="width:100%"><source src="assets/videos/puzzlekeeper-video.mp4" type="video/mp4"></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-content">
+                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
+                        <img src="assets/pictures/CASTLECART1.png" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
+                        <img src="assets/pictures/CASTLECART2.png" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
+                    </div>
+                    <h3 class="project-title">Castle Cart</h3>
+                    <p class="project-desc-short">Couch LAN racing with RPG spells. Fantasy meets drift mechanics.</p>
+                    <div class="project-actions">
+                        <a href="https://gitlab.com/aaa5460844/gierka" target="_blank" class="btn-small">GitLab</a>
+                        <a href="https://gambik.itch.io/the-castle-cart" target="_blank" class="btn-small">Itch.io</a>
+                    </div>
+                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
+                    <div class="details-panel">
+                        <p><strong>Stack:</strong> Unity 3D, C#</p>
+                        <p>Developed racing physics, power-up systems, and class-based magic abilities in a collaborative environment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-content">
+                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
+                        <img src="assets/pictures/MUSHROOM1.png" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
+                        <img src="assets/pictures/MUSHROOM2.png" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
+                    </div>
+                    <h3 class="project-title">Mushroom Survivors</h3>
+                    <p class="project-desc-short">Survivors-like genre twist: Defeated enemies join your army.</p>
+                    <div class="project-actions">
+                        <span style="font-size:0.8rem; color:var(--text-sub)">[CONFIDENTIAL]</span>
+                    </div>
+                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
+                    <div class="details-panel">
+                        <p><strong>Stack:</strong> Unity, AI</p>
+                        <p>Programmed "Enemy-to-Ally" conversion logic, boss fights, and swarm AI behaviors.</p>
+                    </div>
+                </div>
+            </div>
+
+             <div class="project-card">
+                <div class="card-content">
+                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
+                        <img src="assets/pictures/UEDEMO1.png" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
+                        <img src="assets/pictures/UEDEMO2.png" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
+                    </div>
+                    <h3 class="project-title">UE 2.5D Demo</h3>
+                    <p class="project-desc-short">Unreal Engine 5 experiment blending 2D sprites in a 3D Lumen world.</p>
+                    <div class="project-actions">
+                        <a href="https://github.com/Kelduin/UE-DEMO" target="_blank" class="btn-small">GitHub</a>
+                    </div>
+                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
+                    <div class="details-panel">
+                        <p><strong>Stack:</strong> UE5, Blueprints, C++</p>
+                        <p>Character movement, 2D/3D blending, and environment interaction.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="socials">
+            <p>&copy; 2024 Kacper Jaworowski</p>
+            <a href="mailto:htujer@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Kelduin" target="_blank">GitHub</a>
+        </div>
     </footer>
 
-    <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <div class="lightbox-content" onclick="event.stopPropagation()">
-            <button class="close-btn" onclick="closeLightbox()">&times;</button>
-            <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">&#10094;</button>
-            <img id="lightbox-img" src="" alt="">
-            <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">&#10095;</button>
-        </div>
+        <span class="close-lb">&times;</span>
+        <img id="lightbox-img" src="" onclick="event.stopPropagation()">
     </div>
 
     <script>
-        // Carousel Functionality
-        function changeSlide(n, carousel) {
-            const images = carousel.querySelectorAll('img');
-            let activeIndex = [...images].findIndex(image => image.classList.contains('active'));
-            images[activeIndex].classList.remove('active');
-            activeIndex = (activeIndex + n + images.length) % images.length;
-            images[activeIndex].classList.add('active');
-        }
+        // --- MOUSE TRACKING SPOTLIGHT EFFECT ---
+        const cardsContainer = document.getElementById("cards-container");
+        const cards = document.getElementsByClassName("project-card");
 
-        // Auto-slide Functionality
-        document.querySelectorAll('.carousel').forEach(carousel => {
-            let slideInterval = setInterval(() => {
-                changeSlide(1, carousel);
-            }, 5000); // Change slide every 5 seconds
+        cardsContainer.onmousemove = e => {
+            for(const card of cards) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
 
-            // Pause on hover
-            carousel.addEventListener('mouseenter', () => clearInterval(slideInterval));
-            carousel.addEventListener('mouseleave', () => {
-                slideInterval = setInterval(() => {
-                    changeSlide(1, carousel);
-                }, 5000);
-            });
-        });
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            }
+        };
 
-        // Toggle Mobile Menu
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
-        }
+        // --- HACKER TEXT EFFECT ---
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        document.querySelector("header h1").onmouseover = event => {
+            let iterations = 0;
+            const interval = setInterval(() => {
+                event.target.innerText = event.target.innerText
+                    .split("")
+                    .map((letter, index) => {
+                        if(index < iterations) return event.target.dataset.value[index];
+                        return letters[Math.floor(Math.random() * 26)];
+                    })
+                    .join("");
+                
+                if(iterations >= event.target.dataset.value.length) clearInterval(interval);
+                iterations += 1 / 3;
+            }, 30);
+        };
 
-        // Animate Skill Progress Bars on Scroll into View
-        window.addEventListener('scroll', () => {
-            const skillsSection = document.querySelector('.skills');
-            const rect = skillsSection.getBoundingClientRect();
-            if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                if (!skillsSection.classList.contains('visible')) {
-                    skillsSection.classList.add('visible');
-                    const progressBars = skillsSection.querySelectorAll('.progress');
-                    progressBars.forEach(bar => {
-                        const percentage = bar.getAttribute('data-percentage');
-                        bar.style.width = percentage;
+        // --- SKILL BARS REVEAL ---
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.progress-bar');
+                    bars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
                     });
                 }
-            }
+            });
+        });
+        observer.observe(document.querySelector('#skills'));
+
+        // --- CUSTOM CURSOR ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with lag (managed by CSS transition)
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
+            
+            // Animate trailing effect via keyframes in CSS later if needed
+            // But CSS transition handles smooth lag here perfectly
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
         });
 
-        // Lightbox Functionality
-        let currentProject = '';
-        let currentIndex = 0;
-        let currentProjectImages = [];
+        // --- CAROUSEL LOGIC ---
+        let intervals = {};
 
-        function openLightbox(element) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
+        function startSlide(container) {
+            const images = container.querySelectorAll('.carousel-img');
+            if(images.length <= 1) return;
+            let idx = 0;
+            
+            // Find current active
+            images.forEach((img, i) => { if(img.classList.contains('active')) idx = i; });
 
-            currentProject = element.getAttribute('data-project');
-            currentIndex = parseInt(element.getAttribute('data-index')) - 1;
-
-            // Collect all images of the current project
-            currentProjectImages = Array.from(document.querySelectorAll(`img[data-project="${currentProject}"]`));
-
-            // Update the lightbox image
-            lightboxImg.src = currentProjectImages[currentIndex].src;
-            lightboxImg.alt = currentProjectImages[currentIndex].alt;
-
-            lightbox.style.display = 'flex';
+            intervals[container] = setInterval(() => {
+                images[idx].classList.remove('active');
+                idx = (idx + 1) % images.length;
+                images[idx].classList.add('active');
+            }, 1500);
         }
 
+        function stopSlide(container) {
+            clearInterval(intervals[container]);
+        }
+
+        // --- EXPAND DETAILS ---
+        function toggleDetails(btn) {
+            const panel = btn.nextElementSibling;
+            panel.classList.toggle('open');
+            btn.innerText = panel.classList.contains('open') ? "[-] Close Logs" : "[+] View Logs";
+        }
+
+        // --- MENU ---
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // --- LIGHTBOX ---
+        function openLightbox(img) {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            lb.style.display = 'flex';
+            lbImg.src = img.src;
+        }
         function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.style.display = 'none';
+            document.getElementById('lightbox').style.display = 'none';
         }
 
-        function navigateLightbox(n) {
-            currentIndex = (currentIndex + n + currentProjectImages.length) % currentProjectImages.length;
-            const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.src = currentProjectImages[currentIndex].src;
-            lightboxImg.alt = currentProjectImages[currentIndex].alt;
-        }
+        // --- CANVAS PARTICLE BACKGROUND ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
 
-        // Prevent scrolling when lightbox is open
-        const lightbox = document.getElementById('lightbox');
-        lightbox.addEventListener('wheel', function (e) {
-            e.preventDefault();
-        }, { passive: false });
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        // Show More / Show Less Functionality
-        function toggleDetails(button) {
-            const projectItem = button.parentElement;
-            const description = projectItem.querySelector('.project-description');
-
-            if (description.classList.contains('open')) {
-                description.classList.remove('open');
-                button.textContent = 'Show More';
-                // Scroll back to the project title
-                projectItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                description.classList.add('open');
-                button.textContent = 'Show Less';
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
             }
         }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 1) - 0.5;
+                let directionY = (Math.random() * 1) - 0.5;
+                let color = '#00f3ff';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                        ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(0, 243, 255,' + opacityValue + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            init();
+        });
+
+        init();
+        animate();
     </script>
 </body>
-
 </html>
