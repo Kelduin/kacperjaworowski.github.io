@@ -9,8 +9,7 @@
     <meta property="og:description" content="Building immersive digital worlds with Unity, Godot, and UE5.">
     <meta property="og:image" content="assets/pictures/SLIMETASTIC1.jpg">
     <title>Kacper Jaworowski — Game Architect</title>
-    
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/favicon.png"> <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
     
     <style>
         /* --- VARIABLES --- */
@@ -20,7 +19,7 @@
             --text-main: #fff;
             --text-muted: #888;
             --accent: #3b82f6;
-            --border: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.08);
             --radius: 20px;
         }
 
@@ -32,8 +31,10 @@
             color: var(--text-main);
             font-family: 'Satoshi', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 120px; /* Space for dock */
+            padding-bottom: 120px;
         }
+        
+        body.modal-open { overflow: hidden; /* Lock scroll when modal is open */ }
 
         /* --- NOISE TEXTURE --- */
         .noise {
@@ -43,7 +44,7 @@
         }
 
         /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { font-family: 'Clash Display', sans-serif; font-weight: 600; }
+        h1, h2, h3, h4 { font-family: 'Clash Display', sans-serif; font-weight: 600; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -82,11 +83,11 @@
         .btn-social {
             padding: 12px 24px; border: 1px solid var(--border); border-radius: 50px;
             background: rgba(255,255,255,0.05); color: #fff; font-weight: 500;
-            display: flex; align-items: center; gap: 8px;
+            display: flex; align-items: center; gap: 8px; cursor: pointer;
         }
         .btn-social:hover { background: #fff; color: #000; border-color: #fff; }
 
-        /* --- MARQUEE (SEAMLESS LOOP FIXED) --- */
+        /* --- MARQUEE --- */
         .marquee {
             overflow: hidden; padding: 60px 0;
             background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
@@ -95,7 +96,6 @@
         .marquee-track {
             display: flex; gap: 60px;
             animation: scroll 30s linear infinite;
-            /* Important: Width must be fit-content to allow seamless calculation */
             width: fit-content; 
         }
         .skill {
@@ -104,12 +104,7 @@
             transition: 0.3s;
         }
         .skill:hover { color: #fff; -webkit-text-stroke: 1px #fff; }
-
-        /* We duplicate content, so we scroll -50% to loop perfectly */
-        @keyframes scroll { 
-            0% { transform: translateX(0); } 
-            100% { transform: translateX(-50%); } 
-        }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* --- BENTO GRID --- */
         .section-title {
@@ -126,11 +121,10 @@
         .card {
             background-color: var(--card-bg); border-radius: var(--radius);
             border: 1px solid var(--border); overflow: hidden; position: relative;
-            display: flex; flex-direction: column;
+            display: flex; flex-direction: column; cursor: pointer;
             transform-style: preserve-3d; transform: perspective(1000px);
             transition: border-color 0.3s;
         }
-        /* Mouse Spotlight */
         .card::before {
             content: ""; position: absolute; height: 100%; width: 100%; top: 0; left: 0;
             background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
@@ -163,7 +157,72 @@
         .span-4 { grid-column: span 4; }
         .row-2 { grid-row: span 2; }
 
-        /* --- FLOATING DOCK NAV --- */
+        /* --- PROJECT MODAL OVERLAY --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px);
+            z-index: 9999; display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .modal-container {
+            width: 90%; max-width: 1100px; height: 85vh;
+            background: #111; border: 1px solid var(--border); border-radius: 24px;
+            display: grid; grid-template-columns: 1fr 1.5fr; /* Left Info, Right Media */
+            overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: scale(0.95) translateY(20px); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-overlay.active .modal-container { transform: scale(1) translateY(0); }
+
+        /* Left Side: Info */
+        .modal-info {
+            padding: 40px; overflow-y: auto; border-right: 1px solid var(--border);
+            display: flex; flex-direction: column;
+        }
+        .modal-role { font-size: 0.9rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .modal-title { font-size: 2.5rem; margin-bottom: 20px; line-height: 1; }
+        .modal-desc { color: #aaa; line-height: 1.7; margin-bottom: 30px; font-size: 1rem; flex-grow: 1; }
+        .modal-btns { display: flex; gap: 15px; margin-top: auto; }
+        .modal-btn {
+            padding: 12px 24px; border-radius: 50px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: 0.2s;
+        }
+        .btn-primary { background: #fff; color: #000; border: 1px solid #fff; }
+        .btn-primary:hover { background: #ccc; border-color: #ccc; }
+        .btn-secondary { background: transparent; color: #fff; border: 1px solid #333; }
+        .btn-secondary:hover { border-color: #fff; }
+
+        /* Right Side: Media */
+        .modal-media {
+            background: #000; position: relative; display: flex; flex-direction: column;
+        }
+        .media-display { flex: 1; position: relative; }
+        .media-display img, .media-display video {
+            width: 100%; height: 100%; object-fit: contain; position: absolute; top:0; left:0;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .media-display .active-media { opacity: 1; z-index: 2; }
+
+        /* Close Button */
+        .close-modal {
+            position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
+            background: rgba(0,0,0,0.5); border-radius: 50%; color: #fff; border: none;
+            font-size: 1.5rem; cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center;
+        }
+        .close-modal:hover { background: #fff; color: #000; }
+
+        /* Thumbnails for gallery */
+        .modal-thumbnails {
+            height: 80px; background: #080808; border-top: 1px solid var(--border);
+            display: flex; gap: 10px; padding: 10px; overflow-x: auto;
+        }
+        .thumb {
+            height: 100%; aspect-ratio: 16/9; border-radius: 8px; cursor: pointer;
+            opacity: 0.5; transition: 0.2s; border: 1px solid transparent; object-fit: cover;
+        }
+        .thumb:hover, .thumb.active { opacity: 1; border-color: #fff; }
+
+        /* --- FOOTER & DOCK --- */
         .dock-container {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
             z-index: 1000; width: 90%; max-width: 400px;
@@ -175,13 +234,12 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         .dock-btn {
-            padding: 10px 20px; border-radius: 50px; color: #aaa;
-            font-weight: 500; font-size: 0.9rem; transition: 0.2s; border: none; background: transparent; cursor: pointer;
+            padding: 10px 20px; border-radius: 50px; color: #aaa; border:none; background:none;
+            font-weight: 500; font-size: 0.9rem; transition: 0.2s; cursor: pointer;
         }
         .dock-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
         .dock-btn.active { background: #fff; color: #000; }
 
-        /* --- BIG FOOTER (Restored) --- */
         footer {
             margin-top: 100px; padding: 80px 20px 40px 20px;
             border-top: 1px solid var(--border); text-align: center;
@@ -198,13 +256,10 @@
         }
         .email-copy:hover { color: #fff; background: rgba(255,255,255,0.05); }
         
-        .footer-socials {
-            display: flex; justify-content: center; gap: 30px; margin-top: 40px;
-        }
+        .footer-socials { display: flex; justify-content: center; gap: 30px; margin-top: 40px; }
         .footer-link { color: #666; font-size: 1.1rem; transition: 0.3s; }
         .footer-link:hover { color: #fff; }
 
-        /* --- TOAST NOTIFICATION (Readable) --- */
         .toast {
             position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-100px);
             background: #fff; color: #000; padding: 12px 30px; border-radius: 8px;
@@ -217,11 +272,15 @@
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
             .span-8, .span-6, .span-4 { grid-column: span 6; }
+            .modal-container { grid-template-columns: 1fr; overflow-y: auto; height: 90vh; }
+            .modal-info { border-right: none; border-bottom: 1px solid var(--border); order: 2; }
+            .modal-media { height: 400px; order: 1; }
         }
         @media (max-width: 768px) {
             .bento-grid { display: flex; flex-direction: column; }
             .hero-title { font-size: 3.5rem; }
             .dock-btn { padding: 10px 15px; font-size: 0.8rem; }
+            .modal-media { height: 250px; }
         }
         @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
     </style>
@@ -229,10 +288,7 @@
 <body>
     
     <div class="noise"></div>
-    
-    <div class="toast" id="toast">
-        <span>✅</span> Email Copied!
-    </div>
+    <div class="toast" id="toast"><span>✅</span> Email Copied!</div>
 
     <div class="dock-container">
         <nav class="dock">
@@ -244,10 +300,7 @@
     </div>
 
     <header class="container" id="home">
-        <div class="status-pill">
-            <div class="status-dot"></div>
-            Available for New Projects
-        </div>
+        <div class="status-pill"><div class="status-dot"></div>Available for New Projects</div>
         <h1 class="hero-title">Architecting Digital<br>Experiences.</h1>
         <p class="hero-bio">
             I'm Kacper Jaworowski. A Game Developer specializing in <strong>Unity, Godot, and C#</strong>. 
@@ -279,7 +332,7 @@
         
         <div class="bento-grid" id="cards-container">
             
-            <a href="https://kelduin.github.io/game.kacperjaworowski.github.io" target="_blank" class="card span-8 row-2">
+            <div class="card span-8 row-2" onclick="openModal('slimetastic')">
                 <div class="card-media">
                     <video loop muted playsinline poster="assets/pictures/SLIMETASTIC1.jpg">
                         <source src="assets/videos/SLIMETASTICVIDEO.mp4" type="video/mp4">
@@ -289,9 +342,9 @@
                     <h3 class="card-title">Slimetastic</h3>
                     <div class="tags"><span class="tag">Unity</span><span class="tag">Physics</span><span class="tag">Released</span></div>
                 </div>
-            </a>
+            </div>
 
-            <div class="card span-4 row-2">
+            <div class="card span-4 row-2" onclick="openModal('puzzlekeeper')">
                 <div class="card-media">
                     <video loop muted playsinline poster="assets/pictures/puzzlekeeper1.jpg">
                         <source src="assets/videos/puzzlekeeper-video.mp4" type="video/mp4">
@@ -303,7 +356,7 @@
                 </div>
             </div>
 
-            <a href="https://gambik.itch.io/the-castle-cart" target="_blank" class="card span-6">
+            <div class="card span-6" onclick="openModal('castlecart')">
                 <div class="card-media">
                     <video loop muted playsinline poster="assets/pictures/CASTLECART1.png">
                         <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
@@ -313,9 +366,9 @@
                     <h3 class="card-title">Castle Cart</h3>
                     <div class="tags"><span class="tag">Unity</span><span class="tag">Multiplayer</span></div>
                 </div>
-            </a>
+            </div>
 
-            <div class="card span-6">
+            <div class="card span-6" onclick="openModal('mushroom')">
                 <div class="card-media">
                     <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom">
                 </div>
@@ -325,7 +378,7 @@
                 </div>
             </div>
 
-            <a href="https://github.com/Kelduin/UE-DEMO" target="_blank" class="card span-12">
+            <div class="card span-12" onclick="openModal('uedemo')">
                 <div class="card-media" style="max-height: 400px;">
                     <video loop muted playsinline poster="assets/pictures/UEDEMO1.png">
                         <source src="assets/videos/UEVID.webm" type="video/webm">
@@ -335,95 +388,235 @@
                     <h3 class="card-title">UE5 2.5D Tech Demo</h3>
                     <div class="tags"><span class="tag">C++</span><span class="tag">Blueprints</span><span class="tag">Lumen</span></div>
                 </div>
-            </a>
+            </div>
         </div>
     </section>
 
     <footer id="contact">
         <h2 class="footer-cta">Let's build something impossible.</h2>
-        <div class="email-copy" onclick="copyEmail()" title="Click to Copy">
-            htujer@gmail.com
-        </div>
-        
+        <div class="email-copy" onclick="copyEmail()" title="Click to Copy">htujer@gmail.com</div>
         <div class="footer-socials">
             <a href="https://github.com/Kelduin" target="_blank" class="footer-link">GitHub</a>
             <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank" class="footer-link">LinkedIn</a>
             <a href="assets/files/MyResume.pdf" class="footer-link" download>Resume</a>
         </div>
-        
-        <p style="margin-top: 60px; color: #444; font-size: 0.8rem;">&copy; 2024 Kacper Jaworowski. All rights reserved.</p>
+        <p style="margin-top: 60px; color: #444; font-size: 0.8rem;">&copy; 2024 Kacper Jaworowski.</p>
     </footer>
 
-    <script>
-        // --- 1. SPOTLIGHT & 3D TILT EFFECT ---
-        const cards = document.querySelectorAll('.card');
+    <div class="modal-overlay" id="projectModal" onclick="closeModal(event)">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            
+            <div class="modal-info">
+                <div class="modal-role" id="m-role">Role</div>
+                <h3 class="modal-title" id="m-title">Title</h3>
+                <div class="tags" id="m-tags" style="margin-bottom: 20px;"></div>
+                <p class="modal-desc" id="m-desc">Description goes here...</p>
+                <div class="modal-btns" id="m-btns">
+                    </div>
+            </div>
 
-        cards.forEach(card => {
+            <div class="modal-media">
+                <div class="media-display" id="m-display">
+                    </div>
+                <div class="modal-thumbnails" id="m-thumbs">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA OBJECT (Easy to Edit) ---
+        const projects = {
+            slimetastic: {
+                title: "Slimetastic",
+                role: "Solo Developer",
+                tags: ["Unity", "Physics", "C#"],
+                desc: "Developed a 2D mobile physics merger game inspired by Suika. I handled the entire pipeline from coding complex collision logic to UI implementation. The challenge was optimizing the physics engine for mobile devices while maintaining 60 FPS with many objects on screen.",
+                media: [
+                    { type: 'video', src: 'assets/videos/SLIMETASTICVIDEO.mp4' },
+                    { type: 'img', src: 'assets/pictures/SLIMETASTIC1.jpg' },
+                    { type: 'img', src: 'assets/pictures/SLIMETASTIC2.jpg' },
+                    { type: 'img', src: 'assets/pictures/SLIMETASTIC3.jpg' }
+                ],
+                links: [
+                    { text: "Play Demo", url: "https://kelduin.github.io/game.kacperjaworowski.github.io", primary: true },
+                    { text: "View GitHub", url: "https://github.com/Kelduin/Slimetastic", primary: false }
+                ]
+            },
+            puzzlekeeper: {
+                title: "Puzzle Keeper",
+                role: "Lead Developer",
+                tags: ["Godot", "GDScript", "AI"],
+                desc: "A top-down dungeon escaper built in Godot. I engineered the Unit Control Systems and a custom A* pathfinding solution for enemy AI. The game features a complex state machine for puzzle logic.",
+                media: [
+                    { type: 'video', src: 'assets/videos/puzzlekeeper-video.mp4' },
+                    { type: 'img', src: 'assets/pictures/puzzlekeeper1.jpg' },
+                    { type: 'img', src: 'assets/pictures/puzzlekeeper2.jpg' }
+                ],
+                links: [] // No links for WIP
+            },
+            castlecart: {
+                title: "Castle Cart",
+                role: "Gameplay Programmer",
+                tags: ["Unity", "Multiplayer", "Racing"],
+                desc: "A couch LAN racing game combining kart physics with RPG spells. I was responsible for network synchronization, the power-up system, and tuning the vehicle physics for a satisfying drift mechanic.",
+                media: [
+                    { type: 'video', src: 'assets/videos/CASTLECARDVID.webm' },
+                    { type: 'img', src: 'assets/pictures/CASTLECART1.png' },
+                    { type: 'img', src: 'assets/pictures/CASTLECART2.png' }
+                ],
+                links: [
+                    { text: "Itch.io", url: "https://gambik.itch.io/the-castle-cart", primary: true },
+                    { text: "GitLab", url: "https://gitlab.com/aaa5460844/gierka", primary: false }
+                ]
+            },
+            mushroom: {
+                title: "Mushroom Survivors",
+                role: "AI Programmer",
+                tags: ["Unity", "Swarm AI", "Optimization"],
+                desc: "A roguelite survivors game where I developed the 'Enemy-to-Ally' conversion system. This required highly optimized swarm AI capable of handling hundreds of active agents without performance drops.",
+                media: [
+                    { type: 'img', src: 'assets/pictures/MUSHROOM1.png' },
+                    { type: 'img', src: 'assets/pictures/MUSHROOM2.png' }
+                ],
+                links: []
+            },
+            uedemo: {
+                title: "UE5 2.5D Demo",
+                role: "Solo Tech Artist",
+                tags: ["Unreal Engine 5", "C++", "Blueprints"],
+                desc: "A technical experiment blending 2D pixel art sprites into a 3D Lumen-lit environment. I used C++ to handle the character controller and Blueprints for the dimension-switching logic.",
+                media: [
+                    { type: 'video', src: 'assets/videos/UEVID.webm' },
+                    { type: 'img', src: 'assets/pictures/UEDEMO1.png' },
+                    { type: 'img', src: 'assets/pictures/UEDEMO2.png' }
+                ],
+                links: [
+                    { text: "View Code", url: "https://github.com/Kelduin/UE-DEMO", primary: true }
+                ]
+            }
+        };
+
+        // --- MODAL LOGIC ---
+        const modal = document.getElementById('projectModal');
+        let activeMediaIndex = 0;
+        let currentProjectData = null;
+
+        function openModal(projectId) {
+            const data = projects[projectId];
+            if(!data) return;
+            currentProjectData = data;
+            activeMediaIndex = 0;
+
+            // Populate Info
+            document.getElementById('m-role').innerText = data.role;
+            document.getElementById('m-title').innerText = data.title;
+            document.getElementById('m-desc').innerText = data.desc;
+            
+            // Populate Tags
+            const tagsContainer = document.getElementById('m-tags');
+            tagsContainer.innerHTML = data.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+            // Populate Buttons
+            const btnsContainer = document.getElementById('m-btns');
+            btnsContainer.innerHTML = "";
+            if(data.links.length > 0) {
+                data.links.forEach(link => {
+                    btnsContainer.innerHTML += `<a href="${link.url}" target="_blank" class="modal-btn ${link.primary ? 'btn-primary' : 'btn-secondary'}">${link.text}</a>`;
+                });
+            } else {
+                btnsContainer.innerHTML = `<span style="color:#666; font-size:0.9rem;">No public links available (WIP/NDA)</span>`;
+            }
+
+            // Setup Media & Thumbnails
+            updateGallery();
+
+            // Show Modal
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal(e) {
+            if(e && e.target !== modal && e.target !== document.querySelector('.close-modal')) return;
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            
+            // Stop video playing in background
+            const display = document.getElementById('m-display');
+            display.innerHTML = ''; 
+        }
+
+        function updateGallery() {
+            const display = document.getElementById('m-display');
+            const thumbs = document.getElementById('m-thumbs');
+            const media = currentProjectData.media[activeMediaIndex];
+
+            // Main Display
+            let mainContent = '';
+            if(media.type === 'video') {
+                mainContent = `<video src="${media.src}" controls autoplay loop class="active-media"></video>`;
+            } else {
+                mainContent = `<img src="${media.src}" class="active-media">`;
+            }
+            display.innerHTML = mainContent;
+
+            // Thumbnails
+            thumbs.innerHTML = currentProjectData.media.map((m, i) => {
+                const isVideo = m.type === 'video';
+                // For video thumbs, we ideally need a poster, but we'll use the src for now or a placeholder
+                // To keep it simple, we assume the user has a poster or we just show a generic play icon look if needed
+                // For this code, we just map it.
+                return `<img src="${isVideo ? 'assets/pictures/SLIMETASTIC1.jpg' : m.src}" class="thumb ${i === activeMediaIndex ? 'active' : ''}" onclick="setMedia(${i})">`; 
+            }).join('');
+        }
+
+        function setMedia(index) {
+            activeMediaIndex = index;
+            updateGallery();
+        }
+
+        // --- STANDARD JS (Tilt, Lazy Load, etc) ---
+        // Tilt
+        document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Spotlight
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-
-                // 3D Tilt
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -5;
-                const rotateY = ((x - centerX) / centerX) * 5;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                const rotX = ((e.clientY - rect.top) - rect.height/2) / 20;
+                const rotY = ((e.clientX - rect.left) - rect.width/2) / -20;
+                card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
             });
-
             card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
             });
         });
 
-        // --- 2. SMART VIDEO LAZY LOADING ---
-        const videos = document.querySelectorAll('video');
-        const observer = new IntersectionObserver((entries) => {
+        // Lazy Video
+        const videos = document.querySelectorAll('.card video');
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                const video = entry.target;
-                const card = video.closest('.card');
-                if (entry.isIntersecting) {
-                    video.play();
-                    card.classList.add('playing');
-                } else {
-                    video.pause();
-                    card.classList.remove('playing');
-                }
+                entry.isIntersecting ? entry.target.play() : entry.target.pause();
             });
         }, { threshold: 0.5 });
-        videos.forEach(video => observer.observe(video));
+        videos.forEach(v => observer.observe(v));
 
-        // --- 3. CLIPBOARD COPY (Readable Toast) ---
+        // Copy Email
         function copyEmail() {
             navigator.clipboard.writeText('htujer@gmail.com');
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
+            document.getElementById('toast').classList.add('show');
+            setTimeout(() => document.getElementById('toast').classList.remove('show'), 2500);
         }
 
-        // --- 4. NAV HIGHLIGHT ---
-        const sections = document.querySelectorAll('header, section, footer');
-        const navLinks = document.querySelectorAll('.dock-btn');
-
+        // Nav Active
         window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 300) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
+            const scroll = window.scrollY;
+            document.querySelectorAll('.dock-btn').forEach(btn => {
+                const id = btn.getAttribute('href').substring(1);
+                const section = document.getElementById(id);
+                if(section && scroll >= section.offsetTop - 300) {
+                    document.querySelector('.dock-btn.active').classList.remove('active');
+                    btn.classList.add('active');
                 }
             });
         });
