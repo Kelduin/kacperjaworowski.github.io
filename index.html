@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kacper Jaworowski — Creative Developer</title>
+    <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
+    <title>Kacper Jaworowski — Game Developer</title>
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&f[]=general-sans@200,300,400,500,600&display=swap" rel="stylesheet">
     <style>
         /* --- VARIABLES & RESET --- */
         :root {
-            --bg: #050505;
+            --bg: #080808;
             --text: #ffffff;
             --text-muted: #888;
-            --accent: #ebff00; /* Acid Green/Yellow for pop */
-            --card-bg: #101010;
+            --accent: #00ff88; /* Cyberpunk Green */
+            --card-bg: rgba(20, 20, 20, 0.8);
             --border: rgba(255, 255, 255, 0.1);
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -30,6 +31,23 @@
             font-family: 'General Sans', sans-serif;
             overflow-x: hidden;
             width: 100vw;
+            /* Cyber Grid Background */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-attachment: fixed;
+        }
+
+        /* --- PHYSICS CANVAS (FIXED BG) --- */
+        #physics-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0; 
+            pointer-events: auto; 
         }
 
         /* --- CUSTOM CURSOR --- */
@@ -37,21 +55,22 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background: var(--accent);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             pointer-events: none;
             z-index: 10000;
             mix-blend-mode: difference;
-            transition: width 0.3s, height 0.3s;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
         }
 
         .cursor.active {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background: white;
+            opacity: 0.1;
             mix-blend-mode: exclusion;
         }
 
@@ -65,19 +84,28 @@
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            mix-blend-mode: difference;
+            pointer-events: none; 
         }
+
+        nav > * { pointer-events: auto; }
 
         .logo {
             font-family: 'Clash Display', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
             text-transform: uppercase;
+            color: white;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
 
         .nav-items {
             display: flex;
             gap: 40px;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 30px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
         }
 
         .nav-link {
@@ -86,11 +114,12 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             font-weight: 600;
-            position: relative;
+            transition: color 0.3s;
         }
+        .nav-link:hover { color: var(--accent); }
 
         .btn-main {
-            padding: 12px 24px;
+            padding: 12px 28px;
             background: white;
             color: black;
             border-radius: 100px;
@@ -98,54 +127,44 @@
             font-weight: 700;
             font-size: 0.85rem;
             text-transform: uppercase;
-            transition: transform 0.2s;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        
+        .magnetic-wrap {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .magnetic-wrap { display: inline-block; }
-
-        /* --- PHYSICS HERO SECTION --- */
+        /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
             width: 100%;
             position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             user-select: none;
-        }
-
-        #physics-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
             z-index: 2;
-            pointer-events: none; /* Let clicks pass through to canvas */
+            pointer-events: none;
         }
 
         .hero-title {
             font-family: 'Clash Display', sans-serif;
-            font-size: clamp(4rem, 12vw, 10rem);
-            line-height: 0.85;
+            font-size: clamp(4rem, 12vw, 9rem);
+            line-height: 0.9;
             text-transform: uppercase;
-            color: transparent;
-            -webkit-text-stroke: 2px rgba(255,255,255,0.8);
-            mix-blend-mode: overlay;
+            color: white;
+            pointer-events: auto;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
         .hero-title span {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.5);
             display: block;
-            color: white;
-            -webkit-text-stroke: 0;
         }
 
         .hero-instruction {
@@ -154,32 +173,40 @@
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 2px;
-            animation: pulse 2s infinite;
+            background: rgba(0,0,0,0.6);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--accent);
+            pointer-events: auto;
         }
 
         /* --- SKILLS TICKER --- */
         .ticker-wrap {
+            position: relative;
+            z-index: 2;
             width: 100%;
             overflow: hidden;
             background: var(--bg);
             padding: 20px 0;
             border-bottom: 1px solid var(--border);
             border-top: 1px solid var(--border);
+            pointer-events: auto;
         }
 
         .ticker {
             display: flex;
             white-space: nowrap;
-            animation: ticker 30s linear infinite;
+            animation: ticker 20s linear infinite;
         }
 
         .ticker-item {
             font-family: 'Clash Display', sans-serif;
             font-size: 3rem;
             margin: 0 40px;
-            color: #333;
-            -webkit-text-stroke: 1px #555;
+            color: #222;
+            -webkit-text-stroke: 1px #444;
             text-transform: uppercase;
+            transition: 0.3s;
         }
         
         .ticker-item:hover {
@@ -195,6 +222,9 @@
         /* --- STACKING PROJECTS --- */
         .projects-section {
             padding: 100px 5vw;
+            position: relative;
+            z-index: 2;
+            pointer-events: none; 
         }
 
         .section-header {
@@ -202,10 +232,12 @@
             font-size: 3rem;
             margin-bottom: 80px;
             color: white;
+            pointer-events: auto;
         }
 
         .cards-stack {
             position: relative;
+            pointer-events: none;
         }
 
         .card {
@@ -214,14 +246,15 @@
             height: 70vh;
             width: 100%;
             background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border);
             border-radius: 24px;
             margin-bottom: 5vh;
             display: flex;
             overflow: hidden;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             transform-origin: center top;
-            transition: transform 0.5s var(--ease);
+            pointer-events: auto;
         }
 
         .card-info {
@@ -244,7 +277,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.6;
+            opacity: 0.7;
             transition: 0.5s;
         }
 
@@ -265,9 +298,9 @@
 
         .card h3 {
             font-family: 'Clash Display', sans-serif;
-            font-size: 4rem;
+            font-size: 3.5rem;
             line-height: 1;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .card p {
@@ -280,32 +313,38 @@
         .tags {
             display: flex;
             gap: 10px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .tag {
-            padding: 8px 16px;
-            border: 1px solid #333;
+            padding: 6px 14px;
+            border: 1px solid #444;
             border-radius: 50px;
             font-size: 0.8rem;
-            color: #aaa;
+            color: #ccc;
         }
 
         .btn-project {
             display: inline-flex;
             align-items: center;
-            margin-top: 40px;
+            margin-top: 30px;
             color: white;
             text-decoration: none;
             font-weight: 600;
             text-transform: uppercase;
             border-bottom: 1px solid var(--accent);
             padding-bottom: 5px;
+            transition: 0.3s;
+        }
+        
+        .btn-project:hover {
+            color: var(--accent);
+            padding-left: 10px;
         }
 
         /* --- FOOTER --- */
         footer {
-            height: 80vh;
+            height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -313,20 +352,21 @@
             text-align: center;
             border-top: 1px solid var(--border);
             position: relative;
-            overflow: hidden;
+            z-index: 2;
+            background: rgba(0,0,0,0.8);
+            pointer-events: auto;
         }
 
         .footer h2 {
             font-family: 'Clash Display', sans-serif;
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 6vw, 5rem);
             margin-bottom: 40px;
-            z-index: 2;
         }
 
         .socials {
             display: flex;
             gap: 30px;
-            z-index: 2;
+            margin-top: 40px;
         }
         
         .socials a {
@@ -338,15 +378,10 @@
         
         .socials a:hover { color: var(--accent); }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
         /* Mobile Adjustments */
         @media (max-width: 900px) {
             .card { flex-direction: column-reverse; height: auto; min-height: 80vh; }
-            .card-visual { min-height: 300px; }
+            .card-visual { min-height: 250px; }
             .card-info { padding: 30px; }
             .hero-title { font-size: 3.5rem; }
             .nav-items { display: none; }
@@ -357,6 +392,8 @@
 
     <div class="cursor"></div>
 
+    <canvas id="physics-canvas"></canvas>
+
     <nav>
         <div class="logo magnetic-wrap">KJ.DEV</div>
         <div class="nav-items">
@@ -364,19 +401,18 @@
             <a href="#projects" class="nav-link magnetic-wrap">Work</a>
             <a href="#contact" class="nav-link magnetic-wrap">Contact</a>
         </div>
-        <a href="assets/files/MyResume.pdf" class="btn-main magnetic-wrap" download>Resume</a>
+        <div class="magnetic-wrap">
+            <a href="assets/files/MyResume.pdf" class="btn-main" download>Resume</a>
+        </div>
     </nav>
 
     <header class="hero" id="hero">
-        <canvas id="physics-canvas"></canvas>
-        <div class="hero-content">
-            <h1 class="hero-title">
-                Kacper<br>
-                <span>Jaworowski</span>
-            </h1>
-            <div class="hero-instruction">
-                [ Click & Drag to Throw Objects ]
-            </div>
+        <h1 class="hero-title">
+            Kacper<br>
+            <span>Jaworowski</span>
+        </h1>
+        <div class="hero-instruction">
+            [ Kick The Balls! ]
         </div>
     </header>
 
@@ -388,7 +424,8 @@
             <div class="ticker-item">Game Physics</div>
             <div class="ticker-item">AI Behavior</div>
             <div class="ticker-item">Level Design</div>
-            <div class="ticker-item">Unity Development</div> <div class="ticker-item">Godot Engine</div>
+            <div class="ticker-item">Unity Development</div>
+            <div class="ticker-item">Godot Engine</div>
             <div class="ticker-item">C# Programming</div>
             <div class="ticker-item">Game Physics</div>
             <div class="ticker-item">AI Behavior</div>
@@ -468,7 +505,7 @@
                 </div>
             </div>
 
-            <div class="card">
+             <div class="card">
                 <div class="card-info">
                     <div>
                         <div class="project-meta">04 — Confidential</div>
@@ -518,7 +555,7 @@
         <div class="magnetic-wrap">
             <a href="mailto:htujer@gmail.com" class="btn-main" style="padding: 20px 40px; font-size: 1rem;">htujer@gmail.com</a>
         </div>
-        <div class="socials" style="margin-top: 50px;">
+        <div class="socials">
             <a href="https://github.com/Kelduin" target="_blank">GitHub</a>
             <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a>
         </div>
@@ -527,19 +564,32 @@
     <script>
         // --- CUSTOM CURSOR ---
         const cursor = document.querySelector('.cursor');
-        const links = document.querySelectorAll('a, .magnetic-wrap, .btn-main');
+        const activeElements = document.querySelectorAll('a, .magnetic-wrap, .btn-main, .card');
+
+        // Track global mouse position for physics
+        let mouse = { x: -1000, y: -1000, vx: 0, vy: 0 };
+        let lastMouse = { x: 0, y: 0 };
 
         document.addEventListener('mousemove', (e) => {
+            // Update Cursor Visual
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
+
+            // Calculate Mouse Velocity (for hitting power)
+            mouse.vx = e.clientX - lastMouse.x;
+            mouse.vy = e.clientY - lastMouse.y;
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            lastMouse.x = e.clientX;
+            lastMouse.y = e.clientY;
         });
 
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => cursor.classList.add('active'));
-            link.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        activeElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
         });
 
-        // --- MAGNETIC EFFECT ---
+        // --- MAGNETIC BUTTONS ---
         const magnets = document.querySelectorAll('.magnetic-wrap');
         magnets.forEach(magnet => {
             magnet.addEventListener('mousemove', (e) => {
@@ -553,15 +603,18 @@
             });
         });
 
-        // --- GRAVITY PHYSICS PLAYGROUND ---
+        // --- PHYSICS ENGINE REMASTERED ---
         const canvas = document.getElementById('physics-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
         let balls = [];
-        const friction = 0.9;
-        const gravity = 0.5;
+        
+        // Physics Constants
+        const friction = 0.98; 
+        const gravity = 0.6;   
+        const bounce = 0.6;    
+        const interactionRadius = 80; // How big the cursor "hitbox" is
 
-        // Resize Canvas
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
@@ -569,41 +622,107 @@
         window.addEventListener('resize', resize);
         resize();
 
-        // Ball Class
         class Ball {
             constructor(x, y, r, color) {
                 this.x = x;
                 this.y = y;
                 this.r = r;
                 this.color = color;
-                this.dx = (Math.random() - 0.5) * 4;
-                this.dy = Math.random() * 4;
+                this.mass = r * r; 
+                this.dx = (Math.random() - 0.5) * 10;
+                this.dy = (Math.random() - 0.5) * 10;
                 this.isDragging = false;
+                
+                // Lifecycle
+                this.spawnTime = Date.now();
+                this.lifeDuration = 15000; // 15 seconds life
+                this.isHot = true; 
             }
 
             draw() {
+                // Shrink effect near death
+                const age = Date.now() - this.spawnTime;
+                let scale = 1;
+                if(age > this.lifeDuration - 1000) {
+                    scale = (this.lifeDuration - age) / 1000; // Fade out last second
+                }
+                if (scale < 0) scale = 0;
+
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, this.r * scale, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
                 ctx.fill();
-                ctx.strokeStyle = '#fff';
+                
+                // Glow if hot
+                if(this.isHot && scale > 0.5) {
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = this.color;
+                } else {
+                    ctx.shadowBlur = 0;
+                }
+
+                ctx.strokeStyle = `rgba(255,255,255,${0.3 * scale})`;
                 ctx.lineWidth = 1;
                 ctx.stroke();
                 ctx.closePath();
+                ctx.shadowBlur = 0;
             }
 
             update() {
+                const age = Date.now() - this.spawnTime;
+                
+                // Cooldown logic
+                if (this.isHot && age > 3000 && !this.isDragging) {
+                    this.isHot = false;
+                }
+
+                // Mouse Interaction (The "Kick")
                 if (!this.isDragging) {
-                    if (this.y + this.r + this.dy > height) {
-                        this.dy = -this.dy * friction;
-                    } else {
-                        this.dy += gravity;
+                    let dx = this.x - mouse.x;
+                    let dy = this.y - mouse.y;
+                    let dist = Math.hypot(dx, dy);
+
+                    if (dist < interactionRadius + this.r) {
+                        // Calculate force vector
+                        const angle = Math.atan2(dy, dx);
+                        const force = (interactionRadius + this.r - dist) / interactionRadius;
+                        
+                        // Add impulse based on mouse movement + static repulsion
+                        const pushPower = 2; 
+                        this.dx += Math.cos(angle) * force * pushPower;
+                        this.dy += Math.sin(angle) * force * pushPower;
+
+                        // Transfer mouse velocity to ball (The "Slap")
+                        this.dx += mouse.vx * 0.1;
+                        this.dy += mouse.vy * 0.1;
+
+                        // Wake up physics interactions
+                        this.isHot = true;
+                        this.spawnTime = Date.now(); // Reset death timer slightly on interact
                     }
 
-                    if (this.x + this.r + this.dx > width || this.x - this.r <= 0) {
-                        this.dx = -this.dx * friction;
+                    // Physics
+                    this.dy += gravity;
+                    this.dx *= friction;
+                    this.dy *= friction;
+
+                    // Floor Collision (Bounce)
+                    if (this.y + this.r > height) {
+                        this.y = height - this.r;
+                        this.dy = -this.dy * bounce;
+                        // Friction on ground
+                        this.dx *= 0.95; 
                     }
-                    
+
+                    // Wall Collisions
+                    if (this.x + this.r > width) {
+                        this.x = width - this.r;
+                        this.dx = -this.dx * bounce;
+                    } else if (this.x - this.r < 0) {
+                        this.x = this.r;
+                        this.dx = -this.dx * bounce;
+                    }
+
                     this.x += this.dx;
                     this.y += this.dy;
                 }
@@ -611,41 +730,103 @@
             }
         }
 
-        // Initialize Balls
-        const colors = ['#ebff00', '#ffffff', '#333333'];
+        // --- COLLISION LOGIC ---
+        function resolveCollisions() {
+            for (let i = 0; i < balls.length; i++) {
+                for (let j = i + 1; j < balls.length; j++) {
+                    const b1 = balls[i];
+                    const b2 = balls[j];
+
+                    if (!b1.isHot && !b2.isHot) continue;
+
+                    const dx = b2.x - b1.x;
+                    const dy = b2.y - b1.y;
+                    const distance = Math.hypot(dx, dy);
+
+                    if (distance < b1.r + b2.r) {
+                        // Overlap Fix
+                        const overlap = (b1.r + b2.r - distance) / 2;
+                        const offsetX = (dx / distance) * overlap;
+                        const offsetY = (dy / distance) * overlap;
+
+                        if(!b1.isDragging) { b1.x -= offsetX; b1.y -= offsetY; }
+                        if(!b2.isDragging) { b2.x += offsetX; b2.y += offsetY; }
+
+                        // Momentum Exchange
+                        const angle = Math.atan2(dy, dx);
+                        const sin = Math.sin(angle);
+                        const cos = Math.cos(angle);
+
+                        const v1 = { x: 0, y: 0 };
+                        const v2 = { x: 0, y: 0 };
+
+                        v1.x = b1.dx * cos + b1.dy * sin;
+                        v1.y = b1.dy * cos - b1.dx * sin;
+                        v2.x = b2.dx * cos + b2.dy * sin;
+                        v2.y = b2.dy * cos - b2.dx * sin;
+
+                        const v1Final = ((b1.mass - b2.mass) * v1.x + 2 * b2.mass * v2.x) / (b1.mass + b2.mass);
+                        const v2Final = ((b2.mass - b1.mass) * v2.x + 2 * b1.mass * v1.x) / (b1.mass + b2.mass);
+
+                        v1.x = v1Final;
+                        v2.x = v2Final;
+
+                        const v1F = { x: v1.x * cos - v1.y * sin, y: v1.y * cos + v1.x * sin };
+                        const v2F = { x: v2.x * cos - v2.y * sin, y: v2.y * cos + v2.x * sin };
+
+                        if(!b1.isDragging) { b1.dx = v1F.x; b1.dy = v1F.y; }
+                        if(!b2.isDragging) { b2.dx = v2F.x; b2.dy = v2F.y; }
+
+                        if(b1.isHot) b2.isHot = true;
+                        if(b2.isHot) b1.isHot = true;
+                    }
+                }
+            }
+        }
+
+        const colors = ['#00ff88', '#ffffff', '#222222', '#555555'];
+        
         function initBalls() {
             balls = [];
-            for (let i = 0; i < 15; i++) {
-                const r = Math.random() * 20 + 10;
+            // Spawn initial drop
+            for (let i = 0; i < 20; i++) {
+                const r = Math.random() * 20 + 15;
                 const x = Math.random() * (width - r * 2) + r;
-                const y = Math.random() * (height / 2); // Start top half
+                const y = -Math.random() * 500; // Start ABOVE screen
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 balls.push(new Ball(x, y, r, color));
             }
         }
         initBalls();
 
-        // Animation Loop
+        // Game Loop
         function animate() {
             requestAnimationFrame(animate);
             ctx.clearRect(0, 0, width, height);
+
+            // Cleanup old balls
+            balls = balls.filter(b => Date.now() - b.spawnTime < b.lifeDuration);
+
+            resolveCollisions();
             balls.forEach(ball => ball.update());
         }
         animate();
 
-        // Mouse Interactions (Drag & Throw)
+        // Mouse Drag Logic
         let draggedBall = null;
 
         canvas.addEventListener('mousedown', (e) => {
             const mouseX = e.clientX;
             const mouseY = e.clientY;
-
+            
+            // Check balls
             balls.forEach(ball => {
                 const dist = Math.hypot(mouseX - ball.x, mouseY - ball.y);
                 if (dist < ball.r) {
                     draggedBall = ball;
                     ball.isDragging = true;
-                    // Stop movement while dragging
+                    ball.isHot = true;
+                    ball.spawnTime = Date.now(); // Reset life
                     ball.dx = 0;
                     ball.dy = 0;
                 }
@@ -654,10 +835,8 @@
 
         canvas.addEventListener('mousemove', (e) => {
             if (draggedBall) {
-                // Simple physics for throwing
-                draggedBall.dx = (e.clientX - draggedBall.x) * 0.1; 
-                draggedBall.dy = (e.clientY - draggedBall.y) * 0.1;
-                
+                draggedBall.dx = (e.clientX - draggedBall.x) * 0.2; 
+                draggedBall.dy = (e.clientY - draggedBall.y) * 0.2;
                 draggedBall.x = e.clientX;
                 draggedBall.y = e.clientY;
             }
@@ -670,8 +849,9 @@
             }
         });
         
-        // Spawn on click if not dragging
+        // Spawn on click
         canvas.addEventListener('click', (e) => {
+            if(e.target !== canvas) return;
             let clickedBall = false;
             balls.forEach(ball => {
                 const dist = Math.hypot(e.clientX - ball.x, e.clientY - ball.y);
@@ -679,12 +859,11 @@
             });
             
             if(!clickedBall && !draggedBall) {
-                const r = Math.random() * 20 + 10;
+                const r = Math.random() * 20 + 15;
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 balls.push(new Ball(e.clientX, e.clientY, r, color));
             }
         });
-
     </script>
 </body>
 </html>
