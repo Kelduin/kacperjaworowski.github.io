@@ -7,8 +7,7 @@
     <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio. Unity, Godot, and Unreal Engine expert.">
     <meta property="og:title" content="Kacper Jaworowski — Game Architect">
     <meta property="og:description" content="Building immersive digital worlds with Unity, Godot, and UE5.">
-    <meta property="og:image" content="assets/pictures/SLIMETASTIC1.jpg"> <meta property="og:type" content="website">
-    
+    <meta property="og:image" content="assets/pictures/SLIMETASTIC1.jpg">
     <title>Kacper Jaworowski — Game Architect</title>
     
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
@@ -21,7 +20,7 @@
             --text-main: #fff;
             --text-muted: #888;
             --accent: #3b82f6;
-            --border: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.1);
             --radius: 20px;
         }
 
@@ -33,13 +32,12 @@
             color: var(--text-main);
             font-family: 'Satoshi', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 100px; /* Space for floating dock */
+            padding-bottom: 120px; /* Space for dock */
         }
 
         /* --- NOISE TEXTURE --- */
         .noise {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 9000; opacity: 0.04;
             background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
@@ -47,10 +45,9 @@
         /* --- TYPOGRAPHY --- */
         h1, h2, h3 { font-family: 'Clash Display', sans-serif; font-weight: 600; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
         /* --- HERO SECTION --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        
         header {
             min-height: 90vh;
             display: flex;
@@ -60,123 +57,106 @@
         }
 
         .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            background: rgba(0, 255, 136, 0.05);
-            border-radius: 50px;
-            color: #00ff88;
-            font-size: 0.85rem;
-            margin-bottom: 30px;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 16px; border: 1px solid rgba(0, 255, 136, 0.2);
+            background: rgba(0, 255, 136, 0.05); border-radius: 50px;
+            color: #00ff88; font-size: 0.85rem; margin-bottom: 30px;
         }
-
         .status-dot {
             width: 8px; height: 8px; background: #00ff88; border-radius: 50%;
-            box-shadow: 0 0 10px #00ff88;
-            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px #00ff88; animation: pulse 2s infinite;
         }
 
         .hero-title {
-            font-size: clamp(3rem, 7vw, 6rem);
-            line-height: 1;
-            margin-bottom: 30px;
+            font-size: clamp(3rem, 7vw, 6rem); line-height: 1; margin-bottom: 30px;
             background: linear-gradient(to right, #fff, #999);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .hero-bio {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 40px;
+            font-size: 1.2rem; color: var(--text-muted); max-width: 600px;
+            line-height: 1.6; margin-bottom: 40px;
+        }
+
+        .hero-socials { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn-social {
+            padding: 12px 24px; border: 1px solid var(--border); border-radius: 50px;
+            background: rgba(255,255,255,0.05); color: #fff; font-weight: 500;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .btn-social:hover { background: #fff; color: #000; border-color: #fff; }
+
+        /* --- MARQUEE (SEAMLESS LOOP FIXED) --- */
+        .marquee {
+            overflow: hidden; padding: 60px 0;
+            background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            display: flex;
+        }
+        .marquee-track {
+            display: flex; gap: 60px;
+            animation: scroll 30s linear infinite;
+            /* Important: Width must be fit-content to allow seamless calculation */
+            width: fit-content; 
+        }
+        .skill {
+            font-family: 'Clash Display', sans-serif; font-size: 2.5rem;
+            color: #333; white-space: nowrap; -webkit-text-stroke: 1px #444;
+            transition: 0.3s;
+        }
+        .skill:hover { color: #fff; -webkit-text-stroke: 1px #fff; }
+
+        /* We duplicate content, so we scroll -50% to loop perfectly */
+        @keyframes scroll { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-50%); } 
         }
 
         /* --- BENTO GRID --- */
         .section-title {
-            font-size: 2rem;
-            margin: 80px 0 40px 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            font-size: 2rem; margin: 80px 0 40px 0;
+            display: flex; align-items: center; gap: 15px;
         }
-        .section-title::after {
-            content: ''; height: 1px; flex: 1; background: var(--border);
-        }
+        .section-title::after { content: ''; height: 1px; flex: 1; background: var(--border); }
 
         .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
-            grid-auto-rows: minmax(320px, auto);
+            display: grid; grid-template-columns: repeat(12, 1fr);
+            gap: 24px; grid-auto-rows: minmax(320px, auto);
         }
 
-        /* CARD STYLES */
         .card {
-            background-color: var(--card-bg);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            /* 3D Transform setup */
-            transform-style: preserve-3d;
-            transform: perspective(1000px);
+            background-color: var(--card-bg); border-radius: var(--radius);
+            border: 1px solid var(--border); overflow: hidden; position: relative;
+            display: flex; flex-direction: column;
+            transform-style: preserve-3d; transform: perspective(1000px);
             transition: border-color 0.3s;
         }
-
         /* Mouse Spotlight */
         .card::before {
-            content: "";
-            position: absolute;
-            height: 100%; width: 100%; top: 0; left: 0;
-            background: radial-gradient(
-                600px circle at var(--mouse-x) var(--mouse-y),
-                rgba(255, 255, 255, 0.06),
-                transparent 40%
-            );
+            content: ""; position: absolute; height: 100%; width: 100%; top: 0; left: 0;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
             z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.5s;
         }
         .card:hover::before { opacity: 1; }
         .card:hover { border-color: rgba(255,255,255,0.3); }
 
-        .card-media {
-            flex: 1; position: relative; overflow: hidden; background: #000;
-        }
-
+        .card-media { flex: 1; position: relative; overflow: hidden; background: #000; }
         .card-media img, .card-media video {
-            width: 100%; height: 100%; object-fit: cover;
-            opacity: 0.6; transition: transform 0.6s, opacity 0.6s;
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: transform 0.6s, opacity 0.6s;
         }
-
-        /* Video active state (controlled by JS) */
-        .card.playing .card-media video,
-        .card:hover .card-media img {
-            opacity: 1; transform: scale(1.03);
-        }
+        .card.playing .card-media video, .card:hover .card-media img { opacity: 1; transform: scale(1.03); }
 
         .card-content {
-            padding: 24px;
-            position: absolute; bottom: 0; width: 100%;
+            padding: 24px; position: absolute; bottom: 0; width: 100%;
             background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-            z-index: 3;
-            transform: translateZ(20px); /* Parallax text pop */
+            z-index: 3; transform: translateZ(20px);
         }
-
         .card-title { font-size: 1.5rem; color: #fff; margin-bottom: 8px; }
-        
         .tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .tag {
-            font-size: 0.75rem; padding: 4px 10px;
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50px; color: #ddd; backdrop-filter: blur(4px);
+            font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; color: #ddd; backdrop-filter: blur(4px);
         }
 
-        /* Grid Spans */
         .span-12 { grid-column: span 12; }
         .span-8 { grid-column: span 8; }
         .span-6 { grid-column: span 6; }
@@ -185,51 +165,54 @@
 
         /* --- FLOATING DOCK NAV --- */
         .dock-container {
-            position: fixed; bottom: 30px; left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            z-index: 1000; width: 90%; max-width: 400px;
         }
-
         .dock {
-            display: flex; gap: 10px; padding: 10px;
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex; justify-content: space-between; padding: 8px 12px;
+            background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
-
         .dock-btn {
-            padding: 12px 24px;
-            border-radius: 50px;
-            color: #fff;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: 0.2s;
-            position: relative;
+            padding: 10px 20px; border-radius: 50px; color: #aaa;
+            font-weight: 500; font-size: 0.9rem; transition: 0.2s; border: none; background: transparent; cursor: pointer;
         }
-
-        .dock-btn:hover { background: rgba(255,255,255,0.1); }
+        .dock-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
         .dock-btn.active { background: #fff; color: #000; }
 
-        /* --- COPY EMAIL TOAST --- */
+        /* --- BIG FOOTER (Restored) --- */
+        footer {
+            margin-top: 100px; padding: 80px 20px 40px 20px;
+            border-top: 1px solid var(--border); text-align: center;
+        }
+        .footer-cta {
+            font-size: clamp(2rem, 5vw, 4rem); font-family: 'Clash Display', sans-serif;
+            margin-bottom: 40px; color: #fff;
+        }
+        .email-copy {
+            display: inline-block; font-size: clamp(1.5rem, 4vw, 3rem);
+            font-family: 'Satoshi', sans-serif; color: #888;
+            cursor: pointer; transition: 0.3s; padding: 10px 20px;
+            border-radius: 12px;
+        }
+        .email-copy:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        
+        .footer-socials {
+            display: flex; justify-content: center; gap: 30px; margin-top: 40px;
+        }
+        .footer-link { color: #666; font-size: 1.1rem; transition: 0.3s; }
+        .footer-link:hover { color: #fff; }
+
+        /* --- TOAST NOTIFICATION (Readable) --- */
         .toast {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
-            background: #00ff88; color: #000; padding: 12px 24px; border-radius: 50px;
-            font-weight: 600; z-index: 2000; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-100px);
+            background: #fff; color: #000; padding: 12px 30px; border-radius: 8px;
+            font-weight: 700; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; gap: 10px;
         }
         .toast.show { transform: translateX(-50%) translateY(0); }
-
-        /* --- MARQUEE --- */
-        .marquee {
-            overflow: hidden; padding: 60px 0;
-            background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-        }
-        .marquee-inner { display: flex; gap: 60px; min-width: 100%; animation: scroll 25s linear infinite; }
-        .skill { font-family: 'Clash Display', sans-serif; font-size: 2.5rem; color: #333; white-space: nowrap; }
-        
-        @keyframes scroll { to { transform: translateX(-100%); } }
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
@@ -238,15 +221,18 @@
         @media (max-width: 768px) {
             .bento-grid { display: flex; flex-direction: column; }
             .hero-title { font-size: 3.5rem; }
-            .dock { padding: 8px; gap: 5px; width: 90vw; justify-content: space-around; }
-            .dock-btn { padding: 10px; font-size: 0.8rem; }
+            .dock-btn { padding: 10px 15px; font-size: 0.8rem; }
         }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
     </style>
 </head>
 <body>
     
     <div class="noise"></div>
-    <div class="toast" id="toast">Email copied to clipboard! ✅</div>
+    
+    <div class="toast" id="toast">
+        <span>✅</span> Email Copied!
+    </div>
 
     <div class="dock-container">
         <nav class="dock">
@@ -267,15 +253,24 @@
             I'm Kacper Jaworowski. A Game Developer specializing in <strong>Unity, Godot, and C#</strong>. 
             I bridge the gap between complex backend logic and satisfying player feedback.
         </p>
+        <div class="hero-socials">
+            <a href="assets/files/MyResume.pdf" class="btn-social" download>Download CV</a>
+            <a href="https://github.com/Kelduin" target="_blank" class="btn-social">GitHub</a>
+            <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank" class="btn-social">LinkedIn</a>
+            <button class="btn-social" onclick="copyEmail()">Copy Email</button>
+        </div>
     </header>
 
     <div class="marquee">
-        <div class="marquee-inner">
+        <div class="marquee-track">
             <span class="skill">Unity 3D</span><span class="skill">Godot Engine</span>
-            <span class="skill">C#</span><span class="skill">Unreal Engine 5</span>
-            <span class="skill">Gameplay Programming</span><span class="skill">AI Systems</span>
+            <span class="skill">C# Programming</span><span class="skill">Unreal Engine 5</span>
+            <span class="skill">Gameplay Physics</span><span class="skill">AI Systems</span>
+            <span class="skill">Level Design</span>
             <span class="skill">Unity 3D</span><span class="skill">Godot Engine</span>
-            <span class="skill">C#</span><span class="skill">Unreal Engine 5</span>
+            <span class="skill">C# Programming</span><span class="skill">Unreal Engine 5</span>
+            <span class="skill">Gameplay Physics</span><span class="skill">AI Systems</span>
+            <span class="skill">Level Design</span>
         </div>
     </div>
 
@@ -344,8 +339,19 @@
         </div>
     </section>
 
-    <footer class="container" style="padding: 100px 0 150px 0; text-align: center;">
-        <p style="color: #444;">&copy; 2024 Kacper Jaworowski</p>
+    <footer id="contact">
+        <h2 class="footer-cta">Let's build something impossible.</h2>
+        <div class="email-copy" onclick="copyEmail()" title="Click to Copy">
+            htujer@gmail.com
+        </div>
+        
+        <div class="footer-socials">
+            <a href="https://github.com/Kelduin" target="_blank" class="footer-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank" class="footer-link">LinkedIn</a>
+            <a href="assets/files/MyResume.pdf" class="footer-link" download>Resume</a>
+        </div>
+        
+        <p style="margin-top: 60px; color: #444; font-size: 0.8rem;">&copy; 2024 Kacper Jaworowski. All rights reserved.</p>
     </footer>
 
     <script>
@@ -358,35 +364,30 @@
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 
-                // Spotlight Position
+                // Spotlight
                 card.style.setProperty('--mouse-x', `${x}px`);
                 card.style.setProperty('--mouse-y', `${y}px`);
 
-                // 3D Tilt Calculation
-                // Map x/y to -1 to 1 range
+                // 3D Tilt
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
+                const rotateX = ((y - centerY) / centerY) * -5;
                 const rotateY = ((x - centerX) / centerX) * 5;
 
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             });
 
-            // Reset transform on leave
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
             });
         });
 
         // --- 2. SMART VIDEO LAZY LOADING ---
-        // Only plays video when 50% of the card is visible on screen
         const videos = document.querySelectorAll('video');
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const video = entry.target;
                 const card = video.closest('.card');
-                
                 if (entry.isIntersecting) {
                     video.play();
                     card.classList.add('playing');
@@ -395,28 +396,26 @@
                     card.classList.remove('playing');
                 }
             });
-        }, { threshold: 0.5 }); // 50% visibility required
-
+        }, { threshold: 0.5 });
         videos.forEach(video => observer.observe(video));
 
-        // --- 3. CLIPBOARD COPY ---
+        // --- 3. CLIPBOARD COPY (Readable Toast) ---
         function copyEmail() {
             navigator.clipboard.writeText('htujer@gmail.com');
             const toast = document.getElementById('toast');
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        // --- 4. FLOATING DOCK ACTIVE STATE ---
-        // Highlights the nav button based on scroll position
-        const sections = document.querySelectorAll('header, section');
+        // --- 4. NAV HIGHLIGHT ---
+        const sections = document.querySelectorAll('header, section, footer');
         const navLinks = document.querySelectorAll('.dock-btn');
 
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 200) {
+                if (scrollY >= sectionTop - 300) {
                     current = section.getAttribute('id');
                 }
             });
