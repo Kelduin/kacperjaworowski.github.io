@@ -1,93 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
-    <meta name="keywords" content="Game Developer, Unity, Unreal Engine, Portfolio, Kacper Jaworowski">
-    <meta name="author" content="Kacper Jaworowski">
-    <title>Kacper Jaworowski - Game Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Kacper Jaworowski — Creative Developer</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&f[]=general-sans@200,300,400,500,600&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS VARIABLES & THEME --- */
+        /* --- VARIABLES & RESET --- */
         :root {
-            --primary: #00f3ff; /* Neon Cyan */
-            --primary-dim: rgba(0, 243, 255, 0.1);
-            --secondary: #7000ff; /* Neon Purple */
-            --bg-dark: #050505;
-            --bg-card: rgba(20, 20, 20, 0.6);
-            --text-main: #ffffff;
-            --text-sub: #a0a0a0;
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --bg: #0a0a0a;
+            --text: #f0f0f0;
+            --text-muted: #888;
+            --accent: #5e6aff;
+            --card-bg: #141414;
+            --border: rgba(255, 255, 255, 0.1);
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* --- RESET & BASE --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Hide default cursor for custom one */
+            cursor: none; /* Custom cursor */
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'General Sans', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
+            width: 100vw;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--primary);
-            position: relative;
-            transition: 0.3s;
-        }
-
-        /* --- CUSTOM CURSOR --- */
-        .cursor-dot,
-        .cursor-outline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
-            pointer-events: none;
-        }
-
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--primary);
-        }
-
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--primary);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-        
-        body:hover .cursor-outline {
-            background-color: rgba(0, 243, 255, 0.05);
-        }
-
-        /* --- BACKGROUND CANVAS --- */
-        #bg-canvas {
+        /* --- NOISE & BACKGROUND --- */
+        .noise {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.4;
+        }
+
+        .gradient-orb {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(94, 106, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: -1;
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            filter: blur(80px);
+            animation: breathe 10s infinite alternate;
+        }
+
+        @keyframes breathe {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            mix-blend-mode: difference;
+        }
+
+        .cursor.active {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-color: transparent;
+            mix-blend-mode: exclusion;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
         }
 
         /* --- NAVIGATION --- */
@@ -95,915 +99,494 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 40px;
+            padding: 30px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
-            background: rgba(5, 5, 5, 0.7);
+            mix-blend-mode: exclusion;
         }
 
         .logo {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
             font-size: 1.5rem;
-            letter-spacing: 2px;
-            color: white;
+            font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: -0.02em;
         }
 
-        .nav-links {
+        .nav-items {
             display: flex;
-            list-style: none;
             gap: 40px;
         }
 
-        .nav-links a {
-            color: var(--text-sub);
-            font-weight: 500;
+        .nav-link {
+            text-decoration: none;
+            color: white;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.05em;
+            position: relative;
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary);
+        /* --- MAGNETIC BUTTON --- */
+        .magnetic-wrap {
+            display: inline-block;
+            position: relative;
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            color: white;
+        .btn-main {
+            padding: 15px 30px;
+            background: white;
+            color: black;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: transform 0.1s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
         }
-
-        /* --- HEADER (HERO) --- */
-        header {
+        
+        /* --- HERO SECTION --- */
+        .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
+            padding: 0 5vw;
             position: relative;
         }
 
-        header h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 700;
-            line-height: 1.1;
+        .hero-title {
+            font-size: clamp(3rem, 9vw, 8rem);
+            line-height: 0.9;
+            text-transform: uppercase;
             margin-bottom: 20px;
-            color: white;
-            text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            overflow: hidden; /* For text reveal */
+        }
+
+        .reveal-text {
+            display: block;
+            transform: translateY(100%);
+            opacity: 0;
+            animation: slideUp 1s var(--ease) forwards;
+        }
+        
+        .reveal-text:nth-child(2) { animation-delay: 0.1s; }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeIn 1s var(--ease) 0.5s forwards;
+        }
+
+        /* --- SKILLS SCROLL --- */
+        .marquee-container {
+            padding: 100px 0;
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 50px;
+            animation: scroll 20s linear infinite;
+            width: max-content;
+        }
+
+        .skill-tag {
+            font-size: 4rem;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            font-family: 'Clash Display', sans-serif;
+            text-transform: uppercase;
             white-space: nowrap;
         }
 
-        header p {
-            font-size: 1.2rem;
-            color: var(--text-sub);
-            max-width: 600px;
-            margin-bottom: 40px;
+        /* --- STACKING CARDS PROJECT SECTION --- */
+        .projects-section {
+            padding: 100px 5vw;
         }
 
-        .scroll-down {
-            position: absolute;
-            bottom: 40px;
-            animation: bounce 2s infinite;
-            opacity: 0.7;
-        }
-
-        /* --- SECTIONS GENERAL --- */
-        section {
-            padding: 100px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 80px;
-            background: linear-gradient(to right, #fff, var(--text-sub));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-        }
-
-        /* --- ABOUT ME --- */
-        .bio {
-            text-align: center;
-            max-width: 800px;
-        }
-
-        .bio p {
-            font-size: 1.2rem;
-            color: var(--text-sub);
-            margin-bottom: 40px;
-        }
-
-        .btn-neon {
-            display: inline-block;
-            padding: 15px 40px;
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            position: relative;
-            overflow: hidden;
-            transition: 0.4s;
-            z-index: 1;
-        }
-
-        .btn-neon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            z-index: -1;
-            transition: 0.4s;
-        }
-
-        .btn-neon:hover::before {
-            left: 0;
-        }
-
-        .btn-neon:hover {
-            color: #000;
-            box-shadow: 0 0 20px var(--primary);
-        }
-
-        /* --- SKILLS --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .skill-category {
-            background: var(--bg-card);
-            border: 1px solid var(--glass-border);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-category h3 {
-            color: var(--primary);
-            margin-bottom: 25px;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .skill-item {
-            margin-bottom: 20px;
-        }
-
-        .skill-info {
+        .section-header {
+            font-size: 2rem;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
+            align-items: end;
         }
 
-        .progress-bg {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--primary);
-            width: 0;
-            box-shadow: 0 0 10px var(--primary);
-            transition: width 1.5s cubic-bezier(0.1, 0.6, 0.1, 1);
-        }
-
-        .tag-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tag {
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .tag:hover {
-            background: var(--primary-dim);
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* --- PROJECTS (SPOTLIGHT EFFECT) --- */
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            padding: 20px;
-        }
-
-        /* The Card */
-        .project-card {
-            background-color: rgba(25, 25, 25, 0.6);
-            border-radius: 16px;
+        .cards-stack {
             position: relative;
+            /* No height here, calculated by content */
+        }
+
+        .card {
+            position: sticky;
+            top: 100px; /* Distance from top when sticking */
+            height: 70vh;
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            margin-bottom: 50px; /* Spacing between end of cards */
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.1s;
+            transform-origin: center top;
             display: flex;
-            flex-direction: column;
-        }
-
-        /* Mouse Spotlight Effect */
-        .project-card::before {
-            content: "";
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-radius: inherit;
-            background: radial-gradient(
-                800px circle at var(--mouse-x) var(--mouse-y),
-                rgba(255, 255, 255, 0.06),
-                transparent 40%
-            );
-            z-index: 3;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        /* Glow Border */
-        .project-card::after {
-            content: "";
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-radius: inherit;
-            background: radial-gradient(
-                600px circle at var(--mouse-x) var(--mouse-y),
-                rgba(0, 243, 255, 0.4),
-                transparent 40%
-            );
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        
-        .project-card:hover::after {
-            opacity: 1;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.5);
         }
 
         .card-content {
-            background-color: #111;
-            border-radius: inherit;
-            flex-grow: 1;
-            margin: 1px; /* Creates the border space */
-            position: relative;
-            z-index: 2;
-            padding: 25px;
-            height: calc(100% - 2px);
-            width: calc(100% - 2px);
+            flex: 1;
+            padding: 60px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            z-index: 2;
         }
 
-        /* Carousel inside Card */
-        .carousel-container {
-            width: 100%;
-            height: 200px;
-            border-radius: 8px;
-            overflow: hidden;
+        .card-media {
+            flex: 1.5;
             position: relative;
-            margin-bottom: 20px;
+            overflow: hidden;
             background: #000;
         }
 
-        .carousel-img {
+        .card-media img, .card-media video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none;
-            transition: opacity 0.5s;
+            opacity: 0.8;
+            transition: transform 0.7s var(--ease), opacity 0.5s;
         }
 
-        .carousel-img.active {
-            display: block;
-            animation: fadeIn 0.5s;
+        .card:hover .card-media img {
+            transform: scale(1.05);
+            opacity: 1;
         }
 
-        .project-title {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-family: 'Outfit', sans-serif;
+        .project-number {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 5rem;
+            color: rgba(255,255,255,0.05);
+            line-height: 1;
         }
 
-        .project-desc-short {
-            color: var(--text-sub);
-            font-size: 0.95rem;
+        .card h3 {
+            font-size: 3rem;
             margin-bottom: 20px;
-            flex-grow: 1;
+            line-height: 1;
         }
 
-        .project-actions {
+        .card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.5;
+            max-width: 400px;
+            margin-bottom: 30px;
+        }
+
+        .tech-stack {
             display: flex;
-            gap: 15px;
+            gap: 10px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
-            margin-top: auto;
         }
 
-        .btn-small {
-            font-size: 0.8rem;
+        .pill {
             padding: 8px 16px;
-            border: 1px solid var(--glass-border);
-            border-radius: 4px;
-            color: white;
-            transition: 0.3s;
-        }
-
-        .btn-small:hover {
-            background: var(--primary);
-            color: black;
-            border-color: var(--primary);
-        }
-
-        .expand-btn {
-            background: transparent;
-            border: none;
-            color: var(--primary);
-            font-weight: bold;
-            margin-top: 15px;
-            display: block;
-            width: 100%;
-            text-align: right;
-            transition: 0.3s;
-        }
-        
-        .expand-btn:hover {
-            text-shadow: 0 0 8px var(--primary);
-        }
-
-        /* Expanded Details */
-        .details-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-            border-top: 1px solid transparent;
-            margin-top: 10px;
-        }
-
-        .details-panel.open {
-            max-height: 1000px;
-            border-top: 1px solid var(--glass-border);
-            padding-top: 15px;
-        }
-
-        .details-panel p {
-            font-size: 0.9rem;
-            color: #ccc;
-            margin-bottom: 10px;
-        }
-        
-        .details-panel strong {
-            color: white;
-        }
-
-        .badge-wip {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 0, 0, 0.2);
-            color: #ff4d4d;
-            border: 1px solid #ff4d4d;
-            padding: 4px 8px;
-            font-size: 0.7rem;
-            border-radius: 4px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            font-weight: bold;
-            backdrop-filter: blur(4px);
         }
 
-        /* --- LIGHTBOX --- */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
+        /* --- CONTACT --- */
+        .footer {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 80vh;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 50px rgba(0, 243, 255, 0.2);
-        }
-
-        .close-lb {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            color: white;
-            font-size: 3rem;
-            cursor: none;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            border-top: 1px solid var(--glass-border);
-            padding: 40px;
             text-align: center;
-            background: #000;
+            border-top: 1px solid var(--border);
         }
 
-        footer p {
-            color: var(--text-sub);
-            margin-bottom: 15px;
-        }
-
-        .socials a {
-            margin: 0 15px;
-            font-size: 1.1rem;
+        .footer-cta {
+            font-size: 4rem;
+            font-family: 'Clash Display', sans-serif;
+            margin-bottom: 40px;
         }
 
         /* --- ANIMATIONS --- */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
+        @keyframes slideUp {
+            to { transform: translateY(0); opacity: 1; }
         }
-
         @keyframes fadeIn {
-            from { opacity: 0; }
             to { opacity: 1; }
+        }
+        @keyframes scroll {
+            to { transform: translateX(-50%); }
         }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            header h1 { font-size: 3rem; white-space: normal; }
-            .nav-links {
-                position: fixed;
-                background: black;
-                top: 70px;
-                left: -100%;
-                flex-direction: column;
-                width: 100%;
-                height: 100vh;
-                padding-top: 50px;
-                transition: 0.3s;
-                align-items: center;
-            }
-            .nav-links.active { left: 0; }
-            .menu-toggle { display: block; }
-            .cursor-dot, .cursor-outline { display: none; }
-            * { cursor: auto; }
+        @media (max-width: 900px) {
+            .card { flex-direction: column-reverse; height: auto; min-height: 70vh; }
+            .card-media { min-height: 300px; }
+            .card-content { padding: 30px; }
+            .hero-title { font-size: 3.5rem; }
+            .nav-items { display: none; }
         }
     </style>
 </head>
-
 <body>
-    <canvas id="bg-canvas"></canvas>
 
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+    <div class="noise"></div>
+    <div class="gradient-orb"></div>
+    
+    <div class="cursor"></div>
 
     <nav>
-        <div class="logo">KJ<span style="color:var(--primary)">.DEV</span></div>
-        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Works</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="https://github.com/Kelduin" target="_blank">GitHub</a></li>
-        </ul>
+        <div class="logo magnetic-wrap">Kacper Jaworowski</div>
+        <div class="nav-items">
+            <a href="#projects" class="nav-link magnetic-wrap">Work</a>
+            <a href="#about" class="nav-link magnetic-wrap">About</a>
+            <a href="mailto:htujer@gmail.com" class="nav-link magnetic-wrap">Contact</a>
+        </div>
+        <a href="assets/files/MyResume.pdf" class="btn-main magnetic-wrap" download>Resume</a>
     </nav>
 
-    <header>
-        <p>System Online // Welcome User</p>
-        <h1 data-value="KACPER JAWOROWSKI">KACPER JAWOROWSKI</h1>
-        <p style="color: var(--primary);">Game Developer | Unity | Godot | Indie Enthusiast</p>
-        <div class="scroll-down">
-            <span style="color: var(--text-sub)">SCROLL DOWN</span>
-            <br>↓
-        </div>
-    </header>
-
-    <section id="about" class="bio">
-        <h2 class="section-title">Initialize Profile</h2>
-        <p>Hi, I'm Kacper. I architect immersive digital experiences using Unity and Godot. I thrive in the chaotic creative process of game development, turning logic into magic.</p>
-        <a href="assets/files/MyResume.pdf" class="btn-neon" download>Download Data Log (Resume)</a>
-    </section>
-
-    <section id="skills">
-        <h2 class="section-title">Skill Matrix</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3>Core Systems</h3>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span>Unity Engine</span>
-                        <span>70%</span>
-                    </div>
-                    <div class="progress-bg"><div class="progress-bar" data-width="70%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span>Godot Engine</span>
-                        <span>65%</span>
-                    </div>
-                    <div class="progress-bg"><div class="progress-bar" data-width="65%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span>C# Scripting</span>
-                        <span>55%</span>
-                    </div>
-                    <div class="progress-bg"><div class="progress-bar" data-width="55%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span>GDScript</span>
-                        <span>65%</span>
-                    </div>
-                    <div class="progress-bg"><div class="progress-bar" data-width="65%"></div></div>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h3>Augmentations (Soft Skills)</h3>
-                <div class="tag-cloud">
-                    <span class="tag">Teamwork</span>
-                    <span class="tag">Problem Solving</span>
-                    <span class="tag">Adaptive AI Logic</span>
-                    <span class="tag">Time Management</span>
-                    <span class="tag">Creative Direction</span>
-                    <span class="tag">Git Version Control</span>
-                    <span class="tag">Leadership</span>
-                </div>
-            </div>
+    <section class="hero">
+        <h1 class="hero-title">
+            <span class="reveal-text">Game</span>
+            <span class="reveal-text">Developer.</span>
+        </h1>
+        <div class="hero-sub">
+            Architecting immersive systems in Unity & Godot. Turning complex logic into seamless player experiences.
         </div>
     </section>
 
-    <section id="projects">
-        <h2 class="section-title">Project Database</h2>
-        <div class="projects-container" id="cards-container">
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span class="skill-tag">Unity</span>
+            <span class="skill-tag">Godot</span>
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Level Design</span>
+            <span class="skill-tag">AI Logic</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Unity</span>
+            <span class="skill-tag">Godot</span>
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Level Design</span>
+            <span class="skill-tag">AI Logic</span>
+            <span class="skill-tag">Git</span>
+        </div>
+    </div>
+
+    <section class="projects-section" id="projects">
+        <div class="section-header">
+            <span>Selected Works</span>
+            <span>(05)</span>
+        </div>
+
+        <div class="cards-stack">
             
-            <div class="project-card">
+            <div class="card">
                 <div class="card-content">
-                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
-                        <img src="assets/pictures/SLIMETASTIC1.jpg" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
-                        <img src="assets/pictures/SLIMETASTIC2.jpg" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
-                        <img src="assets/pictures/SLIMETASTIC3.jpg" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
-                    </div>
-                    <h3 class="project-title">Slimetastic</h3>
-                    <p class="project-desc-short">A Suika-inspired merging game. Merge slimes, manage physics, don't breach the containment line.</p>
-                    <div class="project-actions">
-                        <a href="https://github.com/Kelduin/Slimetastic" target="_blank" class="btn-small">GitHub</a>
-                        <a href="https://kelduin.github.io/game.kacperjaworowski.github.io" target="_blank" class="btn-small">Play Now</a>
-                    </div>
-                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
-                    <div class="details-panel">
-                        <p><strong>Stack:</strong> Unity, C#, 2D Physics</p>
-                        <p>Designed physics interactions and game state logic. handled UI/UX and game loop implementation independently.</p>
-                        <div style="margin-top:10px; width:100%; border-radius:8px; overflow:hidden;">
-                            <video controls style="width:100%"><source src="assets/videos/SLIMETASTICVIDEO.mp4" type="video/mp4"></video>
+                    <div>
+                        <div class="project-number">01</div>
+                        <h3>Slimetastic</h3>
+                        <div class="tech-stack">
+                            <span class="pill">Unity</span>
+                            <span class="pill">C#</span>
+                            <span class="pill">Physics</span>
                         </div>
+                        <p>A Suika-inspired physics merging game. Designed complex collision detection, game state management, and satisfying user feedback loops entirely from scratch.</p>
                     </div>
+                    <div class="magnetic-wrap">
+                        <a href="https://kelduin.github.io/game.kacperjaworowski.github.io" target="_blank" class="btn-main">Play Demo</a>
+                    </div>
+                </div>
+                <div class="card-media">
+                    <video autoplay muted loop playsinline poster="assets/pictures/SLIMETASTIC1.jpg">
+                        <source src="assets/videos/SLIMETASTICVIDEO.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
 
-            <div class="project-card">
-                <div class="badge-wip">In Development</div>
+            <div class="card">
                 <div class="card-content">
-                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
-                        <img src="assets/pictures/puzzlekeeper1.jpg" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
-                        <img src="assets/pictures/puzzlekeeper2.jpg" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
-                    </div>
-                    <h3 class="project-title">Puzzle Keeper</h3>
-                    <p class="project-desc-short">Top-down dungeon escaper using Godot. Solve riddles, evade capture.</p>
-                    <div class="project-actions">
+                    <div>
+                        <div class="project-number">02</div>
+                        <h3>Puzzle Keeper</h3>
+                        <div class="tech-stack">
+                            <span class="pill">Godot</span>
+                            <span class="pill">AI Systems</span>
+                            <span class="pill">WIP</span>
                         </div>
-                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
-                    <div class="details-panel">
-                        <p><strong>Stack:</strong> Godot, GDScript, AI</p>
-                        <p>Responsible for Unit Control Systems, Puzzle Logic, and AI Pathfinding behaviors.</p>
-                        <div style="margin-top:10px; width:100%; border-radius:8px; overflow:hidden;">
-                            <video controls style="width:100%"><source src="assets/videos/puzzlekeeper-video.mp4" type="video/mp4"></video>
+                        <p>Top-down dungeon escape built in Godot. Engineered custom pathfinding AI, puzzle logic states, and responsive unit control systems.</p>
+                    </div>
+                    <div class="magnetic-wrap">
+                        <span class="btn-main" style="opacity:0.6; cursor: not-allowed;">In Development</span>
+                    </div>
+                </div>
+                <div class="card-media">
+                    <video autoplay muted loop playsinline poster="assets/pictures/puzzlekeeper1.jpg">
+                        <source src="assets/videos/puzzlekeeper-video.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <div>
+                        <div class="project-number">03</div>
+                        <h3>Castle Cart</h3>
+                        <div class="tech-stack">
+                            <span class="pill">Unity</span>
+                            <span class="pill">Multiplayer</span>
+                            <span class="pill">Racing</span>
                         </div>
+                        <p>Couch LAN racing game fusing kart mechanics with RPG classes. Responsible for ability systems, racing physics tuning, and couch co-op synchronization.</p>
                     </div>
+                    <div class="magnetic-wrap">
+                        <a href="https://gambik.itch.io/the-castle-cart" target="_blank" class="btn-main">View on Itch.io</a>
+                    </div>
+                </div>
+                <div class="card-media">
+                    <video autoplay muted loop playsinline poster="assets/pictures/CASTLECART1.png">
+                        <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
+                    </video>
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="card">
                 <div class="card-content">
-                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
-                        <img src="assets/pictures/CASTLECART1.png" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
-                        <img src="assets/pictures/CASTLECART2.png" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
+                    <div>
+                        <div class="project-number">04</div>
+                        <h3>Mushroom Survivors</h3>
+                        <div class="tech-stack">
+                            <span class="pill">Unity</span>
+                            <span class="pill">Swarm AI</span>
+                            <span class="pill">Strategy</span>
+                        </div>
+                        <p>A twist on the survivors genre where enemies become allies. Implemented high-performance swarm AI and dynamic unit conversion logic.</p>
                     </div>
-                    <h3 class="project-title">Castle Cart</h3>
-                    <p class="project-desc-short">Couch LAN racing with RPG spells. Fantasy meets drift mechanics.</p>
-                    <div class="project-actions">
-                        <a href="https://gitlab.com/aaa5460844/gierka" target="_blank" class="btn-small">GitLab</a>
-                        <a href="https://gambik.itch.io/the-castle-cart" target="_blank" class="btn-small">Itch.io</a>
+                    <div class="magnetic-wrap">
+                        <span class="pill" style="border-color: #555; color: #888;">Confidential / NDA</span>
                     </div>
-                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
-                    <div class="details-panel">
-                        <p><strong>Stack:</strong> Unity 3D, C#</p>
-                        <p>Developed racing physics, power-up systems, and class-based magic abilities in a collaborative environment.</p>
-                    </div>
+                </div>
+                <div class="card-media">
+                    <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors">
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="card">
                 <div class="card-content">
-                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
-                        <img src="assets/pictures/MUSHROOM1.png" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
-                        <img src="assets/pictures/MUSHROOM2.png" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
+                    <div>
+                        <div class="project-number">05</div>
+                        <h3>UE 2.5D Demo</h3>
+                        <div class="tech-stack">
+                            <span class="pill">Unreal Engine 5</span>
+                            <span class="pill">C++</span>
+                            <span class="pill">Blueprints</span>
+                        </div>
+                        <p>Experimental blend of 2D sprites in a 3D Lumen-lit environment. Explored C++ actor manipulation and dimension blending.</p>
                     </div>
-                    <h3 class="project-title">Mushroom Survivors</h3>
-                    <p class="project-desc-short">Survivors-like genre twist: Defeated enemies join your army.</p>
-                    <div class="project-actions">
-                        <span style="font-size:0.8rem; color:var(--text-sub)">[CONFIDENTIAL]</span>
-                    </div>
-                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
-                    <div class="details-panel">
-                        <p><strong>Stack:</strong> Unity, AI</p>
-                        <p>Programmed "Enemy-to-Ally" conversion logic, boss fights, and swarm AI behaviors.</p>
+                    <div class="magnetic-wrap">
+                        <a href="https://github.com/Kelduin/UE-DEMO" target="_blank" class="btn-main">View Code</a>
                     </div>
                 </div>
-            </div>
-
-             <div class="project-card">
-                <div class="card-content">
-                    <div class="carousel-container" onmouseenter="startSlide(this)" onmouseleave="stopSlide(this)">
-                        <img src="assets/pictures/UEDEMO1.png" class="carousel-img active" alt="Game Screenshot" onclick="openLightbox(this)">
-                        <img src="assets/pictures/UEDEMO2.png" class="carousel-img" alt="Game Screenshot" onclick="openLightbox(this)">
-                    </div>
-                    <h3 class="project-title">UE 2.5D Demo</h3>
-                    <p class="project-desc-short">Unreal Engine 5 experiment blending 2D sprites in a 3D Lumen world.</p>
-                    <div class="project-actions">
-                        <a href="https://github.com/Kelduin/UE-DEMO" target="_blank" class="btn-small">GitHub</a>
-                    </div>
-                    <button class="expand-btn" onclick="toggleDetails(this)">[+] View Logs</button>
-                    <div class="details-panel">
-                        <p><strong>Stack:</strong> UE5, Blueprints, C++</p>
-                        <p>Character movement, 2D/3D blending, and environment interaction.</p>
-                    </div>
+                <div class="card-media">
+                    <video autoplay muted loop playsinline poster="assets/pictures/UEDEMO1.png">
+                        <source src="assets/videos/UEVID.webm" type="video/webm">
+                    </video>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <footer id="contact">
-        <div class="socials">
-            <p>&copy; 2024 Kacper Jaworowski</p>
-            <a href="mailto:htujer@gmail.com">Email</a>
-            <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a>
-            <a href="https://github.com/Kelduin" target="_blank">GitHub</a>
+    <footer class="footer">
+        <h2 class="footer-cta">Let's build something<br>impossible.</h2>
+        <div class="magnetic-wrap">
+            <a href="mailto:htujer@gmail.com" class="btn-main">Get in Touch</a>
+        </div>
+        <div style="margin-top: 50px; display: flex; gap: 20px;">
+            <a href="https://github.com/Kelduin" target="_blank" style="color:white; text-decoration:none;">GitHub</a>
+            <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank" style="color:white; text-decoration:none;">LinkedIn</a>
         </div>
     </footer>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="close-lb">&times;</span>
-        <img id="lightbox-img" src="" onclick="event.stopPropagation()">
-    </div>
-
     <script>
-        // --- MOUSE TRACKING SPOTLIGHT EFFECT ---
-        const cardsContainer = document.getElementById("cards-container");
-        const cards = document.getElementsByClassName("project-card");
+        // --- CUSTOM CURSOR LOGIC ---
+        const cursor = document.querySelector('.cursor');
+        const links = document.querySelectorAll('a, button, .magnetic-wrap');
 
-        cardsContainer.onmousemove = e => {
-            for(const card of cards) {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
 
-                card.style.setProperty("--mouse-x", `${x}px`);
-                card.style.setProperty("--mouse-y", `${y}px`);
-            }
-        };
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            link.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
 
-        // --- HACKER TEXT EFFECT ---
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        document.querySelector("header h1").onmouseover = event => {
-            let iterations = 0;
-            const interval = setInterval(() => {
-                event.target.innerText = event.target.innerText
-                    .split("")
-                    .map((letter, index) => {
-                        if(index < iterations) return event.target.dataset.value[index];
-                        return letters[Math.floor(Math.random() * 26)];
-                    })
-                    .join("");
+        // --- MAGNETIC BUTTON EFFECT ---
+        const magnetics = document.querySelectorAll('.magnetic-wrap');
+
+        magnetics.forEach(magnetic => {
+            magnetic.addEventListener('mousemove', (e) => {
+                const rect = magnetic.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
                 
-                if(iterations >= event.target.dataset.value.length) clearInterval(interval);
-                iterations += 1 / 3;
-            }, 30);
-        };
+                // Move the element slightly towards mouse
+                magnetic.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
 
-        // --- SKILL BARS REVEAL ---
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    const bars = entry.target.querySelectorAll('.progress-bar');
-                    bars.forEach(bar => {
-                        bar.style.width = bar.getAttribute('data-width');
-                    });
+            magnetic.addEventListener('mouseleave', () => {
+                magnetic.style.transform = 'translate(0px, 0px)';
+            });
+        });
+
+        // --- STACKING CARDS SCALE EFFECT ---
+        // As you scroll, the cards behind get slightly smaller and darker
+        const cards = document.querySelectorAll('.card');
+        
+        window.addEventListener('scroll', () => {
+            cards.forEach((card, index) => {
+                const rect = card.getBoundingClientRect();
+                // If card is sticky (top 100px)
+                if (rect.top <= 100) {
+                   // Calculate how far we've scrolled past the stick point
+                   let scale = 1 - (index * 0.05); 
+                   // Logic for stacking scale could be added here for extra flair
+                   // but purely CSS sticky works 90% of the way for this clean look.
                 }
             });
         });
-        observer.observe(document.querySelector('#skills'));
 
-        // --- CUSTOM CURSOR ---
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            // Dot follows instantly
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            // Outline follows with lag (managed by CSS transition)
-            cursorOutline.style.left = `${posX}px`;
-            cursorOutline.style.top = `${posY}px`;
+        // --- ORB MOVEMENT ---
+        const orb = document.querySelector('.gradient-orb');
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
             
-            // Animate trailing effect via keyframes in CSS later if needed
-            // But CSS transition handles smooth lag here perfectly
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
+            orb.animate({
+                left: `${e.clientX}px`,
+                top: `${e.clientY}px`
+            }, { duration: 3000, fill: "forwards" });
         });
 
-        // --- CAROUSEL LOGIC ---
-        let intervals = {};
-
-        function startSlide(container) {
-            const images = container.querySelectorAll('.carousel-img');
-            if(images.length <= 1) return;
-            let idx = 0;
-            
-            // Find current active
-            images.forEach((img, i) => { if(img.classList.contains('active')) idx = i; });
-
-            intervals[container] = setInterval(() => {
-                images[idx].classList.remove('active');
-                idx = (idx + 1) % images.length;
-                images[idx].classList.add('active');
-            }, 1500);
-        }
-
-        function stopSlide(container) {
-            clearInterval(intervals[container]);
-        }
-
-        // --- EXPAND DETAILS ---
-        function toggleDetails(btn) {
-            const panel = btn.nextElementSibling;
-            panel.classList.toggle('open');
-            btn.innerText = panel.classList.contains('open') ? "[-] Close Logs" : "[+] View Logs";
-        }
-
-        // --- MENU ---
-        function toggleMenu() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        }
-
-        // --- LIGHTBOX ---
-        function openLightbox(img) {
-            const lb = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lightbox-img');
-            lb.style.display = 'flex';
-            lbImg.src = img.src;
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
-
-        // --- CANVAS PARTICLE BACKGROUND ---
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray;
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x;
-                this.y = y;
-                this.directionX = directionX;
-                this.directionY = directionY;
-                this.size = size;
-                this.color = color;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-            update() {
-                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                this.x += this.directionX;
-                this.y += this.directionY;
-                this.draw();
-            }
-        }
-
-        function init() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 9000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 1) - 0.5;
-                let directionY = (Math.random() * 1) - 0.5;
-                let color = '#00f3ff';
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-            }
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, innerWidth, innerHeight);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
-            connect();
-        }
-
-        function connect() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
-                        ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                        opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = 'rgba(0, 243, 255,' + opacityValue + ')';
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
-            init();
-        });
-
-        init();
-        animate();
     </script>
 </body>
 </html>
