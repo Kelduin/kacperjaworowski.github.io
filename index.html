@@ -4,865 +4,478 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kacper Jaworowski - Game Developer Portfolio">
-    <title>Kacper Jaworowski — Game Developer</title>
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&f[]=general-sans@200,300,400,500,600&display=swap" rel="stylesheet">
+    <title>Kacper Jaworowski — Game Architect</title>
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+    
     <style>
         /* --- VARIABLES & RESET --- */
         :root {
-            --bg: #080808;
-            --text: #ffffff;
-            --text-muted: #888;
-            --accent: #00ff88; /* Cyberpunk Green */
-            --card-bg: rgba(20, 20, 20, 0.8);
-            --border: rgba(255, 255, 255, 0.1);
-            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent: #3b82f6; /* Subtle Professional Blue */
+            --border: rgba(255, 255, 255, 0.08);
+            --radius: 24px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Custom cursor everywhere */
         }
 
         body {
             background-color: var(--bg);
-            color: var(--text);
-            font-family: 'General Sans', sans-serif;
+            color: var(--text-main);
+            font-family: 'Satoshi', sans-serif;
             overflow-x: hidden;
-            width: 100vw;
-            /* Cyber Grid Background */
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- PHYSICS CANVAS (FIXED BG) --- */
-        #physics-canvas {
+        /* --- NOISE OVERLAY (Texture) --- */
+        .noise {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0; 
-            pointer-events: auto; 
-        }
-
-        /* --- CUSTOM CURSOR --- */
-        .cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            z-index: 10000;
-            mix-blend-mode: difference;
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            z-index: 9000;
+            opacity: 0.03;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        .cursor.active {
-            width: 60px;
-            height: 60px;
-            background: white;
-            opacity: 0.1;
-            mix-blend-mode: exclusion;
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            pointer-events: none; 
-        }
-
-        nav > * { pointer-events: auto; }
-
-        .logo {
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
             font-family: 'Clash Display', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: white;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-        }
-
-        .nav-items {
-            display: flex;
-            gap: 40px;
-            background: rgba(0,0,0,0.5);
-            padding: 10px 30px;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: white;
-            font-size: 0.9rem;
-            text-transform: uppercase;
             font-weight: 600;
-            transition: color 0.3s;
         }
-        .nav-link:hover { color: var(--accent); }
 
-        .btn-main {
-            padding: 12px 28px;
-            background: white;
-            color: black;
-            border-radius: 100px;
+        a {
             text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            display: inline-block;
-            transition: 0.2s;
-        }
-        
-        .magnetic-wrap {
-            display: inline-block;
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            color: inherit;
+            transition: 0.3s;
         }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            width: 100%;
-            position: relative;
+        /* --- LAYOUT UTILS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 120px 0;
+        }
+
+        /* --- HEADER / HERO --- */
+        header {
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            user-select: none;
-            z-index: 2;
-            pointer-events: none;
+            position: relative;
+        }
+
+        .hero-label {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+            backdrop-filter: blur(10px);
         }
 
         .hero-title {
-            font-family: 'Clash Display', sans-serif;
-            font-size: clamp(4rem, 12vw, 9rem);
-            line-height: 0.9;
-            text-transform: uppercase;
-            color: white;
-            pointer-events: auto;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        
-        .hero-title span {
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.5);
-            display: block;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-instruction {
-            margin-top: 30px;
-            font-size: 0.9rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: rgba(0,0,0,0.6);
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: 1px solid var(--accent);
-            pointer-events: auto;
+        .hero-bio {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 50px;
         }
 
-        /* --- SKILLS TICKER --- */
-        .ticker-wrap {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            overflow: hidden;
-            background: var(--bg);
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border);
-            border-top: 1px solid var(--border);
-            pointer-events: auto;
-        }
-
-        .ticker {
+        .social-links {
             display: flex;
-            white-space: nowrap;
-            animation: ticker 20s linear infinite;
+            gap: 20px;
         }
 
-        .ticker-item {
-            font-family: 'Clash Display', sans-serif;
-            font-size: 3rem;
-            margin: 0 40px;
-            color: #222;
-            -webkit-text-stroke: 1px #444;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-        
-        .ticker-item:hover {
-            color: var(--accent);
-            -webkit-text-stroke: 1px var(--accent);
-        }
-
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
-        }
-
-        /* --- STACKING PROJECTS --- */
-        .projects-section {
-            padding: 100px 5vw;
-            position: relative;
-            z-index: 2;
-            pointer-events: none; 
-        }
-
-        .section-header {
-            font-family: 'Clash Display', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 80px;
-            color: white;
-            pointer-events: auto;
-        }
-
-        .cards-stack {
-            position: relative;
-            pointer-events: none;
-        }
-
-        .card {
-            position: sticky;
-            top: 100px;
-            height: 70vh;
-            width: 100%;
+        .social-btn {
+            padding: 12px 24px;
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
             border: 1px solid var(--border);
-            border-radius: 24px;
-            margin-bottom: 5vh;
+            border-radius: 12px;
+            font-weight: 500;
             display: flex;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            transform-origin: center top;
-            pointer-events: auto;
+            align-items: center;
+            gap: 8px;
         }
 
-        .card-info {
-            flex: 1;
-            padding: 60px;
+        .social-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* --- BENTO GRID (PROJECTS) --- */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(300px, auto);
+            gap: 24px;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            z-index: 2;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            group: cursor-pointer;
         }
 
-        .card-visual {
-            flex: 1.5;
+        /* Spotlight Effect */
+        .card::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(
+                800px circle at var(--mouse-x) var(--mouse-y),
+                rgba(255, 255, 255, 0.04),
+                transparent 40%
+            );
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .card:hover::before { opacity: 1; }
+        .card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
+
+        /* Card Content */
+        .card-media {
+            flex: 1;
             position: relative;
-            background: #000;
             overflow: hidden;
+            background: #000;
         }
 
-        .card-visual video, .card-visual img {
+        .card-media img, .card-media video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.7s ease;
             opacity: 0.7;
-            transition: 0.5s;
         }
 
-        .card:hover .card-visual video, 
-        .card:hover .card-visual img {
+        .card:hover .card-media img,
+        .card:hover .card-media video {
+            transform: scale(1.05);
             opacity: 1;
-            transform: scale(1.02);
         }
 
-        .project-meta {
-            font-size: 0.9rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            font-weight: 600;
-            letter-spacing: 1px;
+        .card-info {
+            padding: 30px;
+            z-index: 2;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
 
-        .card h3 {
-            font-family: 'Clash Display', sans-serif;
-            font-size: 3.5rem;
-            line-height: 1;
-            margin-bottom: 20px;
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: white;
         }
 
-        .card p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 450px;
-            line-height: 1.6;
-        }
-
-        .tags {
+        .card-tags {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .tag {
-            padding: 6px 14px;
-            border: 1px solid #444;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            color: #ccc;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            color: #ddd;
         }
 
-        .btn-project {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 30px;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--accent);
-            padding-bottom: 5px;
-            transition: 0.3s;
+        /* --- GRID SPANS (Responsive Bento) --- */
+        .span-12 { grid-column: span 12; } /* Full width */
+        .span-8  { grid-column: span 8; }  /* 2/3 width */
+        .span-6  { grid-column: span 6; }  /* 1/2 width */
+        .span-4  { grid-column: span 4; }  /* 1/3 width */
+        
+        .row-2 { grid-row: span 2; } /* Tall */
+
+        /* --- SKILLS MARQUEE --- */
+        .marquee-container {
+            padding: 60px 0;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            margin: 80px 0;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 60px;
+            animation: scroll 20s linear infinite;
+            min-width: 100%;
+        }
+
+        .skill-item {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2rem;
+            color: var(--text-muted);
+            white-space: nowrap;
         }
         
-        .btn-project:hover {
-            color: var(--accent);
-            padding-left: 10px;
+        @keyframes scroll { 
+            from { transform: translateX(0); } 
+            to { transform: translateX(-100%); } 
         }
 
         /* --- FOOTER --- */
         footer {
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 80px 20px;
             text-align: center;
             border-top: 1px solid var(--border);
-            position: relative;
-            z-index: 2;
-            background: rgba(0,0,0,0.8);
-            pointer-events: auto;
         }
 
-        .footer h2 {
+        .footer-link {
+            font-size: 4rem;
             font-family: 'Clash Display', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            margin-bottom: 40px;
-        }
-
-        .socials {
-            display: flex;
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .socials a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 1.1rem;
+            text-decoration: underline;
+            text-decoration-color: #333;
             transition: 0.3s;
         }
         
-        .socials a:hover { color: var(--accent); }
+        .footer-link:hover { text-decoration-color: white; }
 
-        /* Mobile Adjustments */
-        @media (max-width: 900px) {
-            .card { flex-direction: column-reverse; height: auto; min-height: 80vh; }
-            .card-visual { min-height: 250px; }
-            .card-info { padding: 30px; }
-            .hero-title { font-size: 3.5rem; }
-            .nav-items { display: none; }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .span-8, .span-4, .span-6 { grid-column: span 6; }
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid { display: flex; flex-direction: column; }
+            .card { min-height: 350px; }
+            .hero-title { font-size: 3rem; }
+            .footer-link { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="cursor"></div>
+    <div class="noise"></div>
 
-    <canvas id="physics-canvas"></canvas>
+    <div class="container" style="padding-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-weight: 700; font-family: 'Clash Display', sans-serif;">KACPER J.</div>
+        <a href="mailto:htujer@gmail.com" style="font-size: 0.9rem; color: var(--text-muted);">Available for work ●</a>
+    </div>
 
-    <nav>
-        <div class="logo magnetic-wrap">KJ.DEV</div>
-        <div class="nav-items">
-            <a href="#about" class="nav-link magnetic-wrap">About</a>
-            <a href="#projects" class="nav-link magnetic-wrap">Work</a>
-            <a href="#contact" class="nav-link magnetic-wrap">Contact</a>
-        </div>
-        <div class="magnetic-wrap">
-            <a href="assets/files/MyResume.pdf" class="btn-main" download>Resume</a>
-        </div>
-    </nav>
-
-    <header class="hero" id="hero">
-        <h1 class="hero-title">
-            Kacper<br>
-            <span>Jaworowski</span>
-        </h1>
-        <div class="hero-instruction">
-            [ Kick The Balls! ]
+    <header class="container">
+        <div>
+            <span class="hero-label">Game Developer & Creative Coder</span>
+            <h1 class="hero-title">Architecting Immersive<br>Digital Worlds.</h1>
+            <p class="hero-bio">
+                I'm Kacper Jaworowski. I build robust game systems and engaging player experiences using Unity, Godot, and Unreal Engine. I turn complex logic into magic.
+            </p>
+            <div class="social-links">
+                <a href="assets/files/MyResume.pdf" class="social-btn" download>
+                    Download Resume ↓
+                </a>
+                <a href="https://github.com/Kelduin" target="_blank" class="social-btn">
+                    GitHub ↗
+                </a>
+                <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank" class="social-btn">
+                    LinkedIn ↗
+                </a>
+            </div>
         </div>
     </header>
 
-    <div class="ticker-wrap">
-        <div class="ticker">
-            <div class="ticker-item">Unity Development</div>
-            <div class="ticker-item">Godot Engine</div>
-            <div class="ticker-item">C# Programming</div>
-            <div class="ticker-item">Game Physics</div>
-            <div class="ticker-item">AI Behavior</div>
-            <div class="ticker-item">Level Design</div>
-            <div class="ticker-item">Unity Development</div>
-            <div class="ticker-item">Godot Engine</div>
-            <div class="ticker-item">C# Programming</div>
-            <div class="ticker-item">Game Physics</div>
-            <div class="ticker-item">AI Behavior</div>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span class="skill-item">Unity 3D</span>
+            <span class="skill-item">Godot Engine</span>
+            <span class="skill-item">C# Programming</span>
+            <span class="skill-item">Unreal Engine 5</span>
+            <span class="skill-item">Game Physics</span>
+            <span class="skill-item">AI Systems</span>
+            <span class="skill-item">Level Design</span>
+            <span class="skill-item">Unity 3D</span>
+            <span class="skill-item">Godot Engine</span>
+            <span class="skill-item">C# Programming</span>
+            <span class="skill-item">Unreal Engine 5</span>
+            <span class="skill-item">Game Physics</span>
+            <span class="skill-item">AI Systems</span>
+            <span class="skill-item">Level Design</span>
         </div>
     </div>
 
-    <section class="projects-section" id="projects">
-        <div class="section-header">Selected Projects</div>
+    <section class="container section-padding" id="work">
+        <h2 style="font-size: 2rem; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">Selected Works</h2>
         
-        <div class="cards-stack">
-            <div class="card">
-                <div class="card-info">
-                    <div>
-                        <div class="project-meta">01 — Unity 2D</div>
-                        <h3>Slimetastic</h3>
-                        <p>A physics-based merging game inspired by Suika. Developed custom collision layers, merging algorithms, and a highly polished game loop.</p>
-                        <div class="tags">
-                            <span class="tag">Physics</span>
-                            <span class="tag">C#</span>
-                            <span class="tag">Mobile</span>
-                        </div>
-                    </div>
-                    <div class="magnetic-wrap">
-                        <a href="https://kelduin.github.io/game.kacperjaworowski.github.io" target="_blank" class="btn-project">Play Demo →</a>
-                    </div>
-                </div>
-                <div class="card-visual">
+        <div class="bento-grid" id="cards-container">
+            
+            <a href="https://kelduin.github.io/game.kacperjaworowski.github.io" target="_blank" class="card span-8 row-2">
+                <div class="card-media">
                     <video autoplay muted loop playsinline poster="assets/pictures/SLIMETASTIC1.jpg">
                         <source src="assets/videos/SLIMETASTICVIDEO.mp4" type="video/mp4">
                     </video>
                 </div>
-            </div>
-
-            <div class="card">
                 <div class="card-info">
-                    <div>
-                        <div class="project-meta">02 — Godot Engine</div>
-                        <h3>Puzzle Keeper</h3>
-                        <p>Top-down dungeon escaper. Built entirely in Godot with custom GDScript AI pathfinding and complex state-machine puzzle logic.</p>
-                        <div class="tags">
-                            <span class="tag">GDScript</span>
-                            <span class="tag">AI</span>
-                            <span class="tag">WIP</span>
-                        </div>
-                    </div>
-                    <div class="magnetic-wrap">
-                        <span class="btn-project" style="opacity:0.5; cursor: default;">In Development</span>
+                    <h3 class="card-title">Slimetastic</h3>
+                    <div class="card-tags">
+                        <span class="tag">Unity 2D</span>
+                        <span class="tag">Physics</span>
+                        <span class="tag">Mobile</span>
                     </div>
                 </div>
-                <div class="card-visual">
+            </a>
+
+            <div class="card span-4 row-2">
+                <div class="card-media">
                     <video autoplay muted loop playsinline poster="assets/pictures/puzzlekeeper1.jpg">
                         <source src="assets/videos/puzzlekeeper-video.mp4" type="video/mp4">
                     </video>
                 </div>
-            </div>
-
-            <div class="card">
                 <div class="card-info">
-                    <div>
-                        <div class="project-meta">03 — Unity 3D</div>
-                        <h3>Castle Cart</h3>
-                        <p>Multiplayer LAN racing game with RPG spell mechanics. Handled network synchronization for couch co-op and vehicle physics tuning.</p>
-                        <div class="tags">
-                            <span class="tag">Multiplayer</span>
-                            <span class="tag">Racing</span>
-                            <span class="tag">Unity</span>
-                        </div>
-                    </div>
-                    <div class="magnetic-wrap">
-                        <a href="https://gambik.itch.io/the-castle-cart" target="_blank" class="btn-project">View on Itch.io →</a>
+                    <h3 class="card-title">Puzzle Keeper</h3>
+                    <div class="card-tags">
+                        <span class="tag">Godot</span>
+                        <span class="tag">AI Systems</span>
+                        <span class="tag">WIP</span>
                     </div>
                 </div>
-                <div class="card-visual">
+            </div>
+
+            <a href="https://gambik.itch.io/the-castle-cart" target="_blank" class="card span-6">
+                <div class="card-media">
                     <video autoplay muted loop playsinline poster="assets/pictures/CASTLECART1.png">
                         <source src="assets/videos/CASTLECARDVID.webm" type="video/webm">
                     </video>
                 </div>
-            </div>
-
-             <div class="card">
                 <div class="card-info">
-                    <div>
-                        <div class="project-meta">04 — Confidential</div>
-                        <h3>Mushroom Survivors</h3>
-                        <p>Survivors-like rogue-lite. Engineered the "Enemy-to-Ally" conversion system and optimized swarm AI for hundreds of units onscreen.</p>
-                        <div class="tags">
-                            <span class="tag">Optimization</span>
-                            <span class="tag">Swarm AI</span>
-                        </div>
-                    </div>
-                    <div class="magnetic-wrap">
-                        <span class="btn-project" style="opacity:0.5;">NDA Protected</span>
+                    <h3 class="card-title">Castle Cart</h3>
+                    <div class="card-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">Multiplayer LAN</span>
+                        <span class="tag">Racing</span>
                     </div>
                 </div>
-                <div class="card-visual">
+            </a>
+
+            <div class="card span-6">
+                <div class="card-media">
                     <img src="assets/pictures/MUSHROOM1.png" alt="Mushroom Survivors">
                 </div>
-            </div>
-
-             <div class="card">
                 <div class="card-info">
-                    <div>
-                        <div class="project-meta">05 — Unreal Engine 5</div>
-                        <h3>UE 2.5D Demo</h3>
-                        <p>A technical showcase blending 2D pixel art with 3D Lumen lighting. Scripted in C++ and Blueprints to handle dimension switching.</p>
-                        <div class="tags">
-                            <span class="tag">UE5</span>
-                            <span class="tag">C++</span>
-                            <span class="tag">Lumen</span>
-                        </div>
-                    </div>
-                    <div class="magnetic-wrap">
-                        <a href="https://github.com/Kelduin/UE-DEMO" target="_blank" class="btn-project">View Code →</a>
+                    <h3 class="card-title">Mushroom Survivors</h3>
+                    <div class="card-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">Swarm AI</span>
+                        <span class="tag">NDA</span>
                     </div>
                 </div>
-                <div class="card-visual">
+            </div>
+
+            <a href="https://github.com/Kelduin/UE-DEMO" target="_blank" class="card span-12">
+                <div class="card-media" style="height: 400px;">
                     <video autoplay muted loop playsinline poster="assets/pictures/UEDEMO1.png">
                         <source src="assets/videos/UEVID.webm" type="video/webm">
                     </video>
                 </div>
-            </div>
+                <div class="card-info">
+                    <h3 class="card-title">Unreal Engine 5 - 2.5D Tech Demo</h3>
+                    <div class="card-tags">
+                        <span class="tag">UE5</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">Blueprints</span>
+                        <span class="tag">Lumen</span>
+                    </div>
+                </div>
+            </a>
+
         </div>
     </section>
 
-    <footer id="contact">
-        <h2>Ready to Press Start?</h2>
-        <div class="magnetic-wrap">
-            <a href="mailto:htujer@gmail.com" class="btn-main" style="padding: 20px 40px; font-size: 1rem;">htujer@gmail.com</a>
-        </div>
-        <div class="socials">
-            <a href="https://github.com/Kelduin" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/kacperjaworowski" target="_blank">LinkedIn</a>
+    <footer>
+        <div class="container">
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Interested in working together?</p>
+            <a href="mailto:htujer@gmail.com" class="footer-link">htujer@gmail.com</a>
+            <div style="margin-top: 60px; color: #444; font-size: 0.8rem;">
+                &copy; 2024 Kacper Jaworowski. All rights reserved.
+            </div>
         </div>
     </footer>
 
     <script>
-        // --- CUSTOM CURSOR ---
-        const cursor = document.querySelector('.cursor');
-        const activeElements = document.querySelectorAll('a, .magnetic-wrap, .btn-main, .card');
+        // --- SPOTLIGHT EFFECT FOR CARDS ---
+        // This adds that subtle "Apple" glow that follows your mouse on the cards
+        const cardsContainer = document.getElementById("cards-container");
+        const cards = document.getElementsByClassName("card");
 
-        // Track global mouse position for physics
-        let mouse = { x: -1000, y: -1000, vx: 0, vy: 0 };
-        let lastMouse = { x: 0, y: 0 };
+        cardsContainer.onmousemove = e => {
+            for(const card of cards) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
 
-        document.addEventListener('mousemove', (e) => {
-            // Update Cursor Visual
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-
-            // Calculate Mouse Velocity (for hitting power)
-            mouse.vx = e.clientX - lastMouse.x;
-            mouse.vy = e.clientY - lastMouse.y;
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-            lastMouse.x = e.clientX;
-            lastMouse.y = e.clientY;
-        });
-
-        activeElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-        });
-
-        // --- MAGNETIC BUTTONS ---
-        const magnets = document.querySelectorAll('.magnetic-wrap');
-        magnets.forEach(magnet => {
-            magnet.addEventListener('mousemove', (e) => {
-                const rect = magnet.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                magnet.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-            });
-            magnet.addEventListener('mouseleave', () => {
-                magnet.style.transform = 'translate(0, 0)';
-            });
-        });
-
-        // --- PHYSICS ENGINE REMASTERED ---
-        const canvas = document.getElementById('physics-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let balls = [];
-        
-        // Physics Constants
-        const friction = 0.98; 
-        const gravity = 0.6;   
-        const bounce = 0.6;    
-        const interactionRadius = 80; // How big the cursor "hitbox" is
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Ball {
-            constructor(x, y, r, color) {
-                this.x = x;
-                this.y = y;
-                this.r = r;
-                this.color = color;
-                this.mass = r * r; 
-                this.dx = (Math.random() - 0.5) * 10;
-                this.dy = (Math.random() - 0.5) * 10;
-                this.isDragging = false;
-                
-                // Lifecycle
-                this.spawnTime = Date.now();
-                this.lifeDuration = 15000; // 15 seconds life
-                this.isHot = true; 
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
             }
+        };
 
-            draw() {
-                // Shrink effect near death
-                const age = Date.now() - this.spawnTime;
-                let scale = 1;
-                if(age > this.lifeDuration - 1000) {
-                    scale = (this.lifeDuration - age) / 1000; // Fade out last second
-                }
-                if (scale < 0) scale = 0;
+        // --- SCROLL REVEAL ANIMATION ---
+        // Simple Intersection Observer to fade things in
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.r * scale, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-                
-                // Glow if hot
-                if(this.isHot && scale > 0.5) {
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = this.color;
-                } else {
-                    ctx.shadowBlur = 0;
-                }
-
-                ctx.strokeStyle = `rgba(255,255,255,${0.3 * scale})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-                ctx.closePath();
-                ctx.shadowBlur = 0;
-            }
-
-            update() {
-                const age = Date.now() - this.spawnTime;
-                
-                // Cooldown logic
-                if (this.isHot && age > 3000 && !this.isDragging) {
-                    this.isHot = false;
-                }
-
-                // Mouse Interaction (The "Kick")
-                if (!this.isDragging) {
-                    let dx = this.x - mouse.x;
-                    let dy = this.y - mouse.y;
-                    let dist = Math.hypot(dx, dy);
-
-                    if (dist < interactionRadius + this.r) {
-                        // Calculate force vector
-                        const angle = Math.atan2(dy, dx);
-                        const force = (interactionRadius + this.r - dist) / interactionRadius;
-                        
-                        // Add impulse based on mouse movement + static repulsion
-                        const pushPower = 2; 
-                        this.dx += Math.cos(angle) * force * pushPower;
-                        this.dy += Math.sin(angle) * force * pushPower;
-
-                        // Transfer mouse velocity to ball (The "Slap")
-                        this.dx += mouse.vx * 0.1;
-                        this.dy += mouse.vy * 0.1;
-
-                        // Wake up physics interactions
-                        this.isHot = true;
-                        this.spawnTime = Date.now(); // Reset death timer slightly on interact
-                    }
-
-                    // Physics
-                    this.dy += gravity;
-                    this.dx *= friction;
-                    this.dy *= friction;
-
-                    // Floor Collision (Bounce)
-                    if (this.y + this.r > height) {
-                        this.y = height - this.r;
-                        this.dy = -this.dy * bounce;
-                        // Friction on ground
-                        this.dx *= 0.95; 
-                    }
-
-                    // Wall Collisions
-                    if (this.x + this.r > width) {
-                        this.x = width - this.r;
-                        this.dx = -this.dx * bounce;
-                    } else if (this.x - this.r < 0) {
-                        this.x = this.r;
-                        this.dx = -this.dx * bounce;
-                    }
-
-                    this.x += this.dx;
-                    this.y += this.dy;
-                }
-                this.draw();
-            }
-        }
-
-        // --- COLLISION LOGIC ---
-        function resolveCollisions() {
-            for (let i = 0; i < balls.length; i++) {
-                for (let j = i + 1; j < balls.length; j++) {
-                    const b1 = balls[i];
-                    const b2 = balls[j];
-
-                    if (!b1.isHot && !b2.isHot) continue;
-
-                    const dx = b2.x - b1.x;
-                    const dy = b2.y - b1.y;
-                    const distance = Math.hypot(dx, dy);
-
-                    if (distance < b1.r + b2.r) {
-                        // Overlap Fix
-                        const overlap = (b1.r + b2.r - distance) / 2;
-                        const offsetX = (dx / distance) * overlap;
-                        const offsetY = (dy / distance) * overlap;
-
-                        if(!b1.isDragging) { b1.x -= offsetX; b1.y -= offsetY; }
-                        if(!b2.isDragging) { b2.x += offsetX; b2.y += offsetY; }
-
-                        // Momentum Exchange
-                        const angle = Math.atan2(dy, dx);
-                        const sin = Math.sin(angle);
-                        const cos = Math.cos(angle);
-
-                        const v1 = { x: 0, y: 0 };
-                        const v2 = { x: 0, y: 0 };
-
-                        v1.x = b1.dx * cos + b1.dy * sin;
-                        v1.y = b1.dy * cos - b1.dx * sin;
-                        v2.x = b2.dx * cos + b2.dy * sin;
-                        v2.y = b2.dy * cos - b2.dx * sin;
-
-                        const v1Final = ((b1.mass - b2.mass) * v1.x + 2 * b2.mass * v2.x) / (b1.mass + b2.mass);
-                        const v2Final = ((b2.mass - b1.mass) * v2.x + 2 * b1.mass * v1.x) / (b1.mass + b2.mass);
-
-                        v1.x = v1Final;
-                        v2.x = v2Final;
-
-                        const v1F = { x: v1.x * cos - v1.y * sin, y: v1.y * cos + v1.x * sin };
-                        const v2F = { x: v2.x * cos - v2.y * sin, y: v2.y * cos + v2.x * sin };
-
-                        if(!b1.isDragging) { b1.dx = v1F.x; b1.dy = v1F.y; }
-                        if(!b2.isDragging) { b2.dx = v2F.x; b2.dy = v2F.y; }
-
-                        if(b1.isHot) b2.isHot = true;
-                        if(b2.isHot) b1.isHot = true;
-                    }
-                }
-            }
-        }
-
-        const colors = ['#00ff88', '#ffffff', '#222222', '#555555'];
-        
-        function initBalls() {
-            balls = [];
-            // Spawn initial drop
-            for (let i = 0; i < 20; i++) {
-                const r = Math.random() * 20 + 15;
-                const x = Math.random() * (width - r * 2) + r;
-                const y = -Math.random() * 500; // Start ABOVE screen
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                balls.push(new Ball(x, y, r, color));
-            }
-        }
-        initBalls();
-
-        // Game Loop
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, width, height);
-
-            // Cleanup old balls
-            balls = balls.filter(b => Date.now() - b.spawnTime < b.lifeDuration);
-
-            resolveCollisions();
-            balls.forEach(ball => ball.update());
-        }
-        animate();
-
-        // Mouse Drag Logic
-        let draggedBall = null;
-
-        canvas.addEventListener('mousedown', (e) => {
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-            
-            // Check balls
-            balls.forEach(ball => {
-                const dist = Math.hypot(mouseX - ball.x, mouseY - ball.y);
-                if (dist < ball.r) {
-                    draggedBall = ball;
-                    ball.isDragging = true;
-                    ball.isHot = true;
-                    ball.spawnTime = Date.now(); // Reset life
-                    ball.dx = 0;
-                    ball.dy = 0;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
                 }
             });
-        });
+        }, observerOptions);
 
-        canvas.addEventListener('mousemove', (e) => {
-            if (draggedBall) {
-                draggedBall.dx = (e.clientX - draggedBall.x) * 0.2; 
-                draggedBall.dy = (e.clientY - draggedBall.y) * 0.2;
-                draggedBall.x = e.clientX;
-                draggedBall.y = e.clientY;
-            }
-        });
-
-        canvas.addEventListener('mouseup', () => {
-            if (draggedBall) {
-                draggedBall.isDragging = false;
-                draggedBall = null;
-            }
-        });
-        
-        // Spawn on click
-        canvas.addEventListener('click', (e) => {
-            if(e.target !== canvas) return;
-            let clickedBall = false;
-            balls.forEach(ball => {
-                const dist = Math.hypot(e.clientX - ball.x, e.clientY - ball.y);
-                if(dist < ball.r) clickedBall = true;
-            });
-            
-            if(!clickedBall && !draggedBall) {
-                const r = Math.random() * 20 + 15;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                balls.push(new Ball(e.clientX, e.clientY, r, color));
-            }
+        // Apply initial styles for animation
+        Array.from(cards).forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(card);
         });
     </script>
 </body>
